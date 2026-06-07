@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Winchester Kitchen &amp; Bar — Burgers, Steak &amp; Take-and-Bake Pizza near Winchester Lake, Idaho</title>
+<meta name="description" content="A family bar & grill one mile from Winchester Lake State Park. Scratch burgers, hand-cut steak, and take-and-bake pizza for the campsite. Winchester, Idaho. (208) 924-6420.">
+<link rel="canonical" href="https://winchestergrill.com/">
+<meta property="og:type" content="restaurant">
+<meta property="og:title" content="Winchester Kitchen & Bar — Winchester, Idaho">
+<meta property="og:description" content="Scratch burgers, hand-cut steak, and take-and-bake pizza one mile from Winchester Lake. Families welcome.">
+<meta property="og:url" content="https://winchestergrill.com/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Fraunces:ital,opsz,wght@1,9..144,500;1,9..144,600&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Restaurant",
+  "name": "Winchester Kitchen & Bar",
+  "url": "https://winchestergrill.com/",
+  "servesCuisine": "American",
+  "priceRange": "$10-20",
+  "telephone": "+12089246420",
+  "image": "https://winchestergrill.com/assets/logo-cream.svg",
+  "address": {"@type": "PostalAddress", "streetAddress": "317 Nez Perce Ave", "addressLocality": "Winchester", "addressRegion": "ID", "postalCode": "83555", "addressCountry": "US"},
+  "geo": {"@type": "GeoCoordinates", "latitude": 46.2400662, "longitude": -116.6228965},
+  "openingHoursSpecification": [
+    {"@type": "OpeningHoursSpecification", "dayOfWeek": "Monday", "opens": "15:00", "closes": "21:00"},
+    {"@type": "OpeningHoursSpecification", "dayOfWeek": ["Thursday","Friday","Saturday","Sunday"], "opens": "11:00", "closes": "21:00"}
+  ]
+}
+</script>
+<style>
+/* ============ DESIGN TOKENS ============ */
+:root{
+  --char:#15110D;       /* near-black espresso */
+  --char2:#1F1812;      /* raised dark */
+  --char3:#2A2118;      /* card */
+  --gold:#E0A938;       /* brighter, more modern gold */
+  --gold-d:#B9852A;
+  --ember:#C24A2C;      /* warm ember accent (modern pop) */
+  --cream:#F8F1E4;
+  --mut:#C8BBA4;
+  --line:rgba(224,169,56,.26);
+  --max:1180px;
+  --navh:78px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Outfit',sans-serif;background:var(--char);color:var(--mut);line-height:1.6;-webkit-tap-highlight-color:rgba(224,169,56,.2);overflow-x:hidden}
+img{max-width:100%;display:block}
+section{scroll-margin-top:var(--navh)}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 26px}
+.display{font-family:'Anton',sans-serif;font-weight:400;letter-spacing:.005em;text-transform:uppercase;line-height:.95}
+.accent{font-family:'Fraunces',serif;font-style:italic;font-weight:600}
+.kicker{font-size:.74rem;font-weight:700;letter-spacing:.32em;text-transform:uppercase;color:var(--gold)}
+
+/* ============ NAV ============ */
+nav{position:fixed;top:0;left:0;right:0;z-index:60;height:var(--navh);display:flex;align-items:center;transition:background .3s,box-shadow .3s;background:linear-gradient(180deg,rgba(21,17,13,.9),transparent)}
+nav.solid{background:rgba(21,17,13,.96);backdrop-filter:blur(12px);box-shadow:0 1px 0 var(--line)}
+.nav-in{max-width:var(--max);margin:0 auto;width:100%;display:flex;align-items:center;justify-content:space-between;padding:0 26px}
+.nav-brand{display:flex;align-items:center;gap:12px;text-decoration:none}
+.nav-brand img{height:50px;width:auto}
+.nav-brand b{font-family:'Anton',sans-serif;color:var(--cream);font-size:1.05rem;letter-spacing:.02em;text-transform:uppercase;line-height:1}
+.nav-brand b span{color:var(--gold)}
+.links{display:flex;gap:30px;align-items:center}
+.links a{color:var(--cream);text-decoration:none;font-weight:600;font-size:.86rem;letter-spacing:.08em;text-transform:uppercase;padding:8px 2px}
+.links a:hover{color:var(--gold)}
+.links .order{background:var(--gold);color:var(--char);padding:12px 22px;border-radius:999px;letter-spacing:.06em}
+.links .order:hover{background:var(--cream);color:var(--char)}
+.burger{display:none;background:none;border:none;cursor:pointer;width:48px;height:48px;align-items:center;justify-content:center}
+.burger svg{stroke:var(--cream)}
+
+/* ============ BUTTONS ============ */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:56px;padding:16px 34px;border-radius:999px;font-weight:700;font-size:1rem;letter-spacing:.04em;text-transform:uppercase;text-decoration:none;transition:transform .15s,background .2s,color .2s,border-color .2s;cursor:pointer}
+.btn:active{transform:scale(.97)}
+.btn-gold{background:var(--gold);color:var(--char)}
+.btn-gold:hover{background:var(--cream)}
+.btn-ember{background:var(--ember);color:var(--cream)}
+.btn-ember:hover{background:#D5572F}
+.btn-glass{border:1.5px solid rgba(248,241,228,.55);color:var(--cream);background:rgba(21,17,13,.25);backdrop-filter:blur(4px)}
+.btn-glass:hover{border-color:var(--gold);color:var(--gold)}
+
+/* ============ HERO ============ */
+.hero{position:relative;min-height:100vh;min-height:100svh;display:flex;align-items:center;justify-content:center;text-align:center;overflow:hidden;isolation:isolate}
+@supports not (height:100svh){.hero{min-height:100vh}}
+.slides{position:absolute;inset:0;z-index:-2}
+.slide{position:absolute;inset:-6%;background:center/cover no-repeat #0C0907;opacity:0;animation:cyc 24s infinite ease-in-out}
+.slide:nth-child(1){animation-name:cyc,kbA;animation-delay:0s}
+.slide:nth-child(2){animation-name:cyc,kbB;animation-delay:8s}
+.slide:nth-child(3){animation-name:cyc,kbA;animation-delay:16s}
+.slide{animation-duration:24s,24s;animation-iteration-count:infinite,infinite}
+@keyframes cyc{0%{opacity:0}4%{opacity:1}33.33%{opacity:1}41%{opacity:0}100%{opacity:0}}
+@keyframes kbA{0%{transform:scale(1) translate(0,0)}100%{transform:scale(1.15) translate(1.8%,-1.4%)}}
+@keyframes kbB{0%{transform:scale(1.15) translate(-1.6%,1.2%)}100%{transform:scale(1) translate(0,0)}}
+.hero::after{content:"";position:absolute;inset:0;z-index:-1;background:
+ linear-gradient(180deg,rgba(21,17,13,.6) 0%,rgba(21,17,13,.35) 42%,rgba(21,17,13,.92) 100%),
+ radial-gradient(ellipse 75% 55% at 50% 58%,transparent 28%,rgba(21,17,13,.5))}
+@media (prefers-reduced-motion:reduce){.slide{animation:none!important;opacity:0}.slide:first-child{opacity:1}}
+.hero-in{padding:120px 26px 120px;max-width:900px}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0}
+.hero .eyebrow{display:inline-block;border:1px solid var(--line);border-radius:999px;padding:9px 20px;background:rgba(21,17,13,.4);backdrop-filter:blur(4px);margin-bottom:26px}
+.hero-logo{width:min(300px,66vw);margin:0 auto 18px;filter:drop-shadow(0 10px 30px rgba(0,0,0,.6))}
+.hero h2{color:var(--cream);font-size:clamp(2.6rem,7.5vw,5.6rem);text-shadow:0 4px 40px rgba(0,0,0,.5)}
+.hero h2 .accent{color:var(--gold);text-transform:none;display:inline-block}
+.hero p{font-size:clamp(1.08rem,2.2vw,1.35rem);color:var(--cream);opacity:.94;max-width:600px;margin:18px auto 0}
+.cta-row{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:36px}
+.scroll-hint{position:absolute;bottom:26px;left:50%;transform:translateX(-50%);color:var(--cream);opacity:.6;font-size:.72rem;letter-spacing:.25em;text-transform:uppercase;display:flex;flex-direction:column;align-items:center;gap:8px;animation:bob 2.4s infinite}
+@keyframes bob{0%,100%{transform:translate(-50%,0)}50%{transform:translate(-50%,8px)}}
+
+/* ============ TICKER BAND ============ */
+.ticker{background:var(--gold);color:var(--char);overflow:hidden;white-space:nowrap;border-top:3px solid var(--char);border-bottom:3px solid var(--char)}
+.ticker .run{display:inline-block;padding:14px 0;animation:scrollx 28s linear infinite}
+.ticker span{font-family:'Anton',sans-serif;text-transform:uppercase;font-size:1.05rem;letter-spacing:.04em;margin:0 28px}
+.ticker .dot{color:var(--ember)}
+@keyframes scrollx{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+@media (prefers-reduced-motion:reduce){.ticker .run{animation:none;padding-left:26px}}
+
+/* ============ SECTION SHELL ============ */
+.sec{padding:104px 0}
+.sec-cream{background:var(--cream);color:#3A3128}
+.sec-dark2{background:var(--char2)}
+.sec-head{max-width:680px;margin-bottom:54px}
+.sec-head.center{margin-left:auto;margin-right:auto;text-align:center}
+.sec-head h2{font-size:clamp(2.2rem,5vw,3.6rem);color:var(--cream);margin-top:12px}
+.sec-cream .sec-head h2{color:#241D16}
+.sec-head h2 .accent{color:var(--gold);text-transform:none}
+.sec-head p{margin-top:14px;font-size:1.05rem}
+
+/* ============ MENU TILES ============ */
+.tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.tile{position:relative;border-radius:18px;overflow:hidden;aspect-ratio:3/4;display:flex;align-items:flex-end;background:#0C0907 center/cover no-repeat;border:1px solid var(--line)}
+.tile::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 30%,rgba(10,7,5,.94) 88%)}
+.tile .in{position:relative;z-index:1;padding:22px;width:100%}
+.tile .tag{font-size:.66rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);background:rgba(21,17,13,.55);padding:4px 10px;border-radius:999px;display:inline-block;margin-bottom:10px}
+.tile h3{font-family:'Anton',sans-serif;text-transform:uppercase;color:var(--cream);font-size:1.4rem;line-height:1}
+.tile p{font-size:.85rem;color:var(--mut);margin:6px 0 8px}
+.tile .price{color:var(--gold);font-weight:800;font-size:1.05rem}
+.menu-foot{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;margin-top:46px}
+.menu-foot p{font-size:.95rem;max-width:460px}
+
+/* ============ FEATURE BAND (take & bake) ============ */
+.feature{position:relative;overflow:hidden;background:#0C0907 center/cover no-repeat}
+.feature::before{content:"";position:absolute;inset:0;background:linear-gradient(100deg,rgba(21,17,13,.95) 38%,rgba(21,17,13,.55) 100%)}
+.feature .wrap{position:relative;padding:96px 26px;max-width:var(--max)}
+.feature-card{max-width:560px}
+.feature-card h2{font-size:clamp(2rem,4.6vw,3.2rem);color:var(--cream);margin:14px 0 16px}
+.feature-card h2 .accent{color:var(--gold);text-transform:none}
+.feature-card p{font-size:1.08rem;color:var(--cream);opacity:.9;margin-bottom:28px}
+
+/* ============ STORY ============ */
+.story{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
+.story-img{aspect-ratio:4/5;border-radius:18px;background:#0C0907 center/cover no-repeat;border:1px solid var(--line)}
+.story h2{font-size:clamp(2rem,4.4vw,3.2rem);color:#241D16;margin:12px 0 20px}
+.story h2 .accent{color:var(--gold-d);text-transform:none}
+.story p{margin-bottom:15px;color:#4A3F33}
+.story p b{color:#241D16}
+.story .sig{font-family:'Fraunces',serif;font-style:italic;font-weight:600;color:var(--ember);font-size:1.2rem;margin-top:6px}
+
+/* ============ EVENTS ============ */
+.evgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.ev{background:var(--char3);border:1px solid var(--line);border-radius:18px;padding:34px 30px}
+.ev .ic{width:56px;height:56px;border-radius:14px;background:rgba(224,169,56,.12);display:flex;align-items:center;justify-content:center;margin-bottom:20px}
+.ev .ic svg{stroke:var(--gold)}
+.ev h3{font-family:'Anton',sans-serif;text-transform:uppercase;color:var(--cream);font-size:1.5rem;line-height:1;margin-bottom:6px}
+.ev .when{display:block;font-size:.74rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin-bottom:12px}
+.ev p{font-size:.96rem}
+
+/* ============ REVIEWS CAROUSEL ============ */
+.revhead{text-align:center;margin-bottom:18px}
+.revhead .stars{color:var(--gold);font-size:1.4rem;letter-spacing:6px}
+.revhead .sub{margin-top:8px;font-size:.84rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--mut)}
+.carousel{position:relative;max-width:860px;margin:0 auto;overflow:hidden}
+.car-track{display:flex;transition:transform .55s cubic-bezier(.4,.0,.2,1)}
+.car-slide{min-width:100%;padding:14px 8px;text-align:center}
+.car-slide blockquote{font-family:'Fraunces',serif;font-style:italic;font-weight:600;color:var(--cream);font-size:clamp(1.4rem,3.2vw,2.2rem);line-height:1.36}
+.car-slide cite{display:block;margin-top:22px;font-style:normal;font-weight:700;font-size:.8rem;letter-spacing:.16em;text-transform:uppercase;color:var(--gold)}
+.car-nav{display:flex;align-items:center;justify-content:center;gap:18px;margin-top:30px}
+.car-btn{width:48px;height:48px;border-radius:999px;border:1.5px solid var(--line);background:rgba(224,169,56,.06);color:var(--gold);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background .2s,border-color .2s,transform .15s}
+.car-btn:hover{background:var(--gold);color:var(--char);border-color:var(--gold)}
+.car-btn:active{transform:scale(.92)}
+.car-dots{display:flex;gap:10px;align-items:center}
+.car-dots button{width:9px;height:9px;border-radius:999px;border:none;background:rgba(224,169,56,.3);cursor:pointer;padding:0;transition:background .2s,transform .2s}
+.car-dots button[aria-current="true"]{background:var(--gold);transform:scale(1.35)}
+
+/* ============ VISIT ============ */
+.visit{display:grid;grid-template-columns:1.05fr .95fr;gap:60px;align-items:start}
+.visit h2{font-size:clamp(2rem,4.4vw,3rem);color:var(--cream);margin:12px 0 18px}
+.visit h2 .accent{color:var(--gold);text-transform:none}
+.visit .addr{color:var(--cream);font-weight:600;line-height:1.85;margin:0 0 26px}
+.visit .addr a{color:var(--gold)}
+.vbtns{display:flex;gap:12px;flex-wrap:wrap}
+.hours{width:100%;border-collapse:collapse;background:var(--char3);border:1px solid var(--line);border-radius:18px;overflow:hidden}
+.hours caption{font-family:'Anton',sans-serif;text-transform:uppercase;color:var(--gold);text-align:left;padding:20px 24px 6px;font-size:1.2rem;letter-spacing:.03em}
+.hours td{padding:13px 24px;border-top:1px solid rgba(224,169,56,.14);font-size:.98rem}
+.hours td:first-child{color:var(--cream);font-weight:600}
+.hours td:last-child{text-align:right}
+.hours .today td{background:rgba(224,169,56,.1)}
+.hours .today td:first-child::after{content:"Today";float:none;margin-left:8px;font-size:.64rem;letter-spacing:.14em;text-transform:uppercase;background:var(--gold);color:var(--char);padding:2px 8px;border-radius:999px;vertical-align:middle}
+.hours .closed td:last-child{color:#7E725D}
+
+/* ============ FOOTER ============ */
+footer{background:#0C0907;border-top:1px solid var(--line);padding:64px 26px 28px}
+.foot{max-width:var(--max);margin:0 auto;display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:40px}
+.foot-logo{width:190px;margin-bottom:16px}
+.foot p,.foot a{font-size:.92rem;color:var(--mut);text-decoration:none}
+.foot a:hover{color:var(--gold)}
+.foot h4{font-family:'Anton',sans-serif;text-transform:uppercase;color:var(--cream);font-size:1rem;letter-spacing:.04em;margin-bottom:14px}
+.foot ul{list-style:none;display:flex;flex-direction:column;gap:8px}
+.legal{max-width:var(--max);margin:48px auto 0;padding-top:22px;border-top:1px solid rgba(224,169,56,.14);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:.82rem;color:#7E725D}
+.legal a{color:#7E725D}
+.mocknote{max-width:var(--max);margin:18px auto 0;font-size:.74rem;color:#5C5343;letter-spacing:.05em}
+
+/* ============ STICKY MOBILE ORDER BAR ============ */
+.mobile-order{position:fixed;left:0;right:0;bottom:0;z-index:55;display:none;gap:10px;padding:12px 16px calc(12px + env(safe-area-inset-bottom));background:rgba(21,17,13,.96);backdrop-filter:blur(12px);border-top:1px solid var(--line)}
+.mobile-order .btn{flex:1;min-height:50px;padding:12px 16px;font-size:.9rem}
+
+/* ============ ANIM ============ */
+.fade-up{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease}
+.fade-up.vis{opacity:1;transform:none}
+
+/* ============ RESPONSIVE ============ */
+@media (max-width:1000px){
+  .tiles{grid-template-columns:repeat(2,1fr)}
+  .evgrid{grid-template-columns:1fr}
+  .story,.visit{grid-template-columns:1fr;gap:42px}
+  .foot{grid-template-columns:1fr 1fr}
+}
+@media (max-width:720px){
+  .links{position:fixed;inset:var(--navh) 0 auto 0;flex-direction:column;gap:0;background:rgba(21,17,13,.98);padding:8px 0 22px;display:none;border-bottom:1px solid var(--line)}
+  .links.open{display:flex}
+  .links a{font-size:1.05rem;padding:15px;width:100%;text-align:center}
+  .links .order{border-radius:0;margin-top:6px}
+  .burger{display:flex}
+  .nav-brand b{display:none}
+  .tiles{grid-template-columns:1fr}
+  .tile{aspect-ratio:16/10}
+  .btn{width:100%}
+  .cta-row{flex-direction:column;max-width:360px;margin-left:auto;margin-right:auto}
+  .foot{grid-template-columns:1fr}
+  .mobile-order{display:flex}
+  body{padding-bottom:74px}
+  .scroll-hint{display:none}
+}
+@media (max-width:380px){
+  .hero h2{font-size:2.3rem}
+  .sec{padding:68px 0}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="nav-in">
+    <a class="nav-brand" href="#top">
+      <img src="assets/logo-cream.svg" alt="Winchester Kitchen &amp; Bar">
+      <b>Winchester <span>K&amp;B</span></b>
+    </a>
+    <button class="burger" aria-label="Open menu" onclick="document.querySelector('.links').classList.toggle('open')">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+    </button>
+    <div class="links">
+      <a href="#menu">Menu</a>
+      <a href="#takeandbake">Take &amp; Bake</a>
+      <a href="#story">Our Story</a>
+      <a href="#events">Events</a>
+      <a href="#visit">Visit</a>
+      <!-- TODO: swap href to Toast Online Ordering URL once confirmed -->
+      <a class="order" href="tel:+12089246420">Order</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero" id="top">
+  <div class="slides" aria-hidden="true">
+    <div class="slide" style="background-image:url('https://images.unsplash.com/photo-1551782450-a2132b4ba21d?auto=format&fit=crop&w=2000&q=80')"></div>
+    <div class="slide" style="background-image:url('https://images.unsplash.com/photo-1514516345957-556ca7d90a29?auto=format&fit=crop&w=2000&q=80')"></div>
+    <div class="slide" style="background-image:url('https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=2000&q=80')"></div>
+  </div>
+  <div class="hero-in">
+    <span class="eyebrow kicker">Winchester, Idaho · One mile from the lake</span>
+    <h1 class="sr-only">Winchester Kitchen &amp; Bar — family bar &amp; grill in Winchester, Idaho</h1>
+    <img class="hero-logo" src="assets/logo-cream.svg" alt="Winchester Kitchen &amp; Bar">
+    <h2 class="display">Good food.<br>Tall tales.<br><span class="accent">Golden hours.</span></h2>
+    <p>Scratch burgers, hand-cut steak, and take-and-bake pizza in the town named after a stack of rifles. Pull up a stool.</p>
+    <div class="cta-row">
+      <a class="btn btn-gold" href="tel:+12089246420">Order Carry-Out</a>
+      <a class="btn btn-glass" href="#menu">See the Menu</a>
+    </div>
+  </div>
+  <div class="scroll-hint">Scroll<span style="font-size:1rem">↓</span></div>
+</header>
+
+<!-- TICKER -->
+<div class="ticker" aria-hidden="true">
+  <div class="run">
+    <span>Free Bingo Mondays <span class="dot">●</span></span><span>Take &amp; Bake Pizza To Go <span class="dot">●</span></span><span>Full Bar &amp; Local Taps <span class="dot">●</span></span><span>Families Welcome <span class="dot">●</span></span><span>4.7★ · 212 Reviews <span class="dot">●</span></span>
+    <span>Free Bingo Mondays <span class="dot">●</span></span><span>Take &amp; Bake Pizza To Go <span class="dot">●</span></span><span>Full Bar &amp; Local Taps <span class="dot">●</span></span><span>Families Welcome <span class="dot">●</span></span><span>4.7★ · 212 Reviews <span class="dot">●</span></span>
+  </div>
+</div>
+
+<!-- MENU -->
+<section class="sec" id="menu">
+  <div class="wrap">
+    <div class="sec-head fade-up">
+      <span class="kicker">The Lineup</span>
+      <h2 class="display">What the regulars <span class="accent">won't shut up about</span></h2>
+    </div>
+    <div class="tiles">
+      <div class="tile fade-up" style="background-image:url('https://winchesterkitchenandbar.com/wp-content/uploads/bb-plugin/cache/Mother-Load-Winchester-square.jpg')">
+        <div class="in"><span class="tag">House Legend</span><h3>The Motherload</h3><p>Double prime-rib patty, pulled bacon, fried egg, grilled onions.</p><span class="price">$18.99</span></div>
+      </div>
+      <div class="tile fade-up" style="background-image:url('https://winchesterkitchenandbar.com/wp-content/uploads/bb-plugin/cache/122551688_397442531659417_5300007938975948162_o-square.jpg')">
+        <div class="in"><span class="tag">The Namesake</span><h3>The Winchester</h3><p>Cheddar, bacon, onion rings, and BBQ sauce.</p><span class="price">$16.99</span></div>
+      </div>
+      <div class="tile fade-up" style="background-image:url('https://winchesterkitchenandbar.com/wp-content/uploads/bb-plugin/cache/77333115_146246533445686_2199135689205874688_n-square.jpg')">
+        <div class="in"><span class="tag">For the Lake</span><h3>Take &amp; Bake Pizza</h3><p>Built fresh here, baked at camp. 12″ &amp; 16″.</p><span class="price">from $13.99</span></div>
+      </div>
+      <div class="tile fade-up" style="background-image:url('https://winchesterkitchenandbar.com/wp-content/uploads/2020/12/Winchester-food-Kitchen.jpg')">
+        <div class="in"><span class="tag">Bite-Size</span><h3>The Steak</h3><p>12 oz, fresh mashed, garlic toast, soup or salad.</p><span class="price">$28.99</span></div>
+      </div>
+    </div>
+    <div class="menu-foot fade-up">
+      <p>Wings, salads, sandwiches, rice bowls, and a dessert case worth saving room for — the full menu runs deep.</p>
+      <a class="btn btn-gold" href="#">View the Full Menu</a>
+    </div>
+  </div>
+</section>
+
+<!-- TAKE & BAKE FEATURE -->
+<section class="feature" id="takeandbake" style="background-image:url('https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=2000&q=80')">
+  <div class="wrap">
+    <div class="feature-card fade-up">
+      <span class="kicker">Headed to the lake?</span>
+      <h2 class="display">Take a pizza <span class="accent">to go.</span></h2>
+      <p>Our take-and-bake pizzas are built fresh and packed cold — ready for the campground oven, the cabin, or the drive home. Call ahead and we'll have it boxed when you roll through.</p>
+      <a class="btn btn-ember" href="tel:+12089246420">Call Ahead · (208) 924-6420</a>
+    </div>
+  </div>
+</section>
+
+<!-- STORY -->
+<section class="sec sec-cream" id="story">
+  <div class="wrap story">
+    <div class="story-img fade-up" style="background-image:url('https://winchesterkitchenandbar.com/wp-content/uploads/bb-plugin/cache/Winchester-inside-scaled-landscape-3de4200ce8428714cf37f8d52157dbfc-5fbd87bb10ef1.jpeg')"></div>
+    <div class="fade-up">
+      <span class="kicker" style="color:var(--gold-d)">Since 2019 · Town est. 1900</span>
+      <h2 class="display">Named by a stack of rifles. <span class="accent">Run on burgers.</span></h2>
+      <p>In 1900, the town fathers needed a name for the new school district. Someone eyed the <b>stack of Winchester rifles by the door</b> and that was that — sixty-seven years later, <i>Death Valley Days</i> rolled into town to film an episode about it.</p>
+      <p>The old sawmill's mill pond grew up to become <b>Winchester Lake</b>, and the lake brings campers, anglers, and road-trippers right past our door. Since 2019 we've turned the old bar into a place for the whole family: scratch kitchen, big kids menu, pool, darts, the game on the TVs, and a full bar for the grown-ups.</p>
+      <p class="sig">— Stop in and see us. We'll keep your stool warm.</p>
+    </div>
+  </div>
+</section>
+
+<!-- EVENTS -->
+<section class="sec sec-dark2" id="events">
+  <div class="wrap">
+    <div class="sec-head center fade-up">
+      <span class="kicker">Goings-On</span>
+      <h2 class="display">More than a meal</h2>
+    </div>
+    <div class="evgrid">
+      <div class="ev fade-up">
+        <div class="ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M8 9h.01M12 9h.01M16 9h.01M8 13h.01M12 13h.01M16 13h.01"/></svg></div>
+        <span class="when">Every Monday · 5 PM</span>
+        <h3>Free Bingo</h3>
+        <p>Cards are free, the kitchen's open, and the family's welcome. Bring your lucky dauber.</p>
+      </div>
+      <div class="ev fade-up">
+        <div class="ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/><circle cx="9" cy="7" r="4"/></svg></div>
+        <span class="when">Book Anytime</span>
+        <h3>Private Events</h3>
+        <p>Main room, outdoor venue, catering, and the full bar — birthdays to reunions to holiday parties.</p>
+      </div>
+      <div class="ev fade-up">
+        <div class="ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M14 16V4a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12M14 9h4l3 3v4M5 16h9M1 16h.01"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></div>
+        <span class="when">Out-of-Towners</span>
+        <h3>RV Parking + Power</h3>
+        <p>Room out back for the rigs, hookups included. Roll in off the highway and stay a while.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section class="sec" id="reviews">
+  <div class="wrap fade-up">
+    <div class="revhead">
+      <div class="stars" aria-hidden="true">★★★★★</div>
+      <p class="sub">4.7 stars · 212 Google reviews</p>
+    </div>
+    <div class="carousel" aria-roledescription="carousel" aria-label="Guest reviews">
+      <div class="car-track" id="carTrack">
+        <div class="car-slide" role="group" aria-roledescription="slide">
+          <blockquote>"Excellent, excellent food! Warm, cozy, and all the fixin's."</blockquote>
+          <cite>— Guest Review</cite>
+        </div>
+        <div class="car-slide" role="group" aria-roledescription="slide">
+          <blockquote>"Amazing bite-size steak and shrimp! Great service and atmosphere. We'll be back for sure."</blockquote>
+          <cite>— Guest Review</cite>
+        </div>
+        <div class="car-slide" role="group" aria-roledescription="slide">
+          <blockquote>"Tried one of Eric's take-and-bake pizzas for dinner. Absolutely delicious and very reasonably priced!"</blockquote>
+          <cite>— Guest Review</cite>
+        </div>
+        <div class="car-slide" role="group" aria-roledescription="slide">
+          <blockquote>"The food was cooked to perfection and the drinks were phenomenal. I highly recommend the Winchester burger!"</blockquote>
+          <cite>— Guest Review</cite>
+        </div>
+        <div class="car-slide" role="group" aria-roledescription="slide">
+          <blockquote>"Eric and his team are doing a fantastic job — the food is delicious and the drink selection is huge!"</blockquote>
+          <cite>— Guest Review</cite>
+        </div>
+      </div>
+      <div class="car-nav">
+        <button class="car-btn" id="carPrev" aria-label="Previous review">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M15 18l-6-6 6-6"/></svg>
+        </button>
+        <div class="car-dots" id="carDots" role="tablist"></div>
+        <button class="car-btn" id="carNext" aria-label="Next review">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M9 18l6-6-6-6"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VISIT -->
+<section class="sec sec-dark2" id="visit">
+  <div class="wrap visit">
+    <div class="fade-up">
+      <span class="kicker">Find Us</span>
+      <h2 class="display">Two miles off <span class="accent">US-95</span></h2>
+      <p style="margin-bottom:18px">Take the business loop into downtown Winchester — we're on Nez Perce Ave, one mile from Winchester Lake State Park, with parking out back.</p>
+      <p class="addr">317 Nez Perce Ave, Winchester, ID 83555<br>
+      <a href="tel:+12089246420">(208) 924-6420</a></p>
+      <div class="vbtns">
+        <a class="btn btn-gold" href="https://www.google.com/maps/dir//317+Nezperce+Ave,+Winchester,+ID+83555">Get Directions</a>
+        <a class="btn btn-glass" href="tel:+12089246420">Call Us</a>
+      </div>
+    </div>
+    <div class="fade-up">
+      <table class="hours">
+        <caption>Hours</caption>
+        <tr><td>Monday</td><td>3 PM – 9 PM</td></tr>
+        <tr class="closed"><td>Tuesday</td><td>Closed</td></tr>
+        <tr class="closed"><td>Wednesday</td><td>Closed</td></tr>
+        <tr><td>Thursday</td><td>11 AM – 9 PM</td></tr>
+        <tr><td>Friday</td><td>11 AM – 9 PM</td></tr>
+        <tr><td>Saturday</td><td>11 AM – 9 PM</td></tr>
+        <tr><td>Sunday</td><td>11 AM – 9 PM</td></tr>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="foot">
+    <div>
+      <img class="foot-logo" src="assets/logo-cream.svg" alt="Winchester Kitchen &amp; Bar">
+      <p>A family bar &amp; grill on the Camas Prairie, one mile from Winchester Lake State Park.</p>
+    </div>
+    <div>
+      <h4>Visit</h4>
+      <ul>
+        <li><a href="https://www.google.com/maps/dir//317+Nezperce+Ave,+Winchester,+ID+83555">317 Nez Perce Ave<br>Winchester, ID 83555</a></li>
+        <li><a href="tel:+12089246420">(208) 924-6420</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Explore</h4>
+      <ul>
+        <li><a href="#menu">Menu</a></li>
+        <li><a href="#takeandbake">Take &amp; Bake</a></li>
+        <li><a href="#events">Events &amp; Catering</a></li>
+        <li><a href="https://www.facebook.com/Winchester-Kitchen-and-Bar-114488583288148">Facebook</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="legal">
+    <span>© 2026 Winchester Kitchen &amp; Bar. All rights reserved.</span>
+    <span>winchestergrill.com</span>
+  </div>
+  <p class="mocknote">PREVIEW BUILD — hero photography is Unsplash placeholder · hours pending Eric's confirmation · “Order” buttons ready to wire to Toast Online Ordering</p>
+</footer>
+
+<!-- STICKY MOBILE ORDER BAR -->
+<div class="mobile-order">
+  <a class="btn btn-gold" href="tel:+12089246420">Call to Order</a>
+  <a class="btn btn-glass" href="#menu">Menu</a>
+</div>
+
+<script>
+const nav=document.getElementById('nav');
+addEventListener('scroll',()=>nav.classList.toggle('solid',scrollY>40),{passive:true});
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('vis');io.unobserve(e.target)}}),{threshold:.12});
+document.querySelectorAll('.fade-up').forEach(el=>io.observe(el));
+document.querySelectorAll('.links a').forEach(a=>a.addEventListener('click',()=>document.querySelector('.links').classList.remove('open')));
+
+/* ---- reviews carousel ---- */
+(function(){
+  const track=document.getElementById('carTrack');
+  if(!track)return;
+  const slides=[...track.children], dots=document.getElementById('carDots');
+  let i=0, timer=null;
+  const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  slides.forEach((_,n)=>{
+    const b=document.createElement('button');
+    b.setAttribute('role','tab');
+    b.setAttribute('aria-label','Review '+(n+1));
+    b.addEventListener('click',()=>{go(n);restart()});
+    dots.appendChild(b);
+  });
+  function go(n){
+    i=(n+slides.length)%slides.length;
+    track.style.transform='translateX('+(-i*100)+'%)';
+    [...dots.children].forEach((d,k)=>d.setAttribute('aria-current',k===i?'true':'false'));
+  }
+  function next(){go(i+1)}
+  function restart(){if(reduce)return;clearInterval(timer);timer=setInterval(next,6000)}
+  document.getElementById('carNext').addEventListener('click',()=>{next();restart()});
+  document.getElementById('carPrev').addEventListener('click',()=>{go(i-1);restart()});
+  const car=track.closest('.carousel');
+  car.addEventListener('mouseenter',()=>clearInterval(timer));
+  car.addEventListener('mouseleave',restart);
+  car.addEventListener('focusin',()=>clearInterval(timer));
+  car.addEventListener('focusout',restart);
+  let x0=null;
+  car.addEventListener('touchstart',e=>x0=e.touches[0].clientX,{passive:true});
+  car.addEventListener('touchend',e=>{if(x0===null)return;const dx=e.changedTouches[0].clientX-x0;if(Math.abs(dx)>40){dx<0?next():go(i-1);restart()}x0=null},{passive:true});
+  go(0);restart();
+})();
+</script>
+</body>
+</html>
