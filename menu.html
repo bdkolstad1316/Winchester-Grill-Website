@@ -1295,6 +1295,24 @@ footer{background:#0C0907;border-top:1px solid var(--line);padding:54px 26px 28p
 
 <script>
 document.querySelectorAll('.links a').forEach(a=>a.addEventListener('click',()=>document.querySelector('.links').classList.remove('open')));
+
+/* Jump to menu sections with an offset that measures the real sticky-header height,
+   so headings never hide under the nav + pill bar regardless of screen or font. */
+(function(){
+  var nav=document.getElementById('nav');
+  var sub=document.querySelector('.subnav');
+  function offset(){return (nav?nav.offsetHeight:0)+(sub?sub.offsetHeight:0)+16;}
+  document.querySelectorAll('.subnav a[href^="#"]').forEach(function(a){
+    a.addEventListener('click',function(e){
+      var el=document.getElementById(a.getAttribute('href').slice(1));
+      if(!el)return;
+      e.preventDefault();
+      var y=el.getBoundingClientRect().top+window.pageYOffset-offset();
+      window.scrollTo({top:y,behavior:'smooth'});
+      history.replaceState(null,'',a.getAttribute('href'));
+    });
+  });
+})();
 </script>
 </body>
 </html>
