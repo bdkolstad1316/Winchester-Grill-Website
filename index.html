@@ -42,6 +42,7 @@
   --ember:#C24A2C;      /* warm ember accent (modern pop) */
   --cream:#F8F1E4;
   --mut:#C8BBA4;
+  --tan:#C9A86A;
   --line:rgba(224,169,56,.26);
   --max:1180px;
   --navh:78px;
@@ -130,12 +131,13 @@ nav.solid{background:rgba(21,17,13,.96);backdrop-filter:blur(12px);box-shadow:0 
 
 /* ============ MENU TILES ============ */
 .tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
-.tile{position:relative;border-radius:18px;overflow:hidden;aspect-ratio:3/4;display:flex;align-items:flex-end;background:#0C0907 center/cover no-repeat;border:1px solid var(--line)}
-.tile::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 30%,rgba(10,7,5,.94) 88%)}
-.tile .in{position:relative;z-index:1;padding:22px;width:100%}
-.tile .tag{font-size:.66rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);background:rgba(21,17,13,.55);padding:4px 10px;border-radius:999px;display:inline-block;margin-bottom:10px}
+.tile{border-radius:18px;overflow:hidden;border:1px solid var(--line);background:var(--char3);display:flex;flex-direction:column}
+.tile .photo{aspect-ratio:1/1;background:#0C0907 center/cover no-repeat}
+.tile .in{position:relative;padding:22px 20px;display:flex;flex-direction:column}
+.tile .in::before{content:"";position:absolute;top:0;left:20px;right:20px;height:2px;background:repeating-linear-gradient(90deg,var(--tan) 0 11px,transparent 11px 20px)}
+.tile .tag{font-size:.66rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:9px}
 .tile h3{font-family:'Anton',sans-serif;text-transform:uppercase;color:var(--cream);font-size:1.4rem;line-height:1}
-.tile p{font-size:.85rem;color:var(--mut);margin:6px 0 8px}
+.tile p{font-size:.85rem;color:var(--mut);margin:7px 0 11px}
 .tile .price{color:var(--gold);font-weight:800;font-size:1.05rem}
 .menu-foot{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;margin-top:46px}
 .menu-foot p{font-size:.95rem;max-width:460px}
@@ -236,7 +238,7 @@ footer{background:#0C0907;border-top:1px solid var(--line);padding:64px 26px 28p
   .burger{display:flex}
   .nav-brand b{display:none}
   .tiles{grid-template-columns:1fr}
-  .tile{aspect-ratio:16/10}
+  .tile .photo{aspect-ratio:16/10}
   .btn{width:100%}
   .cta-row{flex-direction:column;max-width:360px;margin-left:auto;margin-right:auto}
   .foot{grid-template-columns:1fr}
@@ -311,16 +313,20 @@ footer{background:#0C0907;border-top:1px solid var(--line);padding:64px 26px 28p
       <h2 class="display">What the regulars <span class="accent">won't shut up about</span></h2>
     </div>
     <div class="tiles">
-      <div class="tile fade-up" style="background-image:url('https://winchesterkitchenandbar.com/wp-content/uploads/bb-plugin/cache/Mother-Load-Winchester-square.jpg')">
+      <div class="tile fade-up">
+        <div class="photo" style="background-image:url('https://winchesterkitchenandbar.com/wp-content/uploads/bb-plugin/cache/Mother-Load-Winchester-square.jpg')"></div>
         <div class="in"><span class="tag">House Legend</span><h3>The Motherload</h3><p>Double prime-rib patty, pulled bacon, fried egg, grilled onions.</p><span class="price">$18.99</span></div>
       </div>
-      <div class="tile fade-up" style="background-image:url('assets/the-winchester.jpg')">
+      <div class="tile fade-up">
+        <div class="photo" style="background-image:url('assets/the-winchester.jpg')"></div>
         <div class="in"><span class="tag">The Namesake</span><h3>The Winchester</h3><p>Cheddar, bacon, onion rings, and BBQ sauce.</p><span class="price">$16.99</span></div>
       </div>
-      <div class="tile fade-up" style="background-image:url('https://winchesterkitchenandbar.com/wp-content/uploads/bb-plugin/cache/77333115_146246533445686_2199135689205874688_n-square.jpg')">
+      <div class="tile fade-up">
+        <div class="photo" style="background-image:url('https://winchesterkitchenandbar.com/wp-content/uploads/bb-plugin/cache/77333115_146246533445686_2199135689205874688_n-square.jpg')"></div>
         <div class="in"><span class="tag">For the Lake</span><h3>Take &amp; Bake Pizza</h3><p>Built fresh here, baked at camp. 12″ &amp; 16″.</p><span class="price">from $13.99</span></div>
       </div>
-      <div class="tile fade-up" style="background-image:url('https://winchesterkitchenandbar.com/wp-content/uploads/2020/12/Winchester-food-Kitchen.jpg')">
+      <div class="tile fade-up">
+        <div class="photo" style="background-image:url('https://winchesterkitchenandbar.com/wp-content/uploads/2020/12/Winchester-food-Kitchen.jpg')"></div>
         <div class="in"><span class="tag">Bite-Size</span><h3>The Steak</h3><p>12 oz, fresh mashed, garlic toast, soup or salad.</p><span class="price">$28.99</span></div>
       </div>
     </div>
