@@ -58,7 +58,8 @@ http
       const type = TYPES[ext] || "application/octet-stream";
       res.writeHead(200, {
         "Content-Type": type,
-        "Cache-Control": ext === ".html" ? "no-cache" : "public, max-age=86400",
+        // Short asset cache while we're actively swapping photos; raise before launch.
+        "Cache-Control": ext === ".html" ? "no-cache" : "public, max-age=300",
       });
       fs.createReadStream(filePath).pipe(res);
     });
