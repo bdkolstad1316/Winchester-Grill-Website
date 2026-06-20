@@ -239,16 +239,6 @@
             "priceCurrency": "USD"
           },
           "description": "Buffalo chicken, tomato, olives, onions, cheese, bacon, on mixed greens"
-        },
-        {
-          "@type": "MenuItem",
-          "name": "Crab Salad",
-          "offers": {
-            "@type": "Offer",
-            "price": "14.99",
-            "priceCurrency": "USD"
-          },
-          "description": "Crab, tomato, onions and croutons on mixed greens"
         }
       ]
     },
@@ -529,16 +519,6 @@
             "priceCurrency": "USD"
           },
           "description": "Cheddar cheese, lettuce and tartar sauce"
-        },
-        {
-          "@type": "MenuItem",
-          "name": "Hot Crab Sandwich",
-          "offers": {
-            "@type": "Offer",
-            "price": "13.99",
-            "priceCurrency": "USD"
-          },
-          "description": "Hot crab and Swiss cheese"
         }
       ],
       "description": "Choice of fries, tater tots, or house-made side salad. Same side upgrades as burgers."
@@ -1000,6 +980,100 @@
           "description": "Cheese, taco meat, tomatoes, olives, green onion, and lettuce"
         }
       ]
+    },
+    {
+      "@type": "MenuSection",
+      "name": "Kids Meals",
+      "hasMenuItem": [
+        {
+          "@type": "MenuItem",
+          "name": "2 Burger Sliders",
+          "offers": {
+            "@type": "Offer",
+            "price": "6.99",
+            "priceCurrency": "USD"
+          }
+        },
+        {
+          "@type": "MenuItem",
+          "name": "Chicken Tenders",
+          "offers": {
+            "@type": "Offer",
+            "price": "6.99",
+            "priceCurrency": "USD"
+          }
+        },
+        {
+          "@type": "MenuItem",
+          "name": "Grilled Cheese Sandwich",
+          "offers": {
+            "@type": "Offer",
+            "price": "4.99",
+            "priceCurrency": "USD"
+          }
+        },
+        {
+          "@type": "MenuItem",
+          "name": "Peanut Butter & Jelly Sandwich",
+          "offers": {
+            "@type": "Offer",
+            "price": "4.99",
+            "priceCurrency": "USD"
+          }
+        },
+        {
+          "@type": "MenuItem",
+          "name": "Mac & Cheese",
+          "offers": {
+            "@type": "Offer",
+            "price": "4.99",
+            "priceCurrency": "USD"
+          }
+        }
+      ],
+      "description": "12 & under \u2014 served with fries or tots"
+    },
+    {
+      "@type": "MenuSection",
+      "name": "Kids Drinks",
+      "hasMenuItem": [
+        {
+          "@type": "MenuItem",
+          "name": "Soda",
+          "offers": {
+            "@type": "Offer",
+            "price": "2.79",
+            "priceCurrency": "USD"
+          }
+        },
+        {
+          "@type": "MenuItem",
+          "name": "Apple Juice",
+          "offers": {
+            "@type": "Offer",
+            "price": "2.50",
+            "priceCurrency": "USD"
+          }
+        },
+        {
+          "@type": "MenuItem",
+          "name": "Milk",
+          "offers": {
+            "@type": "Offer",
+            "price": "2.49",
+            "priceCurrency": "USD"
+          }
+        },
+        {
+          "@type": "MenuItem",
+          "name": "Chocolate Milk",
+          "offers": {
+            "@type": "Offer",
+            "price": "2.99",
+            "priceCurrency": "USD"
+          }
+        }
+      ]
     }
   ]
 }
@@ -1129,7 +1203,7 @@ footer{background:#0C0907;border-top:1px solid var(--line);padding:54px 26px 28p
 </header>
 
 <div class="subnav">
-  <div class="subnav-in"><a href="#sides">Sides &amp; Shareables</a><a href="#salads">Fresh Made Salads</a><a href="#burgers">Crafted Burgers</a><a href="#sandwiches">Sandwiches &amp; Wraps</a><a href="#entrees">Entrees</a><a href="#desserts">Desserts</a><a href="#pizza">Pizza</a></div>
+  <div class="subnav-in"><a href="#sides">Sides &amp; Shareables</a><a href="#salads">Fresh Made Salads</a><a href="#burgers">Crafted Burgers</a><a href="#sandwiches">Sandwiches &amp; Wraps</a><a href="#entrees">Entrees</a><a href="#desserts">Desserts</a><a href="#pizza">Pizza</a><a href="#kids">Kids</a></div>
 </div>
 
 <div class="menu-body">
@@ -1167,7 +1241,6 @@ footer{background:#0C0907;border-top:1px solid var(--line);padding:54px 26px 28p
 <div class="mi"><div class="mi-top"><span class="mi-name">Taco Salad</span><span class="mi-dots"></span><span class="mi-price">$14.99</span></div><p class="mi-desc">Seasoned beef, mixed greens, tomato, cheese, onion, olives, tortilla chips, sour cream, salsa</p></div>
 <div class="mi"><div class="mi-top"><span class="mi-name">Cobb Salad</span><span class="mi-dots"></span><span class="mi-price">$14.99</span></div><p class="mi-desc">Chicken, bacon, tomatoes, blue cheese crumbles, egg, on mixed greens</p></div>
 <div class="mi"><div class="mi-top"><span class="mi-name">Buffalo Chicken Salad</span><span class="mi-dots"></span><span class="mi-price">$14.99</span></div><p class="mi-desc">Buffalo chicken, tomato, olives, onions, cheese, bacon, on mixed greens</p></div>
-<div class="mi"><div class="mi-top"><span class="mi-name">Crab Salad</span><span class="mi-dots"></span><span class="mi-price">$14.99</span></div><p class="mi-desc">Crab, tomato, onions and croutons on mixed greens</p></div>
   </div>
 </section>
 <section class="menu-sec" id="burgers">
@@ -1207,7 +1280,6 @@ footer{background:#0C0907;border-top:1px solid var(--line);padding:54px 26px 28p
 <div class="mi"><div class="mi-top"><span class="mi-name">Chicken Caesar Wrap</span><span class="mi-dots"></span><span class="mi-price">$11.99</span></div><p class="mi-desc">Chicken, lettuce, parmesan, Caesar dressing</p></div>
 <div class="mi"><div class="mi-top"><span class="mi-name">Pulled Pork Sandwich</span><span class="mi-dots"></span><span class="mi-price">$12.99</span></div><p class="mi-desc">Smoked pulled pork, BBQ sauce, pickles</p></div>
 <div class="mi"><div class="mi-top"><span class="mi-name">Fish Sandwich</span><span class="mi-dots"></span><span class="mi-price">$15.99</span></div><p class="mi-desc">Cheddar cheese, lettuce and tartar sauce</p></div>
-<div class="mi"><div class="mi-top"><span class="mi-name">Hot Crab Sandwich</span><span class="mi-dots"></span><span class="mi-price">$13.99</span></div><p class="mi-desc">Hot crab and Swiss cheese</p></div>
   </div>
 </section>
 <section class="menu-sec" id="entrees">
@@ -1272,6 +1344,33 @@ footer{background:#0C0907;border-top:1px solid var(--line);padding:54px 26px 28p
     </div>
   </div>
       <p class="topping-note">Add jalapenos, extra cheese, or any other topping for $2 each.</p>
+    </section>
+
+    <section class="menu-sec" id="kids">
+      <div class="sec-bar"><h2 class="display">Kids Menu</h2></div>
+      <p class="pizza-intro">For the 12-and-under crowd. Bring the whole family.</p>
+
+  <div class="pizza-group">
+    <div class="pizza-head"><h3 class="display">Kids Meals</h3></div>
+    <p class="pizza-intro">12 &amp; under — served with fries or tots</p>
+    <div class="mi-grid">
+<div class="mi"><div class="mi-top"><span class="mi-name">2 Burger Sliders</span><span class="mi-dots"></span><span class="mi-price">$6.99</span></div></div>
+<div class="mi"><div class="mi-top"><span class="mi-name">Chicken Tenders</span><span class="mi-dots"></span><span class="mi-price">$6.99</span></div></div>
+<div class="mi"><div class="mi-top"><span class="mi-name">Grilled Cheese Sandwich</span><span class="mi-dots"></span><span class="mi-price">$4.99</span></div></div>
+<div class="mi"><div class="mi-top"><span class="mi-name">Peanut Butter &amp; Jelly Sandwich</span><span class="mi-dots"></span><span class="mi-price">$4.99</span></div></div>
+<div class="mi"><div class="mi-top"><span class="mi-name">Mac &amp; Cheese</span><span class="mi-dots"></span><span class="mi-price">$4.99</span></div></div>
+    </div>
+  </div>
+  <div class="pizza-group">
+    <div class="pizza-head"><h3 class="display">Kids Drinks</h3></div>
+    
+    <div class="mi-grid">
+<div class="mi"><div class="mi-top"><span class="mi-name">Soda</span><span class="mi-dots"></span><span class="mi-price">$2.79</span></div></div>
+<div class="mi"><div class="mi-top"><span class="mi-name">Apple Juice</span><span class="mi-dots"></span><span class="mi-price">$2.50</span></div></div>
+<div class="mi"><div class="mi-top"><span class="mi-name">Milk</span><span class="mi-dots"></span><span class="mi-price">$2.49</span></div></div>
+<div class="mi"><div class="mi-top"><span class="mi-name">Chocolate Milk</span><span class="mi-dots"></span><span class="mi-price">$2.99</span></div></div>
+    </div>
+  </div>
     </section>
   </div>
 </div>
