@@ -124,6 +124,15 @@ nav.solid{background:rgba(21,17,13,.96);backdrop-filter:blur(12px);box-shadow:0 
 @keyframes scrollx{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
 @media (prefers-reduced-motion:reduce){.ticker .run{animation:none;padding-left:26px}}
 
+/* ============ CALL-TO-ORDER BILLBOARD ============ */
+.callbar{background:var(--char2);border-top:3px solid var(--gold);border-bottom:3px solid var(--gold);text-align:center;padding:60px 24px}
+.callbar .kicker{display:block;margin-bottom:16px}
+.callbar-num{display:inline-flex;align-items:center;gap:.32em;font-family:'Bevan',serif;color:var(--cream);font-size:clamp(2.1rem,8vw,4.8rem);line-height:1;letter-spacing:.01em;text-decoration:none;white-space:nowrap;transition:color .2s}
+.callbar-num:hover{color:var(--gold)}
+.callbar-num svg{stroke:var(--gold);width:.74em;height:.74em;flex:0 0 auto}
+.callbar p{margin-top:18px;font-size:1.08rem;color:var(--mut)}
+.callbar p b{color:var(--cream)}
+
 /* ============ SECTION SHELL ============ */
 .sec{padding:104px 0}
 .sec-cream{background:var(--cream);color:#3A3128}
@@ -345,6 +354,18 @@ footer{background:#0C0907;border-top:1px solid var(--line);padding:64px 26px 28p
       <p>Wings, salads, sandwiches, rice bowls, and a dessert case worth saving room for — the full menu runs deep.</p>
       <a class="btn btn-gold" href="menu.html">View the Full Menu</a>
     </div>
+  </div>
+</section>
+
+<!-- CALL TO ORDER BILLBOARD -->
+<section class="callbar">
+  <div class="wrap">
+    <span class="kicker">Order Ahead · Skip the Wait</span>
+    <a class="callbar-num" href="tel:+12089246420">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+      (208) 924-6420
+    </a>
+    <p>Carry-out, catering, and take-and-bake — <b>just call ahead.</b></p>
   </div>
 </section>
 
