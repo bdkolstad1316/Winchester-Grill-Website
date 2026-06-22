@@ -1171,12 +1171,14 @@ footer{background:#0C0907;border-top:1px solid var(--line);padding:54px 26px 28p
   .mi-grid{grid-template-columns:1fr;gap:0}
   .nav-brand b{font-size:1.15rem}
 }
-@media (max-width:720px){
+@media (max-width:920px){
   .links{position:fixed;inset:var(--navh) 0 auto 0;flex-direction:column;gap:0;background:rgba(21,17,13,.98);padding:8px 0 22px;display:none;border-bottom:1px solid var(--line)}
   .links.open{display:flex}
   .links a{font-size:1.05rem;padding:15px;width:100%;text-align:center}
-  .links .order{border-radius:0;margin-top:6px}
+  .links .order{border-radius:0;margin-top:6px;justify-content:center}
   .burger{display:flex}
+}
+@media (max-width:720px){
   .btn{width:100%;max-width:340px}
 }
 </style>
