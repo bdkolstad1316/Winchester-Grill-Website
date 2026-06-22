@@ -10,6 +10,12 @@
 <meta property="og:title" content="Winchester Kitchen & Bar — Winchester, Idaho">
 <meta property="og:description" content="Scratch burgers, hand-cut steak, and take-and-bake pizza one mile from Winchester Lake. Families welcome.">
 <meta property="og:url" content="https://winchestergrill.com/">
+<meta property="og:image" content="https://winchestergrill.com/assets/og-image.jpg?v=1">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Winchester Grill — family bar & grill in Winchester, Idaho">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://winchestergrill.com/assets/og-image.jpg?v=1">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bevan&family=Fraunces:ital,opsz,wght@1,9..144,500;1,9..144,600&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
@@ -49,13 +55,13 @@
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{font-family:'Lora',serif;background:var(--char);color:var(--mut);line-height:1.65;-webkit-tap-highlight-color:rgba(224,169,56,.2);overflow-x:hidden}
+body{font-family:'Lora',serif;font-size:16px;text-size-adjust:100%;-webkit-text-size-adjust:100%;background:var(--char);color:var(--mut);line-height:1.65;-webkit-tap-highlight-color:rgba(224,169,56,.2);overflow-x:hidden}
 img{max-width:100%;display:block}
 section{scroll-margin-top:var(--navh)}
 .wrap{max-width:var(--max);margin:0 auto;padding:0 26px}
 .display{font-family:'Bevan',serif;font-weight:400;letter-spacing:.005em;text-transform:uppercase;line-height:.95}
 .accent{font-family:'Fraunces',serif;font-style:italic;font-weight:600}
-.kicker{font-size:.74rem;font-weight:700;letter-spacing:.32em;text-transform:uppercase;color:var(--gold)}
+.kicker{font-size:.78rem;font-weight:700;letter-spacing:.3em;text-transform:uppercase;color:var(--gold)}
 
 /* ============ NAV ============ */
 nav{position:fixed;top:0;left:0;right:0;z-index:60;height:var(--navh);display:flex;align-items:center;transition:background .3s,box-shadow .3s;background:linear-gradient(180deg,rgba(21,17,13,.9),transparent)}
@@ -63,7 +69,7 @@ nav.solid{background:rgba(21,17,13,.96);backdrop-filter:blur(12px);box-shadow:0 
 .nav-in{max-width:var(--max);margin:0 auto;width:100%;display:flex;align-items:center;justify-content:space-between;padding:0 26px}
 .nav-brand{display:flex;align-items:center;gap:12px;text-decoration:none}
 .nav-brand img{height:50px;width:auto}
-.nav-brand b{font-family:'Bevan',serif;color:var(--cream);font-size:1.05rem;letter-spacing:.02em;text-transform:uppercase;line-height:1}
+.nav-brand b{font-family:'Bevan',serif;color:var(--cream);font-size:1.32rem;letter-spacing:.02em;text-transform:uppercase;line-height:1}
 .nav-brand b span{color:var(--gold)}
 .links{display:flex;gap:30px;align-items:center}
 .links a{color:var(--cream);text-decoration:none;font-weight:600;font-size:.86rem;letter-spacing:.08em;text-transform:uppercase;padding:8px 2px}
@@ -87,7 +93,7 @@ nav.solid{background:rgba(21,17,13,.96);backdrop-filter:blur(12px);box-shadow:0 
 .hero{position:relative;min-height:100vh;min-height:100svh;display:flex;align-items:center;justify-content:center;text-align:center;overflow:hidden;isolation:isolate}
 @supports not (height:100svh){.hero{min-height:100vh}}
 .slides{position:absolute;inset:0;z-index:-2}
-.slide{position:absolute;inset:-6%;background:center/cover no-repeat #0C0907;opacity:0;animation:cyc 24s infinite ease-in-out}
+.slide{position:absolute;inset:-6%;background:35% center/cover no-repeat #0C0907;opacity:0;animation:cyc 24s infinite ease-in-out}
 .slide:nth-child(1){animation-name:cyc,kbA;animation-delay:0s}
 .slide:nth-child(2){animation-name:cyc,kbB;animation-delay:8s}
 .slide:nth-child(3){animation-name:cyc,kbA;animation-delay:16s}
@@ -132,10 +138,11 @@ nav.solid{background:rgba(21,17,13,.96);backdrop-filter:blur(12px);box-shadow:0 
 /* ============ MENU TILES ============ */
 .tiles{display:grid;grid-template-columns:repeat(5,1fr);gap:18px}
 .tile{border-radius:18px;overflow:hidden;border:1px solid var(--line);background:var(--char3);display:flex;flex-direction:column}
-.tile .photo{aspect-ratio:1/1;background:#0C0907 center/cover no-repeat}
+.tile .photo{aspect-ratio:1/1;background:#0C0907;overflow:hidden}
+.tile .photo img{width:100%;height:100%;object-fit:cover;display:block}
 .tile .in{position:relative;padding:22px 20px;display:flex;flex-direction:column}
 .tile .in::before{content:"";position:absolute;top:0;left:20px;right:20px;height:2px;background:repeating-linear-gradient(90deg,var(--tan) 0 11px,transparent 11px 20px)}
-.tile .tag{font-size:.66rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:9px}
+.tile .tag{font-size:.72rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:9px}
 .tile h3{font-family:'Bevan',serif;text-transform:uppercase;color:var(--cream);font-size:1.12rem;line-height:1.06;letter-spacing:.005em}
 .tile p{font-size:.85rem;color:var(--mut);margin:7px 0 11px}
 .tile .price{color:var(--gold);font-weight:800;font-size:1.05rem}
@@ -206,7 +213,8 @@ nav.solid{background:rgba(21,17,13,.96);backdrop-filter:blur(12px);box-shadow:0 
 /* ============ FOOTER ============ */
 footer{background:#0C0907;border-top:1px solid var(--line);padding:64px 26px 28px}
 .foot{max-width:var(--max);margin:0 auto;display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:40px}
-.foot-logo{width:190px;margin-bottom:16px}
+.foot-logotype{font-family:'Bevan',serif;text-transform:uppercase;color:var(--cream);font-size:1.6rem;letter-spacing:.02em;line-height:1;margin-bottom:16px}
+.foot-logotype span{color:var(--gold)}
 .foot p,.foot a{font-size:.92rem;color:var(--mut);text-decoration:none}
 .foot a:hover{color:var(--gold)}
 .foot h4{font-family:'Bevan',serif;text-transform:uppercase;color:var(--cream);font-size:1rem;letter-spacing:.04em;margin-bottom:14px}
@@ -225,7 +233,7 @@ footer{background:#0C0907;border-top:1px solid var(--line);padding:64px 26px 28p
 
 /* ============ RESPONSIVE ============ */
 @media (max-width:1000px){
-  .tiles{grid-template-columns:repeat(2,1fr)}
+  .tiles{grid-template-columns:repeat(3,1fr)}
   .evgrid{grid-template-columns:1fr}
   .story,.visit{grid-template-columns:1fr;gap:42px}
   .foot{grid-template-columns:1fr 1fr}
@@ -236,7 +244,7 @@ footer{background:#0C0907;border-top:1px solid var(--line);padding:64px 26px 28p
   .links a{font-size:1.05rem;padding:15px;width:100%;text-align:center}
   .links .order{border-radius:0;margin-top:6px}
   .burger{display:flex}
-  .nav-brand b{display:none}
+  .nav-brand b{font-size:1.15rem}
   .tiles{grid-template-columns:1fr}
   .tile .photo{aspect-ratio:16/10}
   .btn{width:100%}
@@ -258,7 +266,6 @@ footer{background:#0C0907;border-top:1px solid var(--line);padding:64px 26px 28p
 <nav id="nav">
   <div class="nav-in">
     <a class="nav-brand" href="#top">
-      <img src="assets/logo-cream.svg" alt="Winchester Kitchen &amp; Bar">
       <b>Winchester <span>Grill</span></b>
     </a>
     <button class="burger" aria-label="Open menu" onclick="document.querySelector('.links').classList.toggle('open')">
@@ -279,9 +286,9 @@ footer{background:#0C0907;border-top:1px solid var(--line);padding:64px 26px 28p
 <!-- HERO -->
 <header class="hero" id="top">
   <div class="slides" aria-hidden="true">
-    <div class="slide" style="background-image:url('https://images.unsplash.com/photo-1551782450-a2132b4ba21d?auto=format&fit=crop&w=2000&q=80')"></div>
-    <div class="slide" style="background-image:url('https://images.unsplash.com/photo-1514516345957-556ca7d90a29?auto=format&fit=crop&w=2000&q=80')"></div>
-    <div class="slide" style="background-image:url('https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=2000&q=80')"></div>
+    <div class="slide" style="background-image:url('assets/hero-burger.jpg?v=1')"></div>
+    <div class="slide" style="background-image:url('assets/hero-pizza.jpg?v=1')"></div>
+    <div class="slide" style="background-image:url('assets/hero-wings.jpg?v=1')"></div>
   </div>
   <div class="hero-in">
     <span class="eyebrow kicker">Winchester, Idaho · One mile from the lake</span>
@@ -314,23 +321,23 @@ footer{background:#0C0907;border-top:1px solid var(--line);padding:64px 26px 28p
     </div>
     <div class="tiles">
       <div class="tile fade-up">
-        <div class="photo" style="background-image:url('assets/the-motherlode.jpg?v=1')"></div>
+        <div class="photo"><img src="assets/the-motherlode.jpg?v=1" loading="lazy" decoding="async" alt="The Motherlode double cheeseburger"></div>
         <div class="in"><span class="tag">House Legend</span><h3>The Motherlode</h3><p>Double prime-rib patty, pulled bacon, fried egg, grilled onions.</p><span class="price">$18.99</span></div>
       </div>
       <div class="tile fade-up">
-        <div class="photo" style="background-image:url('assets/cooked-pepperoni.jpg?v=2')"></div>
+        <div class="photo"><img src="assets/cooked-pepperoni.jpg?v=2" loading="lazy" decoding="async" alt="Hot cooked pepperoni pizza"></div>
         <div class="in"><span class="tag">Fresh-Baked</span><h3>Pepperoni Pizza</h3><p>Hand-built and baked hot in-house. Pepperoni to specialty.</p><span class="price">from $13.99</span></div>
       </div>
       <div class="tile fade-up">
-        <div class="photo" style="background-image:url('assets/the-winchester.jpg?v=3')"></div>
+        <div class="photo"><img src="assets/the-winchester.jpg?v=3" loading="lazy" decoding="async" alt="The Winchester cheeseburger"></div>
         <div class="in"><span class="tag">The Namesake</span><h3>The Winchester</h3><p>Cheddar, bacon, onion rings, and BBQ sauce.</p><span class="price">$16.99</span></div>
       </div>
       <div class="tile fade-up">
-        <div class="photo" style="background-image:url('assets/wings.jpg?v=1')"></div>
+        <div class="photo"><img src="assets/wings.jpg?v=1" loading="lazy" decoding="async" alt="Buffalo bone-in chicken wings"></div>
         <div class="in"><span class="tag">House Famous</span><h3>Bone-In Wings</h3><p>Choice of sauce — Buffalo to Korean BBQ.</p><span class="price">$17.99</span></div>
       </div>
       <div class="tile fade-up">
-        <div class="photo" style="background-image:url('assets/chicken-fried-steak.jpg?v=1')"></div>
+        <div class="photo"><img src="assets/chicken-fried-steak.jpg?v=1" loading="lazy" decoding="async" alt="Chicken fried steak dinner"></div>
         <div class="in"><span class="tag">Comfort Classic</span><h3>Chicken Fried Steak</h3><p>Smothered in country sausage gravy, with fresh mashed and garlic toast.</p><span class="price">$19.99</span></div>
       </div>
     </div>
@@ -476,7 +483,7 @@ footer{background:#0C0907;border-top:1px solid var(--line);padding:64px 26px 28p
 <footer>
   <div class="foot">
     <div>
-      <img class="foot-logo" src="assets/logo-cream.svg" alt="Winchester Kitchen &amp; Bar">
+      <div class="foot-logotype">Winchester <span>Grill</span></div>
       <p>A family bar &amp; grill on the Camas Prairie, one mile from Winchester Lake State Park.</p>
     </div>
     <div>
