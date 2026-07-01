@@ -30,6 +30,30 @@ const TYPES = {
   ".txt": "text/plain; charset=utf-8",
 };
 
+// Security headers applied to every response (static brochure site, no user input).
+const SECURITY = {
+  "Strict-Transport-Security": "max-age=31536000; includeSubDomains",
+  "X-Content-Type-Options": "nosniff",
+  "X-Frame-Options": "SAMEORIGIN",
+  "Referrer-Policy": "strict-origin-when-cross-origin",
+  "Permissions-Policy": "geolocation=(), microphone=(), camera=(), payment=()",
+  "Content-Security-Policy":
+    "default-src 'self'; " +
+    "script-src 'self' 'unsafe-inline'; " +
+    "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; " +
+    "font-src 'self' https://fonts.gstatic.com; " +
+    "img-src 'self' data:; " +
+    "connect-src 'self'; frame-ancestors 'self'; base-uri 'self'; form-action 'self'",
+};
+
+// Never serve infrastructure / source files, or any dotfile (blocks .git, .env, etc.).
+const BLOCKED = new Set(["server.js", "package.json", "package-lock.json", ".gitignore"]);
+
+function notFound(res) {
+  res.writeHead(404, { "Content-Type": "text/html; charset=utf-8", ...SECURITY });
+  res.end("<h1>404 — Not Found</h1>");
+}
+
 http
   .createServer((req, res) => {
     // strip query string, prevent directory traversal
@@ -37,9 +61,14 @@ http
     // Root path: serve the holding page when COMING_SOON is on, else the real site.
     // (index.html and every other page stay directly reachable for previewing.)
     if (urlPath === "/") urlPath = COMING_SOON ? "/coming-soon.html" : "/index.html";
-    const safePath = path
-      .normalize(urlPath)
-      .replace(/^(\.\.[/\\])+/, "");
+    const safePath = path.normalize(urlPath).replace(/^(\.\.[/\\])+/, "");
+
+    // Block dotfiles (.git, .env, .gitignore …) and named infra files.
+    const segments = safePath.split(/[/\\]/).filter(Boolean);
+    if (segments.some((s) => s.startsWith(".")) || BLOCKED.has(path.basename(safePath))) {
+      return notFound(res);
+    }
+
     let filePath = path.join(ROOT, safePath);
 
     fs.stat(filePath, (err, stat) => {
@@ -49,9 +78,7 @@ http
         if (fs.existsSync(withHtml)) {
           filePath = withHtml;
         } else {
-          res.writeHead(404, { "Content-Type": "text/html; charset=utf-8" });
-          res.end("<h1>404 — Not Found</h1>");
-          return;
+          return notFound(res);
         }
       }
       const ext = path.extname(filePath).toLowerCase();
@@ -60,6 +87,7 @@ http
         "Content-Type": type,
         // Short asset cache while we're actively swapping photos; raise before launch.
         "Cache-Control": ext === ".html" ? "no-cache" : "public, max-age=300",
+        ...SECURITY,
       });
       fs.createReadStream(filePath).pipe(res);
     });
