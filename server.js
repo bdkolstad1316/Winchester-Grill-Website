@@ -83,8 +83,17 @@ http
       }
       const ext = path.extname(filePath).toLowerCase();
       const type = TYPES[ext] || "application/octet-stream";
+      // Content-Length is required by strict crawlers (Apple/iMessage link previews)
+      // to render social cards; a chunked/no-length response degrades to a plain card.
+      let size;
+      try {
+        size = fs.statSync(filePath).size;
+      } catch {
+        return notFound(res);
+      }
       res.writeHead(200, {
         "Content-Type": type,
+        "Content-Length": String(size),
         // Short asset cache while we're actively swapping photos; raise before launch.
         "Cache-Control": ext === ".html" ? "no-cache" : "public, max-age=300",
         ...SECURITY,
