@@ -1116,6 +1116,12 @@ nav{position:fixed;top:0;left:0;right:0;z-index:60;height:var(--navh);display:fl
 .sec-bar{border-bottom:2px solid var(--line);padding-bottom:10px;margin-bottom:8px}
 .sec-bar h2{color:var(--gold);font-size:clamp(1.6rem,3.4vw,2.3rem)}
 .sec-note{font-family:'Fraunces',serif;font-style:italic;color:var(--mut);font-size:.96rem;margin:10px 0 22px;max-width:760px}
+.menu-feature{position:relative;border-radius:16px;overflow:hidden;margin:4px 0 32px;border:1px solid var(--line);background:#0C0907}
+.menu-feature img{width:100%;aspect-ratio:7/3;object-fit:cover;display:block}
+.menu-feature figcaption{position:absolute;left:0;right:0;bottom:0;padding:22px 26px;background:linear-gradient(transparent,rgba(10,7,5,.92))}
+.menu-feature .feat-label{display:block;font-size:.72rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:5px}
+.menu-feature .feat-name{font-family:'Bevan',serif;text-transform:uppercase;color:var(--cream);font-size:clamp(1.5rem,4vw,2.3rem);line-height:1}
+.menu-feature .feat-tag{display:block;margin-top:6px;font-size:.98rem;color:var(--mut)}
 .mi-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px 48px;margin-top:18px}
 .mi{padding:12px 0;border-bottom:1px solid rgba(224,169,56,.1)}
 .mi-top{display:flex;align-items:baseline;gap:8px}
@@ -1206,6 +1212,7 @@ footer{background:#0C0907;border-top:1px solid var(--line);padding:54px 26px 28p
 <section class="menu-sec" id="sides">
   <div class="sec-bar"><h2 class="display">Sides &amp; Shareables</h2></div>
   <p class="sec-note">Wing sauces: Nashville Hot, Umami, Honey Sriracha, Buffalo, Garlic Parm, BBQ, Korean BBQ, or Naked. Extra sauce $1.</p>
+  
   <div class="mi-grid">
 <div class="mi"><div class="mi-top"><span class="mi-name">Famous Bone-In Wings</span><span class="mi-dots"></span><span class="mi-price">$17.99</span></div><p class="mi-desc">Choice of sauce</p></div>
 <div class="mi"><div class="mi-top"><span class="mi-name">Boneless Wings</span><span class="mi-dots"></span><span class="mi-price">$14.99</span></div><p class="mi-desc">Choice of sauce</p></div>
@@ -1230,6 +1237,7 @@ footer{background:#0C0907;border-top:1px solid var(--line);padding:54px 26px 28p
 <section class="menu-sec" id="salads">
   <div class="sec-bar"><h2 class="display">Fresh Made Salads</h2></div>
   
+  
   <div class="mi-grid">
 <div class="mi"><div class="mi-top"><span class="mi-name">Chef Salad</span><span class="mi-dots"></span><span class="mi-price">$15.99</span></div><p class="mi-desc">Ham, turkey, cheese, egg, tomatoes, olives, on mixed greens</p></div>
 <div class="mi"><div class="mi-top"><span class="mi-name">Taco Salad</span><span class="mi-dots"></span><span class="mi-price">$14.99</span></div><p class="mi-desc">Seasoned beef, mixed greens, tomato, cheese, onion, olives, tortilla chips, sour cream, salsa</p></div>
@@ -1240,6 +1248,7 @@ footer{background:#0C0907;border-top:1px solid var(--line);padding:54px 26px 28p
 <section class="menu-sec" id="burgers">
   <div class="sec-bar"><h2 class="display">Crafted Burgers</h2></div>
   <p class="sec-note">1/3 lb beef locally provided by Marshall&#x27;s Meat. Choice of fries, tater tots, or house-made side salad. Upgrade your side: Onion Rings, Fried Pickles, Pork Rinds, or Fried Mushrooms +$1.99 · Mac &amp; Cheese +$2.49 · Cup of Soup +$1.99.</p>
+  
   <div class="mi-grid">
 <div class="mi"><div class="mi-top"><span class="mi-name">Idaho Classic</span><span class="mi-dots"></span><span class="mi-price">$14.49</span></div><p class="mi-desc">Pickles, lettuce, tomato, onion, cheddar, ketchup, mustard. Add bacon $2</p></div>
 <div class="mi"><div class="mi-top"><span class="mi-name">The Winchester</span><span class="mi-dots"></span><span class="mi-price">$16.99</span></div><p class="mi-desc">Cheddar, bacon, onion rings, BBQ sauce</p></div>
@@ -1257,6 +1266,7 @@ footer{background:#0C0907;border-top:1px solid var(--line);padding:54px 26px 28p
 <section class="menu-sec" id="sandwiches">
   <div class="sec-bar"><h2 class="display">Sandwiches &amp; Wraps</h2></div>
   <p class="sec-note">Choice of fries, tater tots, or house-made side salad. Same side upgrades as burgers.</p>
+  <figure class="menu-feature"><img src="assets/featured-cuban.jpg" alt="The Cuban — Grilled ham, Swiss, pickles &amp; mustard — with tots" loading="lazy" decoding="async"><figcaption><span class="feat-label">House Favorite</span><span class="feat-name">The Cuban</span><span class="feat-tag">Grilled ham, Swiss, pickles &amp; mustard — with tots</span></figcaption></figure>
   <div class="mi-grid">
 <div class="mi"><div class="mi-top"><span class="mi-name">The PDQ</span><span class="mi-dots"></span><span class="mi-price">$7.99</span></div><p class="mi-desc">Grilled cheese sandwich with a cup of the soup of the day</p></div>
 <div class="mi"><div class="mi-top"><span class="mi-name">Winchester BLT</span><span class="mi-dots"></span><span class="mi-price">$11.99</span></div></div>
@@ -1279,6 +1289,7 @@ footer{background:#0C0907;border-top:1px solid var(--line);padding:54px 26px 28p
 <section class="menu-sec" id="entrees">
   <div class="sec-bar"><h2 class="display">Entrees</h2></div>
   
+  
   <div class="mi-grid">
 <div class="mi"><div class="mi-top"><span class="mi-name">Pulled Pork Mac and Cheese</span><span class="mi-dots"></span><span class="mi-price">$13.99</span></div></div>
 <div class="mi"><div class="mi-top"><span class="mi-name">Chicken Bacon Ranch Mac &amp; Cheese</span><span class="mi-dots"></span><span class="mi-price">$12.99</span></div></div>
@@ -1297,6 +1308,7 @@ footer{background:#0C0907;border-top:1px solid var(--line);padding:54px 26px 28p
 </section>
 <section class="menu-sec" id="desserts">
   <div class="sec-bar"><h2 class="display">Desserts</h2></div>
+  
   
   <div class="mi-grid">
 <div class="mi"><div class="mi-top"><span class="mi-name">Brownie Delight</span><span class="mi-dots"></span><span class="mi-price">$5.99</span></div><p class="mi-desc">With ice cream and chocolate drizzle</p></div>
