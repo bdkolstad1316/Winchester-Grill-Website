@@ -1,5 +1,6 @@
 // Minimal zero-dependency static file server for Railway / Nixpacks.
 // Serves the files in this folder. Railway sets PORT; falls back to 8080 locally.
+// build marker: 2026-07-18 (retrigger after transient Railway orchestrator failure)
 const http = require("http");
 const fs = require("fs");
 const path = require("path");
