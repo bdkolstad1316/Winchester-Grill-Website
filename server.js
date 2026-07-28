@@ -29,6 +29,7 @@ const TYPES = {
   ".json": "application/json",
   ".webmanifest": "application/manifest+json",
   ".txt": "text/plain; charset=utf-8",
+  ".xml": "application/xml; charset=utf-8",
 };
 
 // Security headers applied to every response (static brochure site, no user input).

@@ -1,0 +1,7 @@
+# Winchester Grill — winchestergrill.com
+# Search engines and AI crawlers welcome; nothing to hide on a brochure site.
+
+User-agent: *
+Allow: /
+
+Sitemap: https://winchestergrill.com/sitemap.xml
