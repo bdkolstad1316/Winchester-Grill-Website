@@ -1093,6 +1093,24 @@ nav{position:fixed;top:0;left:0;right:0;z-index:60;height:var(--navh);display:fl
 .menu-feature .feat-label{display:block;font-size:.72rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:5px}
 .menu-feature .feat-name{font-family:'Bevan',serif;text-transform:uppercase;color:var(--cream);font-size:clamp(1.5rem,4vw,2.3rem);line-height:1}
 .menu-feature .feat-tag{display:block;margin-top:6px;font-size:.98rem;color:var(--mut)}
+
+/* Inked "Most Loved" stamp — thumps down once when the row scrolls into view. */
+.mi-stamp{
+  font-family:'Bevan',serif;font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--gold);border:2px solid var(--gold);border-radius:3px;
+  padding:3px 7px 2px;margin-left:2px;flex:0 0 auto;white-space:nowrap;
+  transform:rotate(-7deg);opacity:.92;
+}
+.mi-stamp.ink{animation:stamp-thump .5s cubic-bezier(.2,1.5,.4,1) both}
+@keyframes stamp-thump{
+  0%{transform:rotate(-24deg) scale(2.4);opacity:0}
+  55%{transform:rotate(-5deg) scale(.94);opacity:1}
+  75%{transform:rotate(-8deg) scale(1.04)}
+  100%{transform:rotate(-7deg) scale(1);opacity:.92}
+}
+@media (prefers-reduced-motion:reduce){
+  .mi-stamp.ink{animation:none}
+}
 .mi-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px 48px;margin-top:18px}
 .mi{padding:12px 0;border-bottom:1px solid rgba(224,169,56,.1)}
 .mi-top{display:flex;align-items:baseline;gap:8px}
@@ -1282,7 +1300,7 @@ footer{background:#0C0907;border-top:1px solid var(--line);padding:54px 26px 28p
   <div class="mi-grid">
 <div class="mi"><div class="mi-top"><span class="mi-name">Brownie Delight</span><span class="mi-dots"></span><span class="mi-price">$5.99</span></div><p class="mi-desc">With ice cream and chocolate drizzle</p></div>
 <div class="mi"><div class="mi-top"><span class="mi-name">Raspberry Cheesecake</span><span class="mi-dots"></span><span class="mi-price">$6.99</span></div></div>
-<div class="mi"><div class="mi-top"><span class="mi-name">Banana Cream Pie</span><span class="mi-dots"></span><span class="mi-price">$6.99</span></div></div>
+<div class="mi"><div class="mi-top"><span class="mi-name">Banana Cream Pie</span><span class="mi-stamp">Most Loved</span><span class="mi-dots"></span><span class="mi-price">$6.99</span></div></div>
 <div class="mi"><div class="mi-top"><span class="mi-name">Bowl of Ice Cream</span><span class="mi-dots"></span><span class="mi-price">$3.99</span></div><p class="mi-desc">Vanilla or Huckleberry</p></div>
   </div>
 </section>
@@ -1388,6 +1406,21 @@ document.querySelectorAll('.links a').forEach(a=>a.addEventListener('click',()=>
       history.replaceState(null,'',a.getAttribute('href'));
     });
   });
+})();
+
+/* Stamp the flagged dishes once, as they scroll into view. */
+(function(){
+  var stamps=document.querySelectorAll('.mi-stamp');
+  if(!stamps.length)return;
+  if(!('IntersectionObserver' in window)){
+    stamps.forEach(function(s){s.classList.add('ink');});return;
+  }
+  var io=new IntersectionObserver(function(entries){
+    entries.forEach(function(en){
+      if(en.isIntersecting){en.target.classList.add('ink');io.unobserve(en.target);}
+    });
+  },{threshold:.9});
+  stamps.forEach(function(s){io.observe(s);});
 })();
 </script>
 </body>
