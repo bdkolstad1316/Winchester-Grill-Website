@@ -31,7 +31,7 @@
   "telephone": "+12089246420",
   "hasMenu": "https://winchestergrill.com/menu.html",
   "acceptsReservations": "False",
-  "sameAs": ["https://www.facebook.com/Winchester-Kitchen-and-Bar-114488583288148"],
+  "sameAs": ["https://www.facebook.com/people/Winchester-Kitchen-and-Bar/100057365052855/"],
   "image": "https://winchestergrill.com/assets/og-image.jpg",
   "address": {"@type": "PostalAddress", "streetAddress": "317 Nezperce Ave", "addressLocality": "Winchester", "addressRegion": "ID", "postalCode": "83555", "addressCountry": "US"},
   "geo": {"@type": "GeoCoordinates", "latitude": 46.2400662, "longitude": -116.6228965},
@@ -81,6 +81,10 @@ nav.solid{background:rgba(21,17,13,.96);backdrop-filter:blur(12px);box-shadow:0 
 .links .order{display:inline-flex;align-items:center;gap:8px;background:var(--gold);color:var(--char);padding:13px 20px;border-radius:999px;letter-spacing:.03em;font-weight:700;white-space:nowrap}
 .links .order svg{width:16px;height:16px;flex:0 0 auto}
 .links .order:hover{background:var(--cream);color:var(--char)}
+.links .fb{display:inline-flex;align-items:center;justify-content:center;gap:9px;width:42px;height:42px;flex:0 0 auto;border:1px solid var(--line);border-radius:999px;color:var(--cream);text-decoration:none;padding:0;transition:color .2s,border-color .2s,background .2s}
+.links .fb:hover{color:var(--gold);border-color:var(--gold);background:rgba(224,169,56,.08)}
+.links .fb svg{width:18px;height:18px;flex:0 0 auto}
+.fb-txt{display:none}
 .burger{display:none;background:none;border:none;cursor:pointer;width:48px;height:48px;align-items:center;justify-content:center}
 .burger svg{stroke:var(--cream)}
 
@@ -257,6 +261,10 @@ footer{background:#0C0907;border-top:1px solid var(--line);padding:64px 26px 28p
   .links.open{display:flex}
   .links a{font-size:1.05rem;padding:15px;width:100%;text-align:center}
   .links .order{border-radius:0;margin-top:6px;justify-content:center}
+  /* In the collapsed menu the Facebook link becomes a full-width labeled row. */
+  .links .fb{width:100%;height:auto;min-height:52px;border:none;border-radius:0;padding:15px;font-size:1.05rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase}
+  .links .fb:hover{background:none}
+  .fb-txt{display:inline}
   .burger{display:flex}
 }
 @media (max-width:720px){
@@ -293,6 +301,7 @@ footer{background:#0C0907;border-top:1px solid var(--line);padding:64px 26px 28p
       <a href="#story">Our Story</a>
       <a href="#events">Events</a>
       <a href="#visit">Visit</a>
+      <a class="fb" href="https://www.facebook.com/people/Winchester-Kitchen-and-Bar/100057365052855/" target="_blank" rel="noopener" aria-label="Winchester Grill on Facebook"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M24 12.07C24 5.4 18.63 0 12 0S0 5.4 0 12.07c0 6.03 4.39 11.03 10.13 11.93v-8.44H7.08v-3.49h3.05V9.41c0-3.02 1.79-4.69 4.53-4.69 1.31 0 2.68.24 2.68.24v2.97h-1.51c-1.49 0-1.96.93-1.96 1.89v2.25h3.33l-.53 3.49h-2.8V24C19.61 23.1 24 18.1 24 12.07z"/></svg><span class="fb-txt">Facebook</span></a>
       <!-- TODO: swap href to Toast Online Ordering URL once confirmed -->
       <a class="order" href="tel:+12089246420"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>(208) 924-6420</a>
     </div>
@@ -520,7 +529,7 @@ footer{background:#0C0907;border-top:1px solid var(--line);padding:64px 26px 28p
         <li><a href="menu.html">Menu</a></li>
         <li><a href="#takeandbake">Pizza</a></li>
         <li><a href="#events">Events &amp; Catering</a></li>
-        <li><a href="https://www.facebook.com/Winchester-Kitchen-and-Bar-114488583288148">Facebook</a></li>
+        <li><a href="https://www.facebook.com/people/Winchester-Kitchen-and-Bar/100057365052855/">Facebook</a></li>
       </ul>
     </div>
   </div>
