@@ -41,11 +41,12 @@ const SECURITY = {
   "Permissions-Policy": "geolocation=(), microphone=(), camera=(), payment=()",
   "Content-Security-Policy":
     "default-src 'self'; " +
-    "script-src 'self' 'unsafe-inline'; " +
+    // plausible.io is allowlisted for privacy-friendly analytics (script + event POSTs).
+    "script-src 'self' 'unsafe-inline' https://plausible.io; " +
     "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; " +
     "font-src 'self' https://fonts.gstatic.com; " +
     "img-src 'self' data:; " +
-    "connect-src 'self'; frame-ancestors 'self'; base-uri 'self'; form-action 'self'",
+    "connect-src 'self' https://plausible.io; frame-ancestors 'self'; base-uri 'self'; form-action 'self'",
 };
 
 // Never serve infrastructure / source files, or any dotfile (blocks .git, .env, etc.).
