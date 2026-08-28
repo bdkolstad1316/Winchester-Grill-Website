@@ -601,7 +601,7 @@ document.addEventListener('click',function(ev){
   var where=a.closest('nav')?'nav':a.closest('.mobile-order')?'mobile-bar'
            :a.closest('footer')?'footer':(sec&&sec.id)||'page';
   window.plausible('Call',{props:{location:where}});
-}});
+});
 </script>
 </body>
 </html>
