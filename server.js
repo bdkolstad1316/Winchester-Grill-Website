@@ -41,12 +41,15 @@ const SECURITY = {
   "Permissions-Policy": "geolocation=(), microphone=(), camera=(), payment=()",
   "Content-Security-Policy":
     "default-src 'self'; " +
-    // plausible.io is allowlisted for privacy-friendly analytics (script + event POSTs).
-    "script-src 'self' 'unsafe-inline' https://plausible.io; " +
+    // plausible.io  -> privacy-friendly traffic analytics (script + event POSTs)
+    // cloudflareinsights.com -> Cloudflare RUM beacon, auto-injected at the edge,
+    //   gives real-user Core Web Vitals (LCP/INP/CLS) that Plausible doesn't cover.
+    "script-src 'self' 'unsafe-inline' https://plausible.io https://static.cloudflareinsights.com; " +
     "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; " +
     "font-src 'self' https://fonts.gstatic.com; " +
     "img-src 'self' data:; " +
-    "connect-src 'self' https://plausible.io; frame-ancestors 'self'; base-uri 'self'; form-action 'self'",
+    "connect-src 'self' https://plausible.io https://cloudflareinsights.com; " +
+    "frame-ancestors 'self'; base-uri 'self'; form-action 'self'",
 };
 
 // Never serve infrastructure / source files, or any dotfile (blocks .git, .env, etc.).
