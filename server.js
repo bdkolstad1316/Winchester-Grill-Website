@@ -53,7 +53,7 @@ const SECURITY = {
 };
 
 // Never serve infrastructure / source files, or any dotfile (blocks .git, .env, etc.).
-const BLOCKED = new Set(["server.js", "package.json", "package-lock.json", ".gitignore"]);
+const BLOCKED = new Set(["server.js", "package.json", "package-lock.json", ".gitignore", "_locktest.tmp"]);
 
 function notFound(res) {
   res.writeHead(404, { "Content-Type": "text/html; charset=utf-8", ...SECURITY });
