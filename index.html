@@ -142,7 +142,7 @@ nav.solid{background:rgba(21,17,13,.96);backdrop-filter:blur(12px);box-shadow:0 
 /* ============ CALL-TO-ORDER BILLBOARD ============ */
 .callbar{background:var(--char2);border-top:3px solid var(--gold);border-bottom:3px solid var(--gold);text-align:center;padding:60px 24px}
 .callbar .kicker{display:block;margin-bottom:16px}
-.callbar-num{display:inline-flex;align-items:center;gap:.32em;font-family:'Bevan',serif;color:var(--cream);font-size:clamp(1.6rem,7.5vw,4.8rem);line-height:1;letter-spacing:.01em;text-decoration:none;white-space:nowrap;transition:color .2s}
+.callbar-num{display:inline-flex;align-items:center;gap:.32em;padding:10px 0;font-family:'Bevan',serif;color:var(--cream);font-size:clamp(1.6rem,7.5vw,4.8rem);line-height:1;letter-spacing:.01em;text-decoration:none;white-space:nowrap;transition:color .2s}
 .callbar-num:hover{color:var(--gold)}
 .callbar-num svg{stroke:var(--gold);width:.74em;height:.74em;flex:0 0 auto}
 .callbar p{margin-top:18px;font-size:1.08rem;color:var(--mut)}
@@ -214,9 +214,11 @@ nav.solid{background:rgba(21,17,13,.96);backdrop-filter:blur(12px);box-shadow:0 
 .car-btn{width:48px;height:48px;border-radius:999px;border:1.5px solid var(--line);background:rgba(224,169,56,.06);color:var(--gold);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background .2s,border-color .2s,transform .15s}
 .car-btn:hover{background:var(--gold);color:var(--char);border-color:var(--gold)}
 .car-btn:active{transform:scale(.92)}
-.car-dots{display:flex;gap:10px;align-items:center}
-.car-dots button{width:9px;height:9px;border-radius:999px;border:none;background:rgba(224,169,56,.3);cursor:pointer;padding:0;transition:background .2s,transform .2s}
-.car-dots button[aria-current="true"]{background:var(--gold);transform:scale(1.35)}
+.car-dots{display:flex;align-items:center}
+/* 44px hit area around a 9px visual dot */
+.car-dots button{position:relative;width:44px;height:44px;border:none;background:none;cursor:pointer;padding:0}
+.car-dots button::before{content:"";position:absolute;top:50%;left:50%;width:9px;height:9px;border-radius:999px;background:rgba(224,169,56,.3);transform:translate(-50%,-50%);transition:background .2s,transform .2s}
+.car-dots button[aria-current="true"]::before{background:var(--gold);transform:translate(-50%,-50%) scale(1.35)}
 
 /* ============ VISIT ============ */
 .visit{display:grid;grid-template-columns:1.05fr .95fr;gap:60px;align-items:start}
@@ -240,6 +242,7 @@ footer{background:#0C0907;border-top:1px solid var(--line);padding:64px 26px 28p
 .foot-logotype{font-family:'Bevan',serif;text-transform:uppercase;color:var(--cream);font-size:1.6rem;letter-spacing:.02em;line-height:1;margin-bottom:16px}
 .foot-logotype span{color:var(--gold)}
 .foot p,.foot a{font-size:.92rem;color:var(--mut);text-decoration:none}
+.foot ul a{display:inline-block;padding:10px 0;margin:-10px 0} /* 44px tap height without changing the layout */
 .foot a:hover{color:var(--gold)}
 .foot h4{font-family:'Bevan',serif;text-transform:uppercase;color:var(--cream);font-size:1rem;letter-spacing:.04em;margin-bottom:14px}
 .foot ul{list-style:none;display:flex;flex-direction:column;gap:8px}

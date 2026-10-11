@@ -68,7 +68,12 @@ function notFound(res) {
 http
   .createServer((req, res) => {
     // strip query string, prevent directory traversal
-    let urlPath = decodeURIComponent((req.url || "/").split("?")[0]);
+    let urlPath;
+    try {
+      urlPath = decodeURIComponent((req.url || "/").split("?")[0]);
+    } catch {
+      return notFound(res); // malformed %-escape: a thrown URIError here would kill the process
+    }
     // Root path: serve the holding page when COMING_SOON is on, else the real site.
     // (index.html and every other page stay directly reachable for previewing.)
     if (urlPath === "/") urlPath = COMING_SOON ? "/coming-soon.html" : "/index.html";

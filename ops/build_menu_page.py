@@ -339,7 +339,7 @@ nav{{position:fixed;top:0;left:0;right:0;z-index:60;height:var(--navh);display:f
 .subnav{{position:sticky;top:var(--navh);z-index:50;background:rgba(21,17,13,.97);backdrop-filter:blur(10px);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}}
 .subnav-in{{max-width:var(--max);margin:0 auto;display:flex;gap:8px;overflow-x:auto;padding:12px 26px;scrollbar-width:none}}
 .subnav-in::-webkit-scrollbar{{display:none}}
-.subnav a{{flex:0 0 auto;text-decoration:none;color:var(--mut);font-weight:600;font-size:.82rem;letter-spacing:.04em;padding:8px 16px;border:1px solid var(--line);border-radius:999px;white-space:nowrap;transition:background .2s,color .2s}}
+.subnav a{{flex:0 0 auto;text-decoration:none;color:var(--mut);font-weight:600;font-size:.82rem;letter-spacing:.04em;padding:10px 16px;border:1px solid var(--line);border-radius:999px;white-space:nowrap;transition:background .2s,color .2s}}
 .subnav a:hover{{background:var(--gold);color:var(--char);border-color:var(--gold)}}
 
 /* MENU SECTIONS */
@@ -404,6 +404,7 @@ footer{{background:#0C0907;border-top:1px solid var(--line);padding:54px 26px 28
 .foot-logotype{{font-family:'Bevan',serif;text-transform:uppercase;color:var(--cream);font-size:1.5rem;letter-spacing:.02em;line-height:1}}
 .foot-logotype span{{color:var(--gold)}}
 .foot p,.foot a{{font-size:.9rem;color:var(--mut);text-decoration:none}}
+.foot p a{{display:inline-block;padding:10px 0;margin:-10px 0}} /* 44px tap height without changing the layout */
 .foot a:hover{{color:var(--gold)}}
 .legal{{max-width:var(--max);margin:36px auto 0;padding-top:20px;border-top:1px solid rgba(224,169,56,.14);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:.8rem;color:#7E725D}}
 .mocknote{{max-width:var(--max);margin:16px auto 0;font-size:.74rem;color:#5C5343}}
@@ -419,8 +420,19 @@ footer{{background:#0C0907;border-top:1px solid var(--line);padding:54px 26px 28
   .links .order{{border-radius:0;margin-top:6px;justify-content:center}}
   .burger{{display:flex}}
 }}
+/* STICKY MOBILE ORDER BAR (same as index.html) */
+.mobile-order{{position:fixed;left:0;right:0;bottom:0;z-index:55;display:none;gap:10px;padding:12px 16px calc(12px + env(safe-area-inset-bottom));background:rgba(21,17,13,.96);backdrop-filter:blur(12px);border-top:1px solid var(--line)}}
+.mobile-order .btn{{flex:1;min-height:50px;padding:12px 16px;font-size:.9rem}}
+.btn-gold{{background:var(--gold);color:var(--char)}}
+.btn-gold:hover{{background:var(--cream)}}
+.btn-glass{{border:1.5px solid rgba(248,241,228,.55);color:var(--cream);background:rgba(21,17,13,.25)}}
+.btn-glass:hover{{border-color:var(--gold);color:var(--gold)}}
+
 @media (max-width:720px){{
   .btn{{width:100%;max-width:340px}}
+  .mobile-order{{display:flex}}
+  .mobile-order .btn{{max-width:none}}
+  body{{padding-bottom:74px}}
 }}
 </style>
 </head>
@@ -494,6 +506,12 @@ footer{{background:#0C0907;border-top:1px solid var(--line);padding:54px 26px 28
     <span>winchestergrill.com</span>
   </div>
 </footer>
+
+<!-- STICKY MOBILE ORDER BAR -->
+<div class="mobile-order">
+  <a class="btn btn-gold" href="tel:+12089246420">Call to Order</a>
+  <a class="btn btn-glass" href="index.html">Home</a>
+</div>
 
 <script>
 document.querySelectorAll('.links a').forEach(a=>a.addEventListener('click',()=>document.querySelector('.links').classList.remove('open')));
