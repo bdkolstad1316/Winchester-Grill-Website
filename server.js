@@ -10,11 +10,10 @@ const ROOT = __dirname;
 
 // ── THE TOGGLE ──────────────────────────────────────────────────────────────
 // true  = visitors to winchestergrill.com see the "coming soon" holding page
-// false = visitors see the full site (index.html)
-// Override without editing code by setting a COMING_SOON env var in Railway.
-const COMING_SOON = process.env.COMING_SOON
-  ? process.env.COMING_SOON === "true"
-  : true;
+// false = visitors see the full site (index.html)  ← default since launch, so a
+//         lost/unset env var can never silently put the holding page back up.
+// Override without editing code by setting COMING_SOON=true in Railway.
+const COMING_SOON = process.env.COMING_SOON === "true";
 // ─────────────────────────────────────────────────────────────────────────────
 
 const TYPES = {
@@ -95,30 +94,41 @@ http
       // pretty URLs: /menu -> /menu.html
       if (err || stat.isDirectory()) {
         const withHtml = filePath.replace(/\/$/, "") + ".html";
-        if (fs.existsSync(withHtml)) {
+        try {
+          stat = fs.statSync(withHtml);
           filePath = withHtml;
-        } else {
+        } catch {
           return notFound(res);
         }
+        if (stat.isDirectory()) return notFound(res);
       }
       const ext = path.extname(filePath).toLowerCase();
       const type = TYPES[ext];
       if (!type) return notFound(res); // unknown/no extension: not site content
+
+      // Weak ETag from size + mtime: browsers and Cloudflare revalidate for free,
+      // so photos can be swapped under the same filename and still refresh within a day.
+      const etag = `W/"${stat.size.toString(36)}-${Math.floor(stat.mtimeMs).toString(36)}"`;
+      const cacheControl =
+        ext === ".html"
+          ? "no-cache" // pages: always revalidate (menu/price changes show up immediately)
+          : segments[0] === "assets"
+            ? "public, max-age=86400, stale-while-revalidate=604800" // photos: 1 day, then refresh in background
+            : "public, max-age=300";
+      const headers = {
+        "Content-Type": type,
+        ETag: etag,
+        "Last-Modified": stat.mtime.toUTCString(),
+        "Cache-Control": cacheControl,
+        ...SECURITY,
+      };
+      if (req.headers["if-none-match"] === etag) {
+        res.writeHead(304, headers);
+        return res.end();
+      }
       // Content-Length is required by strict crawlers (Apple/iMessage link previews)
       // to render social cards; a chunked/no-length response degrades to a plain card.
-      let size;
-      try {
-        size = fs.statSync(filePath).size;
-      } catch {
-        return notFound(res);
-      }
-      res.writeHead(200, {
-        "Content-Type": type,
-        "Content-Length": String(size),
-        // Short asset cache while we're actively swapping photos; raise before launch.
-        "Cache-Control": ext === ".html" ? "no-cache" : "public, max-age=300",
-        ...SECURITY,
-      });
+      res.writeHead(200, { ...headers, "Content-Length": String(stat.size) });
       fs.createReadStream(filePath).pipe(res);
     });
   })

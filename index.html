@@ -321,8 +321,9 @@ footer{background:#0C0907;border-top:1px solid var(--line);padding:64px 26px 28p
 <header class="hero" id="top">
   <div class="slides" aria-hidden="true">
     <div class="slide" style="background-image:url('assets/hero-burger.webp')"></div>
-    <div class="slide" style="background-image:url('assets/hero-pizza.webp')"></div>
-    <div class="slide" style="background-image:url('assets/hero-wings.webp')"></div>
+    <!-- Slides 2-3 aren't visible for 8s/16s, so their photos are attached after load (see script) -->
+    <div class="slide" data-bg="assets/hero-pizza.webp"></div>
+    <div class="slide" data-bg="assets/hero-wings.webp"></div>
   </div>
   <div class="hero-in">
     <span class="eyebrow kicker">Winchester, Idaho · One mile from the lake</span>
@@ -557,6 +558,13 @@ footer{background:#0C0907;border-top:1px solid var(--line);padding:64px 26px 28p
 <script>
 const nav=document.getElementById('nav');
 addEventListener('scroll',()=>nav.classList.toggle('solid',scrollY>40),{passive:true});
+
+/* Hero slides 2-3: fetch their photos only once the page has loaded, and not at all
+   when the user prefers reduced motion (the crossfade is off and only slide 1 shows). */
+addEventListener('load',()=>{
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  document.querySelectorAll('.slide[data-bg]').forEach(s=>{s.style.backgroundImage='url('+s.dataset.bg+')'});
+});
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('vis');io.unobserve(e.target)}}),{threshold:.12});
 document.querySelectorAll('.fade-up').forEach(el=>io.observe(el));
 document.querySelectorAll('.links a').forEach(a=>a.addEventListener('click',()=>document.querySelector('.links').classList.remove('open')));

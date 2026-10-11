@@ -15,8 +15,9 @@ the phone ring: there are no forms, and every contact path is a `tel:` link.
 ## Run locally
 ```
 npm start                 # http://localhost:8080   (no dependencies to install)
-COMING_SOON=false npm start   # force the real site instead of the holding page
+COMING_SOON=true npm start    # preview the holding page (coming-soon.html) at /
 ```
+The real site is the default; `COMING_SOON=true` is the only way to get the holding page.
 There are no npm dependencies. `server.js` uses only Node builtins, so there's no lockfile
 and nothing to `npm ci`.
 
@@ -64,6 +65,10 @@ public site.
   the grade and reintroduces layout shift.
 - **Only extensions listed in `TYPES` (server.js) are served; everything else is a 404.**
   Adding a new asset type (fonts, video…) means adding its MIME type there, or it 404s.
+- **Photos under `assets/` are cached for a day** (`Cache-Control: max-age=86400` plus an
+  ETag so browsers/Cloudflare revalidate). Swapping a photo under the same filename shows
+  up within 24h on its own; to force it sooner, change the filename or bump a `?v=`.
+  HTML is `no-cache`, so menu and price edits are live on the next load.
 - **`Content-Length` must be sent on every response.** Apple's iMessage link-preview
   crawler requires it; without it the share card degrades to a grey box.
 - Phone-call tracking fires `plausible('Call', {props:{location:…}})` from a delegated
