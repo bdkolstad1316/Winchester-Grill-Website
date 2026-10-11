@@ -25,6 +25,7 @@ const TYPES = {
   ".png": "image/png",
   ".jpg": "image/jpeg",
   ".jpeg": "image/jpeg",
+  ".webp": "image/webp",
   ".ico": "image/x-icon",
   ".json": "application/json",
   ".webmanifest": "application/manifest+json",
@@ -53,7 +54,11 @@ const SECURITY = {
 };
 
 // Never serve infrastructure / source files, or any dotfile (blocks .git, .env, etc.).
-const BLOCKED = new Set(["server.js", "package.json", "package-lock.json", ".gitignore", "_locktest.tmp"]);
+// Belt and braces: anything whose extension isn't in TYPES is also refused below,
+// so .md / .py / extensionless strays can't leak even if this list goes stale.
+const BLOCKED = new Set(["server.js", "package.json", "package-lock.json", ".gitignore", "CLAUDE.md"]);
+// Top-level folders that hold tooling, not site content (menu generators live in ops/).
+const BLOCKED_DIRS = new Set(["ops"]);
 
 function notFound(res) {
   res.writeHead(404, { "Content-Type": "text/html; charset=utf-8", ...SECURITY });
@@ -71,7 +76,11 @@ http
 
     // Block dotfiles (.git, .env, .gitignore …) and named infra files.
     const segments = safePath.split(/[/\\]/).filter(Boolean);
-    if (segments.some((s) => s.startsWith(".")) || BLOCKED.has(path.basename(safePath))) {
+    if (
+      segments.some((s) => s.startsWith(".")) ||
+      BLOCKED_DIRS.has(segments[0]) ||
+      BLOCKED.has(path.basename(safePath))
+    ) {
       return notFound(res);
     }
 
@@ -88,7 +97,8 @@ http
         }
       }
       const ext = path.extname(filePath).toLowerCase();
-      const type = TYPES[ext] || "application/octet-stream";
+      const type = TYPES[ext];
+      if (!type) return notFound(res); // unknown/no extension: not site content
       // Content-Length is required by strict crawlers (Apple/iMessage link previews)
       // to render social cards; a chunked/no-length response degrades to a plain card.
       let size;

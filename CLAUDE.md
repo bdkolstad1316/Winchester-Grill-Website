@@ -29,16 +29,27 @@ and nothing to `npm ci`.
   here. Don't let it lapse — it still sends real traffic and carries the old SEO equity.
 
 ## IMPORTANT: menu.html is generated — never hand-edit it
-`menu.html` is written by `build_menu_page.py` (currently in the Cowork folder at
-`Winchester Grill/ops/build_menu_page.py`; moving into this repo). Editing `menu.html`
-directly means your changes vanish on the next build.
+`menu.html` is written by `ops/build_menu_page.py`. Editing `menu.html` directly means
+your changes vanish on the next build.
 
-To change the menu: edit the `FOOD` / `PIZZA` / `KIDS` data in the generator, run it, then
-commit the regenerated `menu.html`.
+To change the menu: edit the `FOOD` / `PIZZA` / `KIDS` data in the generator, run it from
+the repo root, then commit the regenerated `menu.html`:
+```
+python3 ops/build_menu_page.py      # writes ./menu.html (system python3, needs Pillow)
+```
 
-The same menu data is **duplicated** in `build_menu_xlsx.py`, which builds Eric's editable
-spreadsheet. Both must be updated together or the website and his spreadsheet drift apart.
-Extracting this to a single `menu.json` both scripts read is the next planned cleanup.
+The same menu data is **duplicated** in `ops/build_menu_xlsx.py`, which builds Eric's
+editable spreadsheet. Both must be updated together or the website and his spreadsheet
+drift apart. Extracting this to a single `menu.json` both scripts read is the next planned
+cleanup.
+```
+python3 ops/build_menu_xlsx.py      # needs openpyxl (pip3 install --user openpyxl)
+```
+It writes to the Cowork folder (`~/Documents/Claude/Projects/Winchester Grill/menu/`),
+not this repo — the spreadsheet is a client deliverable. Set `MENU_XLSX_OUT` to override.
+
+`server.js` refuses to serve anything under `ops/`, so the generators never reach the
+public site.
 
 ## Things that are easy to break
 - **CSP lives in `server.js`.** It allowlists `plausible.io` (analytics) and
@@ -51,6 +62,8 @@ Extracting this to a single `menu.json` both scripts read is the next planned cl
 - **Images must stay WebP with explicit `width`/`height`.** Both pages hold an A mobile
   grade (372KB home / 450KB menu). Dropping in a full-size JPEG without dimensions costs
   the grade and reintroduces layout shift.
+- **Only extensions listed in `TYPES` (server.js) are served; everything else is a 404.**
+  Adding a new asset type (fonts, video…) means adding its MIME type there, or it 404s.
 - **`Content-Length` must be sent on every response.** Apple's iMessage link-preview
   crawler requires it; without it the share card degrades to a grey box.
 - Phone-call tracking fires `plausible('Call', {props:{location:…}})` from a delegated
