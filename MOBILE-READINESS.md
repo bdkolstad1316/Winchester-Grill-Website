@@ -1,8 +1,8 @@
 # Mobile Readiness Report: winchestergrill.com
 
-**Overall: B** — Fast, readable, no layout bugs; tap targets fixed, two performance tune-ups remain.
+**Overall: B** — Fast, readable, no layout bugs; tap targets and caching fixed, a few small labels remain.
 
-Audited 2026-10-11 against https://winchestergrill.com (home) and https://winchestergrill.com/menu.html; items 1–4 below were fixed the same day and re-measured in the browser. Static analysis plus a headless-browser pass at 375×812 (iPhone-size) to measure rendered tap targets, text sizes, and overflow. Not a real-device test.
+Audited 2026-10-11 against https://winchestergrill.com (home) and https://winchestergrill.com/menu.html; items 1–5 and 7 below were fixed the same day and re-measured in the browser. Static analysis plus a headless-browser pass at 375×812 (iPhone-size) to measure rendered tap targets, text sizes, and overflow. Not a real-device test.
 
 ## Grades
 
@@ -12,12 +12,12 @@ Audited 2026-10-11 against https://winchestergrill.com (home) and https://winche
 | Tap Targets | B | All measured targets now ≥44px; device check recommended |
 | Typography | B | 16px Lora body; a few labels dip under 12px |
 | Forms | N/A | No forms by design — every contact path is a phone link |
-| Performance | B | Home ~815KB (three hero photos load at once); menu ~415KB |
+| Performance | B | First paint ~555KB (one hero photo); photos cached a day |
 | Navigation & Interaction | B | Sticky Call bar now on menu page; hamburger needs JS |
 
 ## Punch List
 
-Ordered by impact — fix top-down. Items 1–4 are done (measured at 375px: dots 44×44, footer links 44px tall, chips 44px, menu sticky bar showing with 50px buttons; the billboard phone number also got padding). Items 5–8 remain open.
+Ordered by impact — fix top-down. Items 1–5 and 7 are done (measured at 375px: dots 44×44, footer links 44px tall, chips 44px, menu sticky bar showing with 50px buttons, hero slides 2–3 requested only after the load event, assets cached 24h with ETag revalidation). Items 6 and 8 remain open.
 
 ### 1. ✅ FIXED — Navigation — Menu page has no sticky "Call to Order" bar
 **Current:** `index.html` has the `.mobile-order` bar (Call + Menu, 50px buttons, safe-area padding) pinned to the bottom on phones. `menu.html` does not. On the page people read longest, the only call buttons are inside the hamburger menu or at the very bottom (`.menu-cta`), roughly 1,400px of scrolling away.
@@ -49,7 +49,7 @@ Ordered by impact — fix top-down. Items 1–4 are done (measured at 375px: dot
 **Fix:** `padding:10px 16px` → 44px. The bar is already horizontally scrollable, so width is fine.
 **Why it matters:** The chips are the primary way to jump around a long menu; 4px short of the guideline is a cheap win.
 
-### 5. Performance — All three hero slides download before first paint
+### 5. ✅ FIXED — Performance — All three hero slides download before first paint
 **Current:** `index.html` sets `background-image` on all three `.slide` divs (hero-burger 77KB, hero-pizza 102KB, hero-wings 81KB = 260KB), so the browser fetches all three immediately even though slides 2–3 don't appear for 8 and 16 seconds. With the feature band (86KB) and story photo (136KB) also eager, the home page is ~815KB of first-party bytes — the audit script's 381KB figure counts only `<img>` tags.
 **Fix:** Leave slide 1 inline; set slides 2–3 from the script after `load`:
 ```js
@@ -63,7 +63,7 @@ with `<div class="slide" data-bg="assets/hero-pizza.webp"></div>`. Optionally se
 **Fix:** `.72rem`/`.74rem` → `.75rem` (12px) in `index.html` and `ops/build_menu_page.py`; `.mi-stamp` font-size up to at least `.7rem` at the mobile breakpoint.
 **Why it matters:** These are tracked-uppercase labels, so legibility is already tight; 12px is the floor.
 
-### 7. Performance — Images still on the pre-launch 5-minute cache
+### 7. ✅ FIXED — Performance — Images still on the pre-launch 5-minute cache
 **Current:** `server.js` sends `Cache-Control: public, max-age=300` on every asset, with a comment to raise it before launch.
 **Fix:** For `/assets/`, `max-age=31536000, immutable` and bump a `?v=` query (the og-image already uses `?v=1`) or the filename when a photo changes.
 **Why it matters:** Repeat visitors re-download ~700KB of photos every five minutes instead of using cache.
