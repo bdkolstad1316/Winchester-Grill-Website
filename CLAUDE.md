@@ -33,21 +33,20 @@ and nothing to `npm ci`.
 `menu.html` is written by `ops/build_menu_page.py`. Editing `menu.html` directly means
 your changes vanish on the next build.
 
-To change the menu: edit the `FOOD` / `PIZZA` / `KIDS` data in the generator, run it from
-the repo root, then commit the regenerated `menu.html`:
+**The menu lives in `ops/menu.json`.** To change it: edit the JSON, regenerate, commit
+`menu.json` + `menu.html`:
 ```
-python3 ops/build_menu_page.py      # writes ./menu.html (system python3, needs Pillow)
+python3 ops/build_menu_page.py      # writes ./menu.html (system python3; needs Pillow, fails loudly without it)
 ```
+Section names, anchors and prices in `menu.json` are the client's; don't rename or round.
 
-The same menu data is **duplicated** in `ops/build_menu_xlsx.py`, which builds Eric's
-editable spreadsheet. Both must be updated together or the website and his spreadsheet
-drift apart. Extracting this to a single `menu.json` both scripts read is the next planned
-cleanup.
+`ops/build_menu_xlsx.py` builds an editable spreadsheet from the same JSON. Eric texts
+his menu changes rather than using it, so it's a nice-to-have — run it only when asked:
 ```
 python3 ops/build_menu_xlsx.py      # needs openpyxl (pip3 install --user openpyxl)
 ```
 It writes to the Cowork folder (`~/Documents/Claude/Projects/Winchester Grill/menu/`),
-not this repo — the spreadsheet is a client deliverable. Set `MENU_XLSX_OUT` to override.
+not this repo. Set `MENU_XLSX_OUT` to write elsewhere.
 
 `server.js` refuses to serve anything under `ops/`, so the generators never reach the
 public site.
@@ -56,8 +55,10 @@ public site.
 - **CSP lives in `server.js`.** It allowlists `plausible.io` (analytics) and
   `static.cloudflareinsights.com` / `cloudflareinsights.com` (Core Web Vitals). Adding any
   third-party script means adding its host there, or it silently fails to load.
-- **Inline JS is one block per page.** A syntax error kills the whole block — carousel,
-  sticky nav, fade-ins, and call tracking all die together, silently. Run
+- **Inline JS is one block per page** (plus the one-line `<html class="js">` tagger in the
+  head of `index.html`, which must stay separate so content isn't hidden if the main block
+  fails). A syntax error in the main block kills the carousel, sticky nav, fade-ins, and
+  call tracking together, silently — the page still shows, un-animated. Run
   `node --check` on extracted inline scripts before committing. Don't verify with grep;
   grep will happily confirm broken code is "present."
 - **Images must stay WebP with explicit `width`/`height`.** Both pages hold an A mobile

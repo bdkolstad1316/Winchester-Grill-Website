@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Generate SEO-friendly menu.html for winchestergrill-site from verified menu data."""
-import json, html, os
+import json, html, os, sys
 
 # Repo root (this file lives in <repo>/ops/). Override with SITE_DIR=... if needed.
 SITE_DIR   = os.environ.get("SITE_DIR") or os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -20,126 +20,21 @@ FEATURES = {
                 "Fresh mashed, garlic toast, soup or salad", "16 / 9"),
 }
 
+# ---------- menu data ----------
+# ops/menu.json is the single source of truth for this page AND Eric's spreadsheet
+# (build_menu_xlsx.py). Edit the JSON, never the tuples below.
+MENU_JSON = os.path.join(os.path.dirname(os.path.abspath(__file__)), "menu.json")
+with open(MENU_JSON) as _f:
+    _menu = json.load(_f)
 # (Section, anchor, note, [(name, desc, price)])
-FOOD = [
- ("Sides & Shareables", "sides",
-  "Wing sauces: Nashville Hot, Umami, Honey Sriracha, Buffalo, Garlic Parm, BBQ, Korean BBQ, or Naked. Extra sauce $1.", [
-  ("Famous Bone-In Wings", "Choice of sauce", 17.99),
-  ("Boneless Wings", "Choice of sauce", 14.99),
-  ("Super Nachos", "Chicken or beef, onions, tomato, olives, cheese, sour cream, salsa. Jalapenos & guacamole on request.", 17.99),
-  ("Chili Cheese Fries", "", 9.99),
-  ("Cup of Soup", "", 4.99),
-  ("Bowl of Soup w/ Toast", "", 7.99),
-  ("Deep Fried Pickles", "With ranch", 9.99),
-  ("Stuffed Tater Kegs", "", 11.99),
-  ("Mozzarella Moons", "With marinara", 9.99),
-  ("Giant Soft Pretzel", "With brew pub mustard", 9.99),
-  ("Chicken Quesadilla", "With sour cream and salsa", 9.99),
-  ("Fried Mushrooms", "", 9.99),
-  ("Onion Rings", "", 13.99),
-  ("Basket of Bacon", "", 13.99),
-  ("Fries / Tater Tots", "", 7.99),
-  ("House-Made Potato Chips", "With ranch", 5.99),
-  ("Pork Rinds", "", 7.99),
-  ("Bowl of Mac & Cheese", "", 5.99),
- ]),
- ("Fresh Made Salads", "salads", "", [
-  ("Chef Salad", "Ham, turkey, cheese, egg, tomatoes, olives, on mixed greens", 15.99),
-  ("Taco Salad", "Seasoned beef, mixed greens, tomato, cheese, onion, olives, tortilla chips, sour cream, salsa", 14.99),
-  ("Cobb Salad", "Chicken, bacon, tomatoes, blue cheese crumbles, egg, on mixed greens", 14.99),
-  ("Buffalo Chicken Salad", "Buffalo chicken, tomato, olives, onions, cheese, bacon, on mixed greens", 14.99),
- ]),
- ("Crafted Burgers", "burgers",
-  "1/3 lb beef. Make it a double for $3. Choice of fries, tater tots, house-made potato chips, or house-made side salad. "
-  "Upgrade your side: Onion Rings, Fried Pickles, Pork Rinds, or Fried Mushrooms +$1.99 · Mac & Cheese +$2.49 · Cup of Soup +$1.99.", [
-  ("Idaho Classic", "Pickles, lettuce, tomato, onion, cheddar, ketchup, mustard. Add bacon $2", 14.49),
-  ("The Winchester", "Cheddar, bacon, onion rings, BBQ sauce", 16.99),
-  ("The Local Mac", "House-made mac & cheese and smoked bacon", 16.99),
-  ("Chili Cheese Burger", "Steak chili, cheese, diced onions", 16.99),
-  ("Mushroom & Swiss", "Bacon, sauteed mushrooms, Swiss cheese, mayo", 16.99),
-  ("Black and Blue Burger", "Blue cheese crumble, lettuce, tomato", 14.99),
-  ("Jalapeno Burger", "Bacon, pepper jack cheese, and mayo", 15.99),
-  ("Peanut Butter Burger", "Peanut butter, bacon and pickles", 15.99),
-  ("The Motherlode", "Double prime rib beef patty, bacon, fried egg, grilled onions, lettuce, tomato, mayo", 18.99),
-  ("Chicken Cordon Burger", "Fried chicken breast, ham, Swiss cheese, mayo, lettuce and tomato", 14.99),
-  ("Spicy Chicken Burger", "Chicken breast, bacon, jalapeno, pepper jack, lettuce and tomato", 15.99),
-  ("Reuben Burger", "Corned beef, sauerkraut, Swiss cheese and 1000 island dressing", 16.99),
- ]),
- ("Sandwiches & Wraps", "sandwiches",
-  "Choice of fries, tater tots, house-made potato chips, or house-made side salad. Same side upgrades as burgers.", [
-  ("The PDQ", "Grilled cheese sandwich with a cup of the soup of the day", 7.99),
-  ("Winchester BLT", "", 11.99),
-  ("French Dip Sandwich", "Swiss, grilled onions, mushrooms", 15.99),
-  ("Philly Cheese Steak Sandwich", "Peppers, onions, Swiss cheese", 15.99),
-  ("Patty Melt", "Patty, grilled onions, Swiss cheese, on marbled rye", 13.99),
-  ("Cuban Sandwich", "Grilled ham, Swiss, pickles and mustard sauce", 14.99),
-  ("Classic Club", "Hope you're hungry — it's big!", 15.99),
-  ("Grilled Ham & Cheese", "", 11.99),
-  ("Grilled Turkey & Swiss", "", 11.99),
-  ("Reuben Sandwich", "Corned beef, sauerkraut, Swiss cheese, 1000 island, on marbled rye", 13.99),
-  ("Chicken Wrap", "Chicken, bacon, cheese, lettuce, tomato, ranch", 12.99),
-  ("Buffalo Chicken Wrap", "Buffalo chicken, bacon, lettuce, tomato, cheese, ranch", 12.99),
-  ("Chicken Caesar Wrap", "Chicken, lettuce, parmesan, Caesar dressing", 11.99),
-  ("Pulled Pork Sandwich", "Smoked pulled pork, BBQ sauce, pickles", 12.99),
-  ("Fish Sandwich", "Cheddar cheese, lettuce and tartar sauce", 15.99),
- ]),
- ("Entrees", "entrees", "", [
-  ("Pulled Pork Mac and Cheese", "", 13.99),
-  ("Chicken Bacon Ranch Mac & Cheese", "", 12.99),
-  ("Chicken & Cilantro Lime Rice Bowl", "", 14.99),
-  ("Orange Chicken Rice Bowl", "", 14.99),
-  ("Chicken Strip Basket", "With choice of side", 13.99),
-  ("Shrimp Basket", "Grilled or breaded shrimp", 14.99),
-  ("Fish and Chips", "", 15.99),
-  ("Finger Steak Basket", "", 13.99),
-  ("12 oz Bite Size Steak", "Fresh made mashed, garlic toast, choice of soup or salad. Add 5 grilled shrimp $9", "Market Price"),
-  ("6 oz Bite Size Steak", "Fresh made mashed, garlic toast, choice of soup or salad. Add 5 grilled shrimp $9", "Market Price"),
-  ("Chicken Fried Steak", "Fresh made mashed, white gravy, garlic toast, choice of soup or salad", 19.99),
-  ("Grilled New York Steak", "16 oz New York, fresh made mashed, garlic toast, choice of soup or salad. Add 5 grilled shrimp $9", "Market Price"),
- ]),
- ("Desserts", "desserts", "", [
-  ("Brownie Delight", "With ice cream and chocolate drizzle", 5.99),
-  ("Raspberry Cheesecake", "", 6.99),
-  ("Banana Cream Pie", "", 6.99),
-  ("Bowl of Ice Cream", "Vanilla or Huckleberry", 3.99),
- ]),
-]
-
-PIZZA = [
- ("Regular Pizza", 13.99, 22.00, [
-  ("Cheese", ""), ("Pepperoni", ""),
-  ("Hawaiian", "Cheese, Canadian bacon, and pineapple"),
-  ("Meat Lovers", "Pepperoni, Canadian bacon, sausage, and cheese"),
-  ("Vegetarian", "Cheese, mushrooms, olives, green peppers, and onions"),
-  ("Parmesan Garlic Chicken w/ Bacon", ""),
-  ("BBQ Chicken", "BBQ sauce, cheese, chicken"),
-  ("Chicken Bacon Ranch", ""),
-  ("Husky", "Mustard sauce, cheese, pepperoni, and pineapple"),
-  ("Buffalo Chicken", "Frank's RedHot buffalo sauce, cheese, chicken"),
- ]),
- ("Specialty Pizza", 15.99, 24.99, [
-  ("Supreme", "Cheese, Canadian bacon, sausage, pepperoni, mushrooms, olives, onions, green peppers"),
-  ("Korean Chicken", "Gochujang sauce, cheese, bell peppers, green onions, crispy chicken"),
-  ("Shotgun", "Mustard sauce, Swiss polish sausage, onions, and sauerkraut"),
-  ("Taco Pizza", "Cheese, taco meat, tomatoes, olives, green onion, and lettuce"),
- ]),
-]
-
-KIDS = [
- ("Kids Meals", "12 & under — served with fries or tots", [
-  ("2 Burger Sliders", "", 6.99),
-  ("Chicken Tenders", "", 6.99),
-  ("Grilled Cheese Sandwich", "", 4.99),
-  ("Peanut Butter & Jelly Sandwich", "", 4.99),
-  ("Mac & Cheese", "", 4.99),
- ]),
- ("Kids Drinks", "", [
-  ("Soda", "", 2.99),
-  ("Apple Juice", "", 2.50),
-  ("Milk", "", 2.49),
-  ("Chocolate Milk", "", 2.99),
- ]),
-]
+FOOD = [(s["section"], s["anchor"], s["note"],
+         [(i["name"], i["desc"], i["price"]) for i in s["items"]]) for s in _menu["food"]]
+# (Group, 12" price, 16" price, [(name, desc)])
+PIZZA = [(g["group"], g["price_12"], g["price_16"],
+          [(p["name"], p["desc"]) for p in g["pies"]]) for g in _menu["pizza"]]
+# (Section, note, [(name, desc, price)])
+KIDS = [(s["section"], s["note"],
+         [(i["name"], i["desc"], i["price"]) for i in s["items"]]) for s in _menu["kids"]]
 
 e = lambda s: html.escape(s, quote=True)
 
@@ -213,13 +108,15 @@ def feature_html(anchor):
         return ''  # graceful skip until the real photo is dropped in
     style = f' style="aspect-ratio:{aspect}"' if aspect else ''
     # Intrinsic width/height stop the page shifting while the banner loads.
-    dims = ''
+    # CLAUDE.md rule: images ship with explicit width/height. Fail the build rather
+    # than silently emit a dimensionless <img> and reintroduce layout shift.
     try:
         from PIL import Image
-        with Image.open(os.path.join(ASSETS_DIR, fn)) as _im:
-            dims = f' width="{_im.size[0]}" height="{_im.size[1]}"'
-    except Exception:
-        pass
+    except ImportError:
+        sys.exit("build_menu_page.py: Pillow is required to read image dimensions "
+                 "(pip3 install --user Pillow)")
+    with Image.open(os.path.join(ASSETS_DIR, fn)) as _im:
+        dims = f' width="{_im.size[0]}" height="{_im.size[1]}"'
     return (f'<figure class="menu-feature">'
             f'<img src="assets/{fn}" alt="{e(dish)} — {e(tag)}" loading="lazy" decoding="async"{dims}{style}>'
             f'<figcaption><span class="feat-label">{e(label)}</span>'
@@ -243,8 +140,7 @@ for name, anchor, note, items in FOOD:
 # ---------- pizza ----------
 pizza_groups = ""
 for name, p12, p16, pies in PIZZA:
-    rows = "\n".join(item_row(nm, desc, p12) if False else
-        f'<div class="mi"><div class="mi-top"><span class="mi-name">{e(nm)}</span>'
+    rows = "\n".join(f'<div class="mi"><div class="mi-top"><span class="mi-name">{e(nm)}</span>'
         f'<span class="mi-dots"></span></div>'
         + (f'<p class="mi-desc">{e(desc)}</p>' if desc else '') + '</div>'
         for nm, desc in pies)
@@ -407,7 +303,6 @@ footer{{background:#0C0907;border-top:1px solid var(--line);padding:54px 26px 28
 .foot p a{{display:inline-block;padding:10px 0;margin:-10px 0}} /* 44px tap height without changing the layout */
 .foot a:hover{{color:var(--gold)}}
 .legal{{max-width:var(--max);margin:36px auto 0;padding-top:20px;border-top:1px solid rgba(224,169,56,.14);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:.8rem;color:#7E725D}}
-.mocknote{{max-width:var(--max);margin:16px auto 0;font-size:.74rem;color:#5C5343}}
 
 @media (max-width:820px){{
   .mi-grid{{grid-template-columns:1fr;gap:0}}

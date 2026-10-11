@@ -1,0 +1,503 @@
+{
+ "_comment": "Winchester Grill menu — the single source for menu.html (ops/build_menu_page.py) and Eric's spreadsheet (ops/build_menu_xlsx.py). Prices are the client's; never invent or 'correct' one. Edit here, then run both scripts.",
+ "food": [
+  {
+   "section": "Sides & Shareables",
+   "anchor": "sides",
+   "note": "Wing sauces: Nashville Hot, Umami, Honey Sriracha, Buffalo, Garlic Parm, BBQ, Korean BBQ, or Naked. Extra sauce $1.",
+   "items": [
+    {
+     "name": "Famous Bone-In Wings",
+     "desc": "Choice of sauce",
+     "price": 17.99
+    },
+    {
+     "name": "Boneless Wings",
+     "desc": "Choice of sauce",
+     "price": 14.99
+    },
+    {
+     "name": "Super Nachos",
+     "desc": "Chicken or beef, onions, tomato, olives, cheese, sour cream, salsa. Jalapenos & guacamole on request.",
+     "price": 17.99
+    },
+    {
+     "name": "Chili Cheese Fries",
+     "desc": "",
+     "price": 9.99
+    },
+    {
+     "name": "Cup of Soup",
+     "desc": "",
+     "price": 4.99
+    },
+    {
+     "name": "Bowl of Soup w/ Toast",
+     "desc": "",
+     "price": 7.99
+    },
+    {
+     "name": "Deep Fried Pickles",
+     "desc": "With ranch",
+     "price": 9.99
+    },
+    {
+     "name": "Stuffed Tater Kegs",
+     "desc": "",
+     "price": 11.99
+    },
+    {
+     "name": "Mozzarella Moons",
+     "desc": "With marinara",
+     "price": 9.99
+    },
+    {
+     "name": "Giant Soft Pretzel",
+     "desc": "With brew pub mustard",
+     "price": 9.99
+    },
+    {
+     "name": "Chicken Quesadilla",
+     "desc": "With sour cream and salsa",
+     "price": 9.99
+    },
+    {
+     "name": "Fried Mushrooms",
+     "desc": "",
+     "price": 9.99
+    },
+    {
+     "name": "Onion Rings",
+     "desc": "",
+     "price": 13.99
+    },
+    {
+     "name": "Basket of Bacon",
+     "desc": "",
+     "price": 13.99
+    },
+    {
+     "name": "Fries / Tater Tots",
+     "desc": "",
+     "price": 7.99
+    },
+    {
+     "name": "House-Made Potato Chips",
+     "desc": "With ranch",
+     "price": 5.99
+    },
+    {
+     "name": "Pork Rinds",
+     "desc": "",
+     "price": 7.99
+    },
+    {
+     "name": "Bowl of Mac & Cheese",
+     "desc": "",
+     "price": 5.99
+    }
+   ]
+  },
+  {
+   "section": "Fresh Made Salads",
+   "anchor": "salads",
+   "note": "",
+   "items": [
+    {
+     "name": "Chef Salad",
+     "desc": "Ham, turkey, cheese, egg, tomatoes, olives, on mixed greens",
+     "price": 15.99
+    },
+    {
+     "name": "Taco Salad",
+     "desc": "Seasoned beef, mixed greens, tomato, cheese, onion, olives, tortilla chips, sour cream, salsa",
+     "price": 14.99
+    },
+    {
+     "name": "Cobb Salad",
+     "desc": "Chicken, bacon, tomatoes, blue cheese crumbles, egg, on mixed greens",
+     "price": 14.99
+    },
+    {
+     "name": "Buffalo Chicken Salad",
+     "desc": "Buffalo chicken, tomato, olives, onions, cheese, bacon, on mixed greens",
+     "price": 14.99
+    }
+   ]
+  },
+  {
+   "section": "Crafted Burgers",
+   "anchor": "burgers",
+   "note": "1/3 lb beef. Make it a double for $3. Choice of fries, tater tots, house-made potato chips, or house-made side salad. Upgrade your side: Onion Rings, Fried Pickles, Pork Rinds, or Fried Mushrooms +$1.99 · Mac & Cheese +$2.49 · Cup of Soup +$1.99.",
+   "items": [
+    {
+     "name": "Idaho Classic",
+     "desc": "Pickles, lettuce, tomato, onion, cheddar, ketchup, mustard. Add bacon $2",
+     "price": 14.49
+    },
+    {
+     "name": "The Winchester",
+     "desc": "Cheddar, bacon, onion rings, BBQ sauce",
+     "price": 16.99
+    },
+    {
+     "name": "The Local Mac",
+     "desc": "House-made mac & cheese and smoked bacon",
+     "price": 16.99
+    },
+    {
+     "name": "Chili Cheese Burger",
+     "desc": "Steak chili, cheese, diced onions",
+     "price": 16.99
+    },
+    {
+     "name": "Mushroom & Swiss",
+     "desc": "Bacon, sauteed mushrooms, Swiss cheese, mayo",
+     "price": 16.99
+    },
+    {
+     "name": "Black and Blue Burger",
+     "desc": "Blue cheese crumble, lettuce, tomato",
+     "price": 14.99
+    },
+    {
+     "name": "Jalapeno Burger",
+     "desc": "Bacon, pepper jack cheese, and mayo",
+     "price": 15.99
+    },
+    {
+     "name": "Peanut Butter Burger",
+     "desc": "Peanut butter, bacon and pickles",
+     "price": 15.99
+    },
+    {
+     "name": "The Motherlode",
+     "desc": "Double prime rib beef patty, bacon, fried egg, grilled onions, lettuce, tomato, mayo",
+     "price": 18.99
+    },
+    {
+     "name": "Chicken Cordon Burger",
+     "desc": "Fried chicken breast, ham, Swiss cheese, mayo, lettuce and tomato",
+     "price": 14.99
+    },
+    {
+     "name": "Spicy Chicken Burger",
+     "desc": "Chicken breast, bacon, jalapeno, pepper jack, lettuce and tomato",
+     "price": 15.99
+    },
+    {
+     "name": "Reuben Burger",
+     "desc": "Corned beef, sauerkraut, Swiss cheese and 1000 island dressing",
+     "price": 16.99
+    }
+   ]
+  },
+  {
+   "section": "Sandwiches & Wraps",
+   "anchor": "sandwiches",
+   "note": "Choice of fries, tater tots, house-made potato chips, or house-made side salad. Same side upgrades as burgers.",
+   "items": [
+    {
+     "name": "The PDQ",
+     "desc": "Grilled cheese sandwich with a cup of the soup of the day",
+     "price": 7.99
+    },
+    {
+     "name": "Winchester BLT",
+     "desc": "",
+     "price": 11.99
+    },
+    {
+     "name": "French Dip Sandwich",
+     "desc": "Swiss, grilled onions, mushrooms",
+     "price": 15.99
+    },
+    {
+     "name": "Philly Cheese Steak Sandwich",
+     "desc": "Peppers, onions, Swiss cheese",
+     "price": 15.99
+    },
+    {
+     "name": "Patty Melt",
+     "desc": "Patty, grilled onions, Swiss cheese, on marbled rye",
+     "price": 13.99
+    },
+    {
+     "name": "Cuban Sandwich",
+     "desc": "Grilled ham, Swiss, pickles and mustard sauce",
+     "price": 14.99
+    },
+    {
+     "name": "Classic Club",
+     "desc": "Hope you're hungry — it's big!",
+     "price": 15.99
+    },
+    {
+     "name": "Grilled Ham & Cheese",
+     "desc": "",
+     "price": 11.99
+    },
+    {
+     "name": "Grilled Turkey & Swiss",
+     "desc": "",
+     "price": 11.99
+    },
+    {
+     "name": "Reuben Sandwich",
+     "desc": "Corned beef, sauerkraut, Swiss cheese, 1000 island, on marbled rye",
+     "price": 13.99
+    },
+    {
+     "name": "Chicken Wrap",
+     "desc": "Chicken, bacon, cheese, lettuce, tomato, ranch",
+     "price": 12.99
+    },
+    {
+     "name": "Buffalo Chicken Wrap",
+     "desc": "Buffalo chicken, bacon, lettuce, tomato, cheese, ranch",
+     "price": 12.99
+    },
+    {
+     "name": "Chicken Caesar Wrap",
+     "desc": "Chicken, lettuce, parmesan, Caesar dressing",
+     "price": 11.99
+    },
+    {
+     "name": "Pulled Pork Sandwich",
+     "desc": "Smoked pulled pork, BBQ sauce, pickles",
+     "price": 12.99
+    },
+    {
+     "name": "Fish Sandwich",
+     "desc": "Cheddar cheese, lettuce and tartar sauce",
+     "price": 15.99
+    }
+   ]
+  },
+  {
+   "section": "Entrees",
+   "anchor": "entrees",
+   "note": "",
+   "items": [
+    {
+     "name": "Pulled Pork Mac and Cheese",
+     "desc": "",
+     "price": 13.99
+    },
+    {
+     "name": "Chicken Bacon Ranch Mac & Cheese",
+     "desc": "",
+     "price": 12.99
+    },
+    {
+     "name": "Chicken & Cilantro Lime Rice Bowl",
+     "desc": "",
+     "price": 14.99
+    },
+    {
+     "name": "Orange Chicken Rice Bowl",
+     "desc": "",
+     "price": 14.99
+    },
+    {
+     "name": "Chicken Strip Basket",
+     "desc": "With choice of side",
+     "price": 13.99
+    },
+    {
+     "name": "Shrimp Basket",
+     "desc": "Grilled or breaded shrimp",
+     "price": 14.99
+    },
+    {
+     "name": "Fish and Chips",
+     "desc": "",
+     "price": 15.99
+    },
+    {
+     "name": "Finger Steak Basket",
+     "desc": "",
+     "price": 13.99
+    },
+    {
+     "name": "12 oz Bite Size Steak",
+     "desc": "Fresh made mashed, garlic toast, choice of soup or salad. Add 5 grilled shrimp $9",
+     "price": "Market Price"
+    },
+    {
+     "name": "6 oz Bite Size Steak",
+     "desc": "Fresh made mashed, garlic toast, choice of soup or salad. Add 5 grilled shrimp $9",
+     "price": "Market Price"
+    },
+    {
+     "name": "Chicken Fried Steak",
+     "desc": "Fresh made mashed, white gravy, garlic toast, choice of soup or salad",
+     "price": 19.99
+    },
+    {
+     "name": "Grilled New York Steak",
+     "desc": "16 oz New York, fresh made mashed, garlic toast, choice of soup or salad. Add 5 grilled shrimp $9",
+     "price": "Market Price"
+    }
+   ]
+  },
+  {
+   "section": "Desserts",
+   "anchor": "desserts",
+   "note": "",
+   "items": [
+    {
+     "name": "Brownie Delight",
+     "desc": "With ice cream and chocolate drizzle",
+     "price": 5.99
+    },
+    {
+     "name": "Raspberry Cheesecake",
+     "desc": "",
+     "price": 6.99
+    },
+    {
+     "name": "Banana Cream Pie",
+     "desc": "",
+     "price": 6.99
+    },
+    {
+     "name": "Bowl of Ice Cream",
+     "desc": "Vanilla or Huckleberry",
+     "price": 3.99
+    }
+   ]
+  }
+ ],
+ "pizza": [
+  {
+   "group": "Regular Pizza",
+   "price_12": 13.99,
+   "price_16": 22.0,
+   "pies": [
+    {
+     "name": "Cheese",
+     "desc": ""
+    },
+    {
+     "name": "Pepperoni",
+     "desc": ""
+    },
+    {
+     "name": "Hawaiian",
+     "desc": "Cheese, Canadian bacon, and pineapple"
+    },
+    {
+     "name": "Meat Lovers",
+     "desc": "Pepperoni, Canadian bacon, sausage, and cheese"
+    },
+    {
+     "name": "Vegetarian",
+     "desc": "Cheese, mushrooms, olives, green peppers, and onions"
+    },
+    {
+     "name": "Parmesan Garlic Chicken w/ Bacon",
+     "desc": ""
+    },
+    {
+     "name": "BBQ Chicken",
+     "desc": "BBQ sauce, cheese, chicken"
+    },
+    {
+     "name": "Chicken Bacon Ranch",
+     "desc": ""
+    },
+    {
+     "name": "Husky",
+     "desc": "Mustard sauce, cheese, pepperoni, and pineapple"
+    },
+    {
+     "name": "Buffalo Chicken",
+     "desc": "Frank's RedHot buffalo sauce, cheese, chicken"
+    }
+   ]
+  },
+  {
+   "group": "Specialty Pizza",
+   "price_12": 15.99,
+   "price_16": 24.99,
+   "pies": [
+    {
+     "name": "Supreme",
+     "desc": "Cheese, Canadian bacon, sausage, pepperoni, mushrooms, olives, onions, green peppers"
+    },
+    {
+     "name": "Korean Chicken",
+     "desc": "Gochujang sauce, cheese, bell peppers, green onions, crispy chicken"
+    },
+    {
+     "name": "Shotgun",
+     "desc": "Mustard sauce, Swiss polish sausage, onions, and sauerkraut"
+    },
+    {
+     "name": "Taco Pizza",
+     "desc": "Cheese, taco meat, tomatoes, olives, green onion, and lettuce"
+    }
+   ]
+  }
+ ],
+ "kids": [
+  {
+   "section": "Kids Meals",
+   "note": "12 & under — served with fries or tots",
+   "items": [
+    {
+     "name": "2 Burger Sliders",
+     "desc": "",
+     "price": 6.99
+    },
+    {
+     "name": "Chicken Tenders",
+     "desc": "",
+     "price": 6.99
+    },
+    {
+     "name": "Grilled Cheese Sandwich",
+     "desc": "",
+     "price": 4.99
+    },
+    {
+     "name": "Peanut Butter & Jelly Sandwich",
+     "desc": "",
+     "price": 4.99
+    },
+    {
+     "name": "Mac & Cheese",
+     "desc": "",
+     "price": 4.99
+    }
+   ]
+  },
+  {
+   "section": "Kids Drinks",
+   "note": "",
+   "items": [
+    {
+     "name": "Soda",
+     "desc": "",
+     "price": 2.99
+    },
+    {
+     "name": "Apple Juice",
+     "desc": "",
+     "price": 2.5
+    },
+    {
+     "name": "Milk",
+     "desc": "",
+     "price": 2.49
+    },
+    {
+     "name": "Chocolate Milk",
+     "desc": "",
+     "price": 2.99
+    }
+   ]
+  }
+ ]
+}

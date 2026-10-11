@@ -25,6 +25,9 @@
   window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
   plausible.init()
 </script>
+<!-- Marks the page as JS-capable before it paints, so the .fade-up reveal (and nothing
+     else) only hides content when the script that reveals it is actually running. -->
+<script>document.documentElement.classList.add('js')</script>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -78,7 +81,6 @@ nav{position:fixed;top:0;left:0;right:0;z-index:60;height:var(--navh);display:fl
 nav.solid{background:rgba(21,17,13,.96);backdrop-filter:blur(12px);box-shadow:0 1px 0 var(--line)}
 .nav-in{max-width:var(--max);margin:0 auto;width:100%;display:flex;align-items:center;justify-content:space-between;padding:0 26px}
 .nav-brand{display:flex;align-items:center;gap:12px;text-decoration:none}
-.nav-brand img{height:50px;width:auto}
 .nav-brand b{font-family:'Bevan',serif;color:var(--cream);font-size:1.32rem;letter-spacing:.02em;text-transform:uppercase;line-height:1}
 .nav-brand b span{color:var(--gold)}
 .links{display:flex;gap:30px;align-items:center}
@@ -123,7 +125,6 @@ nav.solid{background:rgba(21,17,13,.96);backdrop-filter:blur(12px);box-shadow:0 
 .hero-in{padding:120px 26px 120px;max-width:900px}
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0}
 .hero .eyebrow{display:inline-block;border:1px solid var(--line);border-radius:999px;padding:9px 20px;background:rgba(21,17,13,.4);backdrop-filter:blur(4px);margin-bottom:26px}
-.hero-logo{width:min(300px,66vw);margin:0 auto 18px;filter:drop-shadow(0 10px 30px rgba(0,0,0,.6))}
 .hero h2{color:var(--cream);font-size:clamp(2.6rem,7.5vw,5.6rem);text-shadow:0 4px 40px rgba(0,0,0,.5)}
 .hero h2 .accent{color:var(--gold);text-transform:none;display:inline-block}
 .hero p{font-size:clamp(1.08rem,2.2vw,1.35rem);color:var(--cream);opacity:.94;max-width:600px;margin:18px auto 0}
@@ -248,15 +249,15 @@ footer{background:#0C0907;border-top:1px solid var(--line);padding:64px 26px 28p
 .foot ul{list-style:none;display:flex;flex-direction:column;gap:8px}
 .legal{max-width:var(--max);margin:48px auto 0;padding-top:22px;border-top:1px solid rgba(224,169,56,.14);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:.82rem;color:#7E725D}
 .legal a{color:#7E725D}
-.mocknote{max-width:var(--max);margin:18px auto 0;font-size:.74rem;color:#5C5343;letter-spacing:.05em}
 
 /* ============ STICKY MOBILE ORDER BAR ============ */
 .mobile-order{position:fixed;left:0;right:0;bottom:0;z-index:55;display:none;gap:10px;padding:12px 16px calc(12px + env(safe-area-inset-bottom));background:rgba(21,17,13,.96);backdrop-filter:blur(12px);border-top:1px solid var(--line)}
 .mobile-order .btn{flex:1;min-height:50px;padding:12px 16px;font-size:.9rem}
 
 /* ============ ANIM ============ */
-.fade-up{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease}
-.fade-up.vis{opacity:1;transform:none}
+.fade-up{transition:opacity .6s ease,transform .6s ease}
+.js .fade-up{opacity:0;transform:translateY(24px)}   /* hidden only when JS can reveal it */
+.js .fade-up.vis{opacity:1;transform:none}
 
 /* ============ RESPONSIVE ============ */
 @media (max-width:1000px){
@@ -568,6 +569,9 @@ addEventListener('load',()=>{
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('vis');io.unobserve(e.target)}}),{threshold:.12});
 document.querySelectorAll('.fade-up').forEach(el=>io.observe(el));
 document.querySelectorAll('.links a').forEach(a=>a.addEventListener('click',()=>document.querySelector('.links').classList.remove('open')));
+
+/* Tag today's row in the hours table (rows run Monday..Sunday; getDay() is Sunday=0). */
+(function(){const rows=document.querySelectorAll('.hours tr');const r=rows[(new Date().getDay()+6)%7];if(r)r.classList.add('today')})();
 
 /* ---- reviews carousel ---- */
 (function(){

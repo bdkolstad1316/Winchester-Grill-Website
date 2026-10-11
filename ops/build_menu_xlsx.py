@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-import os
+import os, json
 from openpyxl import Workbook
 from openpyxl.styles import Font, PatternFill, Alignment, Border, Side
 from openpyxl.utils import get_column_letter
@@ -54,85 +54,14 @@ for i, h in enumerate(hdr, 1):
 food.row_dimensions[1].height = 22
 food.freeze_panes = "A2"
 
-MENU = [
- ("SIDES & SHAREABLES", "Sauce options for wings: Nashville Hot, Umami, Honey Sriracha, Buffalo, Garlic Parm, BBQ, Korean BBQ, Naked. Extra sauce $1.", [
-  ("Famous Bone-In Wings", "Choice of sauce; extra sauce $1", 17.99),
-  ("Boneless Wings", "Choice of sauce; extra sauce $1", 14.99),
-  ("Super Nachos", "Chicken or beef, onions, tomato, olives, cheese, sour cream, salsa. Jalapenos & guacamole on request", 17.99),
-  ("Chili Cheese Fries", "", 9.99),
-  ("Cup of Soup", "", 4.99),
-  ("Bowl of Soup w/ Toast", "", 7.99),
-  ("Deep Fried Pickles", "With ranch", 9.99),
-  ("Stuffed Tater Kegs", "", 11.99),
-  ("Mozzarella Moons", "With marinara", 9.99),
-  ("Giant Soft Pretzel", "With brew pub mustard", 9.99),
-  ("Chicken Quesadilla", "With sour cream and salsa", 9.99),
-  ("Fried Mushrooms", "", 9.99),
-  ("Onion Rings", "", 13.99),
-  ("Basket of Bacon", "", 13.99),
-  ("Fries / Tater Tots", "", 7.99),
-  ("House-Made Potato Chips", "With ranch", 5.99),
-  ("Pork Rinds", "", 7.99),
-  ("Bowl of Mac & Cheese", "", 5.99),
- ]),
- ("FRESH MADE SALADS", "", [
-  ("Chef Salad", "Ham, turkey, cheese, egg, tomatoes, olives, on mixed greens", 15.99),
-  ("Taco Salad", "Seasoned beef, mixed greens, tomato, cheese, onion, olives, tortilla chips, sour cream, salsa", 14.99),
-  ("Cobb Salad", "Chicken, bacon, tomatoes, blue cheese crumbles, egg, on mixed greens", 14.99),
-  ("Buffalo Chicken Salad", "Buffalo chicken, tomato, olives, onions, cheese, bacon, on mixed greens", 14.99),
- ]),
- ("CRAFTED BURGERS", "1/3 lb beef. Make it a double for $3. Choice of fries, tater tots, house-made potato chips, or house-made side salad. Upgraded sides: Onion Rings $1.99 · Fried Pickles $1.99 · Pork Rinds $1.99 · Mac & Cheese $2.49 · Cup of Soup $1.99 · Fried Mushrooms $1.99", [
-  ("Idaho Classic", "Pickles, lettuce, tomato, onion, cheddar, ketchup, mustard (add bacon $2)", 14.49),
-  ("The Winchester", "Cheddar, bacon, onion rings, BBQ sauce", 16.99),
-  ("The Local Mac", "House-made mac & cheese and smoked bacon", 16.99),
-  ("Chili Cheese Burger", "Steak chili, cheese, diced onions", 16.99),
-  ("Mushroom & Swiss", "Bacon, sauteed mushrooms, Swiss cheese, mayo", 16.99),
-  ("Black and Blue Burger", "Blue cheese crumble, lettuce, tomato", 14.99),
-  ("Jalapeno Burger", "Bacon, pepper jack cheese, and mayo", 15.99),
-  ("Peanut Butter Burger", "Peanut butter, bacon and pickles", 15.99),
-  ("The Motherlode", "Double prime rib beef patty, bacon, fried egg, grilled onions, lettuce, tomato, mayo", 18.99),
-  ("Chicken Cordon Burger", "Fried chicken breast, ham, Swiss cheese, mayo, lettuce and tomato", 14.99),
-  ("Spicy Chicken Burger", "Chicken breast, bacon, jalapeno, pepper jack, lettuce and tomato", 15.99),
-  ("Reuben Burger", "Corned beef, sauerkraut, Swiss cheese and 1000 island dressing", 16.99),
- ]),
- ("SANDWICHES / WRAPS", "Choice of fries, tater tots, house-made potato chips, or house-made side salad. Same upgraded sides as burgers.", [
-  ("The PDQ", "Grilled cheese sandwich w/ a cup of the soup of the day", 7.99),
-  ("Winchester BLT", "", 11.99),
-  ("French Dip Sandwich", "Swiss, grilled onions, mushrooms", 15.99),
-  ("Philly Cheese Steak Sandwich", "Peppers, onions, Swiss cheese", 15.99),
-  ("Patty Melt", "Patty, grilled onions, Swiss cheese, on marbled rye", 13.99),
-  ("Cuban Sandwich", "Grilled ham, Swiss, pickles and mustard sauce", 14.99),
-  ("Classic Club", "Hope you're hungry — it's big!", 15.99),
-  ("Grilled Ham & Cheese", "", 11.99),
-  ("Grilled Turkey & Swiss", "", 11.99),
-  ("Reuben Sandwich", "Corned beef, sauerkraut, Swiss cheese, 1000 island, on marbled rye", 13.99),
-  ("Chicken Wrap", "Chicken, bacon, cheese, lettuce, tomato, ranch", 12.99),
-  ("Buffalo Chicken Wrap", "Buffalo chicken, bacon, lettuce, tomato, cheese, ranch", 12.99),
-  ("Chicken Caesar Wrap", "Chicken, lettuce, parmesan, Caesar dressing", 11.99),
-  ("Pulled Pork Sandwich", "Smoked pulled pork, BBQ sauce, pickles", 12.99),
-  ("Fish Sandwich", "Cheddar cheese, lettuce and tartar sauce", 15.99),
- ]),
- ("ENTREES", "", [
-  ("Pulled Pork Mac and Cheese", "", 13.99),
-  ("Chicken Bacon Ranch Mac & Cheese", "", 12.99),
-  ("Chicken & Cilantro Lime Rice Bowl", "", 14.99),
-  ("Orange Chicken Rice Bowl", "", 14.99),
-  ("Chicken Strip Basket", "With choice of side", 13.99),
-  ("Shrimp Basket", "Grilled or breaded shrimp", 14.99),
-  ("Fish and Chips", "", 15.99),
-  ("Finger Steak Basket", "", 13.99),
-  ("12 oz Bite Size Steak", "Fresh made mashed, garlic toast, choice of soup or salad. Add 5 grilled shrimp $9", "Market Price"),
-  ("6 oz Bite Size Steak", "Fresh made mashed, garlic toast, choice of soup or salad. Add 5 grilled shrimp $9", "Market Price"),
-  ("Chicken Fried Steak", "Fresh made mashed, white gravy, garlic toast, choice of soup or salad", 19.99),
-  ("Grilled New York Steak", "16 oz New York, fresh made mashed, garlic toast, choice of soup or salad. Add 5 grilled shrimp $9", "Market Price"),
- ]),
- ("DESSERTS", "", [
-  ("Brownie Delight", "With ice cream and chocolate drizzle", 5.99),
-  ("Raspberry Cheesecake", "", 6.99),
-  ("Banana Cream Pie", "", 6.99),
-  ("Bowl of Ice Cream", "Vanilla or Huckleberry", 3.99),
- ]),
-]
+# ---------- menu data ----------
+# ops/menu.json is the single source of truth, shared with build_menu_page.py.
+# Edit the JSON, never these tuples; section names are upper-cased here for the sheet.
+MENU_JSON = os.path.join(os.path.dirname(os.path.abspath(__file__)), "menu.json")
+with open(MENU_JSON) as _f:
+    _menu = json.load(_f)
+MENU = [(s["section"].upper(), s["note"],
+         [(i["name"], i["desc"], i["price"]) for i in s["items"]]) for s in _menu["food"]]
 
 dv = DataValidation(type="list", formula1='"Keep,Update,Remove,New"', allow_blank=True)
 food.add_data_validation(dv)
@@ -193,25 +122,8 @@ pz.freeze_panes = "A2"
 dv2 = DataValidation(type="list", formula1='"Keep,Update,Remove,New"', allow_blank=True)
 pz.add_data_validation(dv2)
 
-PIZZA = [
- ("Regular", [
-  ("Cheese", ""), ("Pepperoni", ""),
-  ("Hawaiian", "Cheese, Canadian bacon, and pineapple"),
-  ("Meat Lovers", "Pepperoni, Canadian bacon, sausage, and cheese"),
-  ("Vegetarian", "Cheese, mushrooms, olives, green peppers, and onions"),
-  ("Parmesan Garlic Chicken w/ Bacon", ""),
-  ("BBQ Chicken", "BBQ sauce, cheese, chicken"),
-  ("Chicken Bacon Ranch", ""),
-  ("Husky", "Mustard sauce, cheese, pepperoni, and pineapple"),
-  ("Buffalo Chicken", "Frank's RedHot buffalo sauce, cheese, chicken"),
- ], 13.99, 22.00),
- ("Specialty", [
-  ("Supreme", "Cheese, Canadian bacon, sausage, pepperoni, mushrooms, olives, onions, green peppers"),
-  ("Korean Chicken", "Gochujang sauce, cheese, bell peppers, green onions, crispy chicken"),
-  ("Shotgun", "Mustard sauce, Swiss polish sausage, onions, and sauerkraut"),
-  ("Taco Pizza", "Cheese, taco meat, tomatoes, olives, green onion, and lettuce"),
- ], 15.99, 24.99),
-]
+PIZZA = [(g["group"].replace(" Pizza", ""), [(p["name"], p["desc"]) for p in g["pies"]],
+          g["price_12"], g["price_16"]) for g in _menu["pizza"]]
 
 r = 2
 for ptype, pies, p12, p16 in PIZZA:
@@ -267,21 +179,8 @@ kids.row_dimensions[2].height = 20
 dvk = DataValidation(type="list", formula1='"Keep,Update,Remove,New"', allow_blank=True)
 kids.add_data_validation(dvk)
 
-KIDS = [
- ("KIDS MEALS", "12 & under — served with fries or tots", [
-   ("2 Burger Sliders", "", 6.99),
-   ("Chicken Tenders", "", 6.99),
-   ("Grilled Cheese Sandwich", "", 4.99),
-   ("Peanut Butter & Jelly Sandwich", "", 4.99),
-   ("Mac & Cheese", "", 4.99),
- ]),
- ("KIDS DRINKS", "", [
-   ("Soda", "", 2.99),
-   ("Apple Juice", "", 2.50),
-   ("Milk", "", 2.49),
-   ("Chocolate Milk", "", 2.99),
- ]),
-]
+KIDS = [(s["section"].upper(), s["note"],
+         [(i["name"], i["desc"], i["price"]) for i in s["items"]]) for s in _menu["kids"]]
 
 r = 3
 for section, knote, items in KIDS:

@@ -2,7 +2,7 @@
 
 **Overall: B** — Fast, readable, no layout bugs; tap targets and caching fixed, a few small labels remain.
 
-Audited 2026-10-11 against https://winchestergrill.com (home) and https://winchestergrill.com/menu.html; items 1–5 and 7 below were fixed the same day and re-measured in the browser. Static analysis plus a headless-browser pass at 375×812 (iPhone-size) to measure rendered tap targets, text sizes, and overflow. Not a real-device test.
+Audited 2026-10-11 against https://winchestergrill.com (home) and https://winchestergrill.com/menu.html; items 1–5, 7 and 8 below were fixed the same day and re-measured in the browser. Static analysis plus a headless-browser pass at 375×812 (iPhone-size) to measure rendered tap targets, text sizes, and overflow. Not a real-device test.
 
 ## Grades
 
@@ -13,11 +13,11 @@ Audited 2026-10-11 against https://winchestergrill.com (home) and https://winche
 | Typography | B | 16px Lora body; a few labels dip under 12px |
 | Forms | N/A | No forms by design — every contact path is a phone link |
 | Performance | B | First paint ~555KB (one hero photo); photos cached a day |
-| Navigation & Interaction | B | Sticky Call bar now on menu page; hamburger needs JS |
+| Navigation & Interaction | A | Sticky Call bar on both pages; content readable without JS |
 
 ## Punch List
 
-Ordered by impact — fix top-down. Items 1–5 and 7 are done (measured at 375px: dots 44×44, footer links 44px tall, chips 44px, menu sticky bar showing with 50px buttons, hero slides 2–3 requested only after the load event, assets cached 24h with ETag revalidation). Items 6 and 8 remain open.
+Ordered by impact — fix top-down. Items 1–5 and 7 are done (measured at 375px: dots 44×44, footer links 44px tall, chips 44px, menu sticky bar showing with 50px buttons, hero slides 2–3 requested only after the load event, assets cached 24h with ETag revalidation). Only item 6 (small labels) remains open.
 
 ### 1. ✅ FIXED — Navigation — Menu page has no sticky "Call to Order" bar
 **Current:** `index.html` has the `.mobile-order` bar (Call + Menu, 50px buttons, safe-area padding) pinned to the bottom on phones. `menu.html` does not. On the page people read longest, the only call buttons are inside the hamburger menu or at the very bottom (`.menu-cta`), roughly 1,400px of scrolling away.
@@ -68,7 +68,7 @@ with `<div class="slide" data-bg="assets/hero-pizza.webp"></div>`. Optionally se
 **Fix:** For `/assets/`, `max-age=31536000, immutable` and bump a `?v=` query (the og-image already uses `?v=1`) or the filename when a photo changes.
 **Why it matters:** Repeat visitors re-download ~700KB of photos every five minutes instead of using cache.
 
-### 8. Navigation — Content is hidden until JavaScript runs
+### 8. ✅ FIXED — Navigation — Content is hidden until JavaScript runs
 **Current:** `.fade-up{opacity:0}` is applied unconditionally in `index.html`; every section below the hero only appears once the inline script's IntersectionObserver fires. The hamburger menu is also an `onclick` toggle with no non-JS fallback.
 **Fix:** Add `document.documentElement.classList.add('js')` as the first line of the script and scope the rule to `.js .fade-up{opacity:0;…}`. The menu is acceptable as-is because the sticky bar and in-page links cover every destination.
 **Why it matters:** One syntax error in the single inline block (or a blocked script) leaves phones showing a hero and a blank dark page.
