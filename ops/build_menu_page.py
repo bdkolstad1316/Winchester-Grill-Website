@@ -175,6 +175,11 @@ HTML = f'''<!DOCTYPE html>
 <title>Menu | Winchester Grill — Burgers, Steak, Wings &amp; Pizza in Winchester, Idaho</title>
 <meta name="description" content="The full Winchester Grill menu: scratch burgers, hand-cut steak, wings, salads, sandwiches, rice bowls, desserts, and take-and-bake pizza. Winchester, Idaho. (208) 924-6420.">
 <link rel="canonical" href="https://winchestergrill.com/menu.html">
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="theme-color" content="#15110D">
 <meta property="og:type" content="restaurant.menu">
 <meta property="og:title" content="Menu | Winchester Grill">
 <meta property="og:description" content="Scratch burgers, hand-cut steak, wings, and take-and-bake pizza in Winchester, Idaho.">

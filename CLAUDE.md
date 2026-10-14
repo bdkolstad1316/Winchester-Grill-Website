@@ -65,6 +65,9 @@ public site.
 - **Images must stay WebP with explicit `width`/`height`.** Both pages hold an A mobile
   grade (372KB home / 450KB menu). Dropping in a full-size JPEG without dimensions costs
   the grade and reintroduces layout shift.
+- **Favicon set:** `favicon.ico` (root; 16/32/48), `assets/favicon-32.png`, `assets/apple-touch-icon.png`,
+  `assets/icon-192.png` / `icon-512.png`, `site.webmanifest`. All generated from a Bevan "W" in
+  gold on charcoal; regenerate the whole set together if the mark ever changes.
 - **Only extensions listed in `TYPES` (server.js) are served; everything else is a 404.**
   Adding a new asset type (fonts, video…) means adding its MIME type there, or it 404s.
 - **Photos under `assets/` are cached for a day** (`Cache-Control: max-age=86400` plus an
