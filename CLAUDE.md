@@ -9,8 +9,10 @@ the phone ring: there are no forms, and every contact path is a `tel:` link.
 ## Client
 - Name: Eric Frei — Winchester Grill, 317 Nezperce Ave, Winchester, ID 83555, (208) 924-6420
 - Contact: ericfrei7475@gmail.com (he texts menu changes; he does not use email at the domain)
-- Deliverables — reports, brand files, photos, menu spreadsheet, correspondence — live in
-  `~/Documents/Claude/Projects/Winchester Grill/` (Cowork). **Not in this repo.**
+- Client material — reports, brand files, photos, menu spreadsheet, correspondence — lives
+  in `client/` inside this folder. It is gitignored, so it never reaches GitHub or Railway.
+  Keep it that way: nothing from `client/` gets committed or copied into the site.
+  Monthly Plausible report pipeline: `client/reports/`.
 
 ## Run locally
 ```
@@ -45,8 +47,7 @@ his menu changes rather than using it, so it's a nice-to-have — run it only wh
 ```
 python3 ops/build_menu_xlsx.py      # needs openpyxl (pip3 install --user openpyxl)
 ```
-It writes to the Cowork folder (`~/Documents/Claude/Projects/Winchester Grill/menu/`),
-not this repo. Set `MENU_XLSX_OUT` to write elsewhere.
+It writes to `client/menu/` (gitignored). Set `MENU_XLSX_OUT` to write elsewhere.
 
 `server.js` refuses to serve anything under `ops/`, so the generators never reach the
 public site.

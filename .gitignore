@@ -6,3 +6,6 @@ Thumbs.db
 node_modules/
 _locktest.tmp
 *.tmp
+
+# Client material (brand, correspondence, menu source, photos, reports). Never deploy.
+client/

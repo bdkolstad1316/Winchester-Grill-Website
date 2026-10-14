@@ -215,9 +215,10 @@ for section, knote, items in KIDS:
         r += 1
     r += 1
 
-# Eric's spreadsheet is a client deliverable; it lives in the Cowork folder, not this repo.
+# Eric's spreadsheet is a client deliverable; it lives in client/ (gitignored), not in the site.
 # Override with MENU_XLSX_OUT=... to write elsewhere.
-out = os.environ.get("MENU_XLSX_OUT") or os.path.expanduser(
-    "~/Documents/Claude/Projects/Winchester Grill/menu/winchester-menu-for-eric.xlsx")
+out = os.environ.get("MENU_XLSX_OUT") or os.path.join(
+    os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
+    "client", "menu", "winchester-menu-for-eric.xlsx")
 wb.save(out)
 print("saved", out)
