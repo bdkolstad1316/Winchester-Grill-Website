@@ -25,7 +25,9 @@ and nothing to `npm ci`.
 
 ## Deploy
 - GitHub: `bdkolstad1316/Winchester-Grill-Website`, private
-- Railway deploys automatically on push to `main`
+- Railway deploys automatically on push to `main` (project "Winchester Grill", ID
+  `053ed80b-22f4-4ea7-a1ba-bd933e091654`; the CLI is installed — `railway login` then
+  `railway link -p <that id>` to manage it from the terminal)
 - Live: https://winchestergrill.com
 - DNS, SSL and the registrar are all Cloudflare, on Brian's account
 - `winchesterkitchenandbar.com` (the old domain, also on Brian's Cloudflare) 301-redirects
