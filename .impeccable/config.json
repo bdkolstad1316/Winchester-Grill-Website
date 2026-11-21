@@ -39,15 +39,6 @@
         "reason": "Sanctioned brand choice: the project CLAUDE.md names Fraunces italic as the Winchester Grill accent face. It sets one phrase inside Bevan headings, not the headline face."
       },
       {
-        "rule": "italic-serif-display",
-        "value": "*",
-        "files": [
-          "coming-soon.html"
-        ],
-        "createdAt": "2026-11-21T18:45:30.097Z",
-        "reason": "Sanctioned brand choice: the project CLAUDE.md names Fraunces italic as the Winchester Grill accent face. It sets one phrase inside Bevan headings, not the headline face."
-      },
-      {
         "rule": "marquee",
         "value": "*",
         "files": [

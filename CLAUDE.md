@@ -17,9 +17,7 @@ the phone ring: there are no forms, and every contact path is a `tel:` link.
 ## Run locally
 ```
 npm start                 # http://localhost:8080   (no dependencies to install)
-COMING_SOON=true npm start    # preview the holding page (coming-soon.html) at /
 ```
-The real site is the default; `COMING_SOON=true` is the only way to get the holding page.
 There are no npm dependencies. `server.js` uses only Node builtins, so there's no lockfile
 and nothing to `npm ci`.
 
@@ -73,8 +71,7 @@ public site.
   grade (372KB home / 450KB menu). Dropping in a full-size JPEG without dimensions costs
   the grade and reintroduces layout shift.
 - **Colours are tokens.** Every colour lives in the `:root` block at the top of each page
-  (`index.html`, the generator for `menu.html`, `coming-soon.html` — three copies, kept in
-  step by hand). Gold text on cream uses `--gold-ink`, not `--gold`/`--gold-d` (too faint
+  (`index.html` and the generator for `menu.html` — two copies, kept in step by hand). Gold text on cream uses `--gold-ink`, not `--gold`/`--gold-d` (too faint
   there); quiet text on dark uses `--mut-2`. Check contrast (4.5:1) before adding a colour.
 - **Accessibility wiring:** each page has a skip link and a `<main id="main">`; the hamburger
   carries `aria-expanded`/`aria-controls="nav-links"`. Keep those ids if the nav is reworked.

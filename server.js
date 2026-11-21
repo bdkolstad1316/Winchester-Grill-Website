@@ -8,14 +8,6 @@ const path = require("path");
 const PORT = process.env.PORT || 8080;
 const ROOT = __dirname;
 
-// ── THE TOGGLE ──────────────────────────────────────────────────────────────
-// true  = visitors to winchestergrill.com see the "coming soon" holding page
-// false = visitors see the full site (index.html)  ← default since launch, so a
-//         lost/unset env var can never silently put the holding page back up.
-// Override without editing code by setting COMING_SOON=true in Railway.
-const COMING_SOON = process.env.COMING_SOON === "true";
-// ─────────────────────────────────────────────────────────────────────────────
-
 const TYPES = {
   ".html": "text/html; charset=utf-8",
   ".css": "text/css; charset=utf-8",
@@ -97,9 +89,7 @@ http
     }
     // A NUL byte (%00) makes every fs call throw synchronously — refuse it up front.
     if (urlPath.includes("\0")) return notFound(res);
-    // Root path: serve the holding page when COMING_SOON is on, else the real site.
-    // (index.html and every other page stay directly reachable for previewing.)
-    if (urlPath === "/") urlPath = COMING_SOON ? "/coming-soon.html" : "/index.html";
+    if (urlPath === "/") urlPath = "/index.html";
     const safePath = path.normalize(urlPath).replace(/^(\.\.[/\\])+/, "");
 
     // Block dotfiles (.git, .env, .gitignore …) and named infra files.
