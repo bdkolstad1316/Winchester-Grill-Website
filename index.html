@@ -81,6 +81,12 @@
   --navh:78px;
 }
 *{margin:0;padding:0;box-sizing:border-box}
+/* Type that wraps well, and the browser's own surfaces in the house palette. */
+h1,h2,h3{text-wrap:balance}
+p,blockquote,li{text-wrap:pretty}
+::selection{background:var(--gold);color:var(--char)}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+.sec-cream :focus-visible{outline-color:var(--gold-ink)}   /* gold is too faint on cream */
 @media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
 body{font-family:'Lora',serif;font-size:16px;text-size-adjust:100%;-webkit-text-size-adjust:100%;background:var(--char);color:var(--mut);line-height:1.65;-webkit-tap-highlight-color:rgba(224,169,56,.2);overflow-x:hidden}
 img{max-width:100%;display:block}

@@ -26,10 +26,15 @@
 <link href="https://fonts.googleapis.com/css2?family=Bevan&family=Fraunces:ital,opsz,wght@1,9..144,500;1,9..144,600&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
 <style>
 :root{
-  --char:#15110D;--char2:#1F1812;--gold:#E0A938;--gold-d:#B9852A;--ember:#B84426;--mut-2:#A39679;
+  --char:#15110D;--char2:#1F1812;--gold:#E0A938;--gold-d:#B9852A;--ember:#B84426;--mut-2:#A39679;--open:#4EC77A;
   --cream:#F8F1E4;--mut:#CFC3AC;--line:rgba(224,169,56,.26);
 }
 *{margin:0;padding:0;box-sizing:border-box}
+/* Type that wraps well, and the browser's own surfaces in the house palette. */
+h1,h2,h3{text-wrap:balance}
+p,blockquote,li{text-wrap:pretty}
+::selection{background:var(--gold);color:var(--char)}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
 body{font-family:'Lora',serif;background:var(--char);color:var(--mut);line-height:1.65;min-height:100vh;min-height:100svh;-webkit-tap-highlight-color:rgba(224,169,56,.2);overflow-x:hidden}
 .display{font-family:'Bevan',serif;text-transform:uppercase;letter-spacing:.01em;line-height:.95}
 .accent{font-family:'Fraunces',serif;font-style:italic;font-weight:600}
@@ -61,7 +66,7 @@ h1 .accent{color:var(--gold);text-transform:none;display:inline-block}
 /* contact overlay block */
 .contact{margin-top:30px;background:rgba(28,22,16,.66);border:1px solid var(--line);border-radius:18px;padding:24px 22px;backdrop-filter:blur(8px)}
 .contact .open{display:inline-flex;align-items:center;gap:8px;font-size:.74rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin-bottom:14px}
-.contact .open .dot{width:8px;height:8px;border-radius:999px;background:#4ec77a;box-shadow:0 0 0 3px rgba(78,199,122,.2)}
+.contact .open .dot{width:8px;height:8px;border-radius:999px;background:var(--open);box-shadow:0 0 0 3px color-mix(in srgb,var(--open) 20%,transparent)}
 .rows{display:flex;flex-direction:column;gap:2px}
 .phone{font-family:'Bevan',serif;font-size:clamp(1.8rem,6vw,2.4rem);color:var(--cream);letter-spacing:.02em;text-decoration:none;display:inline-block}
 .phone:hover{color:var(--gold)}

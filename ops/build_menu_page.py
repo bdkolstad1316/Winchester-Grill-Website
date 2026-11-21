@@ -206,6 +206,12 @@ HTML = f'''<!DOCTYPE html>
 <style>
 :root{{--char:#15110D;--char2:#1F1812;--char3:#2A2118;--gold:#E0A938;--gold-d:#B9852A;--ember:#B84426;--cream:#F8F1E4;--mut:#C8BBA4;--mut-2:#A39679;--deep:#0C0907;--on-gold:#4A3718;--line:rgba(224,169,56,.26);--max:1180px;--navh:78px;--subh:59px}}
 *{{margin:0;padding:0;box-sizing:border-box}}
+/* Type that wraps well, and the browser's own surfaces in the house palette. */
+h1,h2,h3{{text-wrap:balance}}
+p,blockquote,li{{text-wrap:pretty}}
+::selection{{background:var(--gold);color:var(--char)}}
+:focus-visible{{outline:2px solid var(--gold);outline-offset:3px}}
+.menu-cta :focus-visible{{outline-color:var(--char)}}   /* gold on the gold band would vanish */
 @media (prefers-reduced-motion:no-preference){{html{{scroll-behavior:smooth}}}}
 body{{font-family:'Lora',serif;font-size:16px;text-size-adjust:100%;-webkit-text-size-adjust:100%;background:var(--char);color:var(--mut);line-height:1.65;-webkit-tap-highlight-color:rgba(224,169,56,.2);overflow-x:hidden}}
 a{{color:inherit}}
@@ -305,7 +311,7 @@ nav{{position:fixed;top:0;left:0;right:0;z-index:60;height:var(--navh);display:f
 .btn{{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:54px;padding:15px 32px;border-radius:999px;font-weight:700;font-size:1rem;letter-spacing:.04em;text-transform:uppercase;text-decoration:none;transition:transform .15s,background .2s}}
 .btn:active{{transform:scale(.97)}}
 .btn-dark{{background:var(--char);color:var(--cream)}}
-.btn-dark:hover{{background:#000}}
+.btn-dark:hover{{background:var(--deep)}}
 
 /* FOOTER */
 footer{{background:var(--deep);border-top:1px solid var(--line);padding:54px 26px 28px}}
