@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Page not found | Winchester Grill</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
+<meta name="theme-color" content="#15110D">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bevan&family=Fraunces:ital,opsz,wght@1,9..144,500;1,9..144,600&family=Lora:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<!-- Privacy-friendly analytics by Plausible -->
+<script async src="https://plausible.io/js/pa-_UZvFYMx1dSc_E12NUXJv.js"></script>
+<script>
+  window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
+  plausible.init()
+</script>
+<style>
+/* This page is sent for every unknown URL, at any depth, so every link is root-relative. */
+:root{
+  --char:#15110D;
+  --gold:#E0A938;
+  --cream:#F8F1E4;
+  --mut:#C8BBA4;
+  --mut-2:#A39679;
+  --line:rgba(224,169,56,.26);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+h1{text-wrap:balance}
+p{text-wrap:pretty}
+::selection{background:var(--gold);color:var(--char)}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+body{font-family:'Lora',serif;font-size:16px;text-size-adjust:100%;-webkit-text-size-adjust:100%;background:radial-gradient(ellipse 80% 60% at 50% 0%,rgba(224,169,56,.1),transparent 60%),var(--char);color:var(--mut);line-height:1.65;min-height:100vh;min-height:100svh;display:flex;flex-direction:column;-webkit-tap-highlight-color:rgba(224,169,56,.2)}
+header{padding:26px 26px 0}
+.brand{display:inline-flex;align-items:center;min-height:44px;font-family:'Bevan',serif;color:var(--cream);font-size:1.32rem;letter-spacing:.02em;text-transform:uppercase;line-height:1;text-decoration:none;white-space:nowrap}
+.brand span{color:var(--gold);margin-left:.3em}
+main{flex:1;display:flex;flex-direction:column;justify-content:center;max-width:640px;width:100%;margin:0 auto;padding:48px 26px 72px}
+h1{font-family:'Bevan',serif;font-weight:400;text-transform:uppercase;color:var(--cream);font-size:clamp(2.4rem,9vw,4.2rem);line-height:.98}
+h1 .accent{display:block;font-family:'Fraunces',serif;font-style:italic;font-weight:600;text-transform:none;color:var(--gold);margin-top:.1em}
+.lead{font-size:1.12rem;color:var(--cream);margin-top:22px;max-width:46ch}
+.btns{display:flex;flex-wrap:wrap;gap:12px;margin-top:32px}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:56px;padding:16px 30px;border-radius:999px;font-weight:700;font-size:1rem;letter-spacing:.04em;text-transform:uppercase;text-decoration:none;transition:transform .15s,background .2s,color .2s,border-color .2s}
+.btn:active{transform:scale(.97)}
+.btn-gold{background:var(--gold);color:var(--char)}
+.btn-gold:hover{background:var(--cream)}
+.btn-glass{border:1.5px solid rgba(248,241,228,.55);color:var(--cream)}
+.btn-glass:hover{border-color:var(--gold);color:var(--gold)}
+.home{display:inline-block;margin-top:26px;padding:10px 0;color:var(--mut);text-underline-offset:3px}
+.home:hover{color:var(--gold)}
+footer{padding:22px 26px 28px;border-top:1px solid var(--line);font-size:.82rem;color:var(--mut-2)}
+@media (max-width:520px){
+  .btn{width:100%}
+}
+</style>
+</head>
+<body>
+<header>
+  <a class="brand" href="/">Winchester <span>Grill</span></a>
+</header>
+<main>
+  <h1>Wrong turn. <span class="accent">No harm done.</span></h1>
+  <p class="lead">That page isn't on the menu. The kitchen's open all the same, and everything you came for is one tap away.</p>
+  <div class="btns">
+    <a class="btn btn-gold" href="tel:+12089246420">Call (208) 924-6420</a>
+    <a class="btn btn-glass" href="/menu.html">See the Menu</a>
+  </div>
+  <a class="home" href="/">Back to the home page</a>
+</main>
+<footer>317 Nezperce Ave, Winchester, ID 83555</footer>
+<script>
+/* Same "Call" goal as the rest of the site, tagged so calls from a dead link can be told apart. */
+document.addEventListener('click',function(ev){
+  var a=ev.target.closest?ev.target.closest('a[href^="tel:"]'):null;
+  if(!a||typeof window.plausible!=='function')return;
+  window.plausible('Call',{props:{location:'404'}});
+});
+</script>
+</body>
+</html>

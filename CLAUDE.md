@@ -79,6 +79,12 @@ public site.
   the impeccable detector dislikes as intentional: the Fraunces italic accent, the scrolling
   gold ticker, and the dashed stitch line on the home-page tiles. Don't "fix" them, and don't
   reintroduce small tracked-caps labels above headings; those were folded into the copy.
+- **`404.html` is sent for every unknown URL** (read once at server start, status 404, at any
+  path depth). Its links must stay root-relative (`/menu.html`, not `menu.html`). Asking for
+  `/404.html` directly also answers 404. The menu prints black on white
+  from `print.css`, pulled in by a print-only `@import` at the top of the menu's `<style>`.
+  Keep print rules in that file: inline, they make the design hook's source scan report
+  false contrast failures.
 - **Favicon set:** `favicon.ico` (root; 16/32/48), `assets/favicon-32.png`, `assets/apple-touch-icon.png`,
   `assets/icon-192.png` / `icon-512.png`, `site.webmanifest`. All generated from a Bevan "W" in
   gold on charcoal; regenerate the whole set together if the mark ever changes.

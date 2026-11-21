@@ -204,6 +204,7 @@ HTML = f'''<!DOCTYPE html>
 {ld_json}
 </script>
 <style>
+@import url("print.css") print;   /* print-only rules; see the note at the top of print.css */
 :root{{--char:#15110D;--char2:#1F1812;--char3:#2A2118;--gold:#E0A938;--gold-d:#B9852A;--ember:#B84426;--cream:#F8F1E4;--mut:#C8BBA4;--mut-2:#A39679;--deep:#0C0907;--on-gold:#4A3718;--line:rgba(224,169,56,.26);--max:1180px;--navh:78px;--subh:59px}}
 *{{margin:0;padding:0;box-sizing:border-box}}
 /* Type that wraps well, and the browser's own surfaces in the house palette. */
@@ -368,6 +369,7 @@ footer{{background:var(--deep);border-top:1px solid var(--line);padding:54px 26p
   .mobile-order .btn{{max-width:none}}
   body{{padding-bottom:74px}}
 }}
+
 </style>
 </head>
 <body>

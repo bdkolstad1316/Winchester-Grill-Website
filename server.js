@@ -49,14 +49,26 @@ const SECURITY = {
 // so .md / .py / extensionless strays can't leak even if this list goes stale.
 // Names are compared lower-cased, so /Server.js or /OPS/ can't slip past on a
 // case-insensitive filesystem (macOS dev machines; Railway's Linux is case-sensitive).
-const BLOCKED = new Set(["server.js", "package.json", "package-lock.json", ".gitignore", "claude.md"]);
+const BLOCKED = new Set(["server.js", "package.json", "package-lock.json", ".gitignore", "claude.md", "404.html"]);
 // Top-level folders that are never site content: ops/ holds the menu generators, client/
 // holds client material (gitignored, so it isn't deployed — blocked here as a second lock).
 const BLOCKED_DIRS = new Set(["ops", "client"]);
 
+// The branded "page not found" screen, read once at startup. 404.html is in BLOCKED so that
+// asking for it directly also answers 404. If the file is missing, fall back to a bare heading.
+let NOT_FOUND_BODY = Buffer.from("<h1>404 — Not Found</h1>");
+try {
+  NOT_FOUND_BODY = fs.readFileSync(path.join(ROOT, "404.html"));
+} catch {}
+
 function notFound(res) {
-  res.writeHead(404, { "Content-Type": "text/html; charset=utf-8", ...SECURITY });
-  res.end("<h1>404 — Not Found</h1>");
+  res.writeHead(404, {
+    "Content-Type": "text/html; charset=utf-8",
+    "Content-Length": String(NOT_FOUND_BODY.length),
+    "Cache-Control": "no-cache",
+    ...SECURITY,
+  });
+  res.end(NOT_FOUND_BODY);
 }
 
 function methodNotAllowed(res) {

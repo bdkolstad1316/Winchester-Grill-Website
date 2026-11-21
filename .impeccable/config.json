@@ -64,6 +64,15 @@
         ],
         "createdAt": "2026-11-21T18:46:35.468Z",
         "reason": "Brian confirmed 2026-11-21: keep the dashed stitch rule on the menu tiles; it echoes the leather-patch cap."
+      },
+      {
+        "rule": "italic-serif-display",
+        "value": "*",
+        "files": [
+          "404.html"
+        ],
+        "createdAt": "2026-11-21T19:21:56.833Z",
+        "reason": "Sanctioned brand choice: the project CLAUDE.md names Fraunces italic as the Winchester Grill accent face. It sets one phrase inside a Bevan heading."
       }
     ]
   }
