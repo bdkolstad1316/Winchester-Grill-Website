@@ -1,7 +1,9 @@
 {
   "detector": {
     "ignoreRules": [],
-    "ignoreFiles": [],
+    "ignoreFiles": [
+      "client/mockups/**"
+    ],
     "ignoreValues": [
       {
         "rule": "icon-tile-stack",
