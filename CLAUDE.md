@@ -86,7 +86,9 @@ public site.
   columns, **two letter pages**. Every selector in it starts with `html ` because an import
   loses to the page's own rules at equal specificity; without that prefix the phone layout
   takes over and it prints ten pages. After a menu or `print.css` change run
-  `sh ops/print_check.sh` (headless Chrome, expects `pages: 2`). Keep print rules out of the
+  `sh ops/print_check.sh` (headless Chrome, expects `pages: 2`). **When `print.css` changes,
+  bump the `?v=` on its `@import` in the generator**: Cloudflare tells browsers to keep CSS
+  for four hours, so without a new address visitors keep printing with the old file. Keep print rules out of the
   page's inline CSS: there they make the design hook report false contrast failures.
 - **Favicon set:** `favicon.ico` (root; 16/32/48), `assets/favicon-32.png`, `assets/apple-touch-icon.png`,
   `assets/icon-192.png` / `icon-512.png`, `site.webmanifest`. All generated from a Bevan "W" in
