@@ -213,11 +213,12 @@ nav.solid{background:rgba(21,17,13,.96);backdrop-filter:blur(12px);box-shadow:0 
 
 /* ============ EVENTS ============ */
 .evgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:22px}
-.ev{background:var(--char3);border:1px solid var(--line);border-radius:18px;padding:34px 30px}
-.ev .ic{width:56px;height:56px;border-radius:14px;background:rgba(224,169,56,.12);display:flex;align-items:center;justify-content:center;margin-bottom:20px}
+/* Icon sits beside the heading on one row; the sentence runs full width beneath. */
+.ev{display:grid;grid-template-columns:auto 1fr;align-items:center;column-gap:16px;row-gap:16px;background:var(--char3);border:1px solid var(--line);border-radius:18px;padding:32px 30px}
+.ev .ic{width:52px;height:52px;border-radius:14px;background:rgba(224,169,56,.12);display:flex;align-items:center;justify-content:center}
 .ev .ic svg{stroke:var(--gold)}
-.ev h3{font-family:'Bevan',serif;text-transform:uppercase;color:var(--cream);font-size:1.25rem;line-height:1.08;margin-bottom:8px}
-.ev p{font-size:.96rem}
+.ev h3{font-family:'Bevan',serif;text-transform:uppercase;color:var(--cream);font-size:1.25rem;line-height:1.08}
+.ev p{grid-column:1/-1;font-size:.96rem}
 
 /* ============ REVIEWS CAROUSEL ============ */
 .revhead{text-align:center;margin-bottom:18px}

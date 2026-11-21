@@ -9,3 +9,7 @@ _locktest.tmp
 
 # Client material (brand, correspondence, menu source, photos, reports). Never deploy.
 client/
+
+# Impeccable design hook: per-machine cache and local overrides (config.json is shared)
+.impeccable/hook.cache.json
+.impeccable/config.local.json
