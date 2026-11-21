@@ -263,7 +263,7 @@ footer{background:var(--deep);border-top:1px solid var(--line);padding:64px 26px
 .foot p,.foot a{font-size:.92rem;color:var(--mut);text-decoration:none}
 .foot ul a{display:inline-block;padding:10px 0;margin:-10px 0} /* 44px tap height without changing the layout */
 .foot a:hover{color:var(--gold)}
-.foot h4{font-family:'Bevan',serif;text-transform:uppercase;color:var(--cream);font-size:1rem;letter-spacing:.04em;margin-bottom:14px}
+.foot h3{font-family:'Bevan',serif;text-transform:uppercase;color:var(--cream);font-size:1.15rem;letter-spacing:.04em;margin-bottom:14px}
 .foot ul{list-style:none;display:flex;flex-direction:column;gap:8px}
 .legal{max-width:var(--max);margin:48px auto 0;padding-top:22px;border-top:1px solid rgba(224,169,56,.14);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:.82rem;color:var(--mut-2)}
 .legal a{color:var(--mut);text-decoration:underline;text-underline-offset:3px;display:inline-block;padding:12px 0;margin:-12px 0}
@@ -280,8 +280,10 @@ footer{background:var(--deep);border-top:1px solid var(--line);padding:64px 26px
 .js .fade-up.vis{opacity:1;transform:none}
 
 /* ============ RESPONSIVE ============ */
-@media (max-width:1000px){
+@media (max-width:1140px){
   .tiles{grid-template-columns:repeat(3,1fr)}
+}
+@media (max-width:1000px){
   .evgrid{grid-template-columns:1fr}
   .story,.visit{grid-template-columns:1fr;gap:42px}
   .foot{grid-template-columns:1fr 1fr}
@@ -503,7 +505,7 @@ footer{background:var(--deep);border-top:1px solid var(--line);padding:64px 26px
         <button class="car-btn" id="carPrev" aria-label="Previous review">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M15 18l-6-6 6-6"/></svg>
         </button>
-        <div class="car-dots" id="carDots" role="tablist"></div>
+        <div class="car-dots" id="carDots"></div>
         <button class="car-btn" id="carNext" aria-label="Next review">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M9 18l6-6-6-6"/></svg>
         </button>
@@ -550,14 +552,14 @@ footer{background:var(--deep);border-top:1px solid var(--line);padding:64px 26px
       <p>A family bar &amp; grill on the Camas Prairie, one mile from Winchester Lake State Park. Formerly Winchester Kitchen &amp; Bar.</p>
     </div>
     <div>
-      <h4>Visit</h4>
+      <h3>Visit</h3>
       <ul>
         <li><a href="https://www.google.com/maps/dir//317+Nezperce+Ave,+Winchester,+ID+83555">317 Nezperce Ave<br>Winchester, ID 83555</a></li>
         <li><a href="tel:+12089246420">(208) 924-6420</a></li>
       </ul>
     </div>
     <div>
-      <h4>Explore</h4>
+      <h3>Explore</h3>
       <ul>
         <li><a href="menu.html">Menu</a></li>
         <li><a href="#takeandbake">Pizza</a></li>
@@ -617,8 +619,7 @@ addEventListener('keydown',e=>{if(e.key==='Escape')closeNav()});
   const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
   slides.forEach((_,n)=>{
     const b=document.createElement('button');
-    b.setAttribute('role','tab');
-    b.setAttribute('aria-label','Review '+(n+1));
+    b.setAttribute('aria-label','Show review '+(n+1)+' of '+slides.length);
     b.addEventListener('click',()=>{go(n);stop()});
     dots.appendChild(b);
   });

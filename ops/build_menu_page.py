@@ -252,7 +252,7 @@ nav{{position:fixed;top:0;left:0;right:0;z-index:60;height:var(--navh);display:f
 .menu-sec{{margin-bottom:58px}}
 .sec-bar{{border-bottom:2px solid var(--line);padding-bottom:10px;margin-bottom:8px}}
 .sec-bar h2{{color:var(--gold);font-size:clamp(1.6rem,3.4vw,2.3rem)}}
-.sec-note{{font-family:'Fraunces',serif;font-style:italic;color:var(--mut);font-size:.96rem;margin:10px 0 22px;max-width:760px}}
+.sec-note{{font-family:'Fraunces',serif;font-style:italic;color:var(--mut);font-size:.96rem;margin:10px 0 22px;max-width:56ch}}
 .menu-feature{{position:relative;border-radius:16px;overflow:hidden;margin:4px 0 32px;border:1px solid var(--line);background:var(--deep)}}
 /* height:auto matters: without it the <img> height attribute is a fixed pixel height and
    aspect-ratio never applies (banners rendered 686px tall on phones). */
@@ -290,7 +290,7 @@ nav{{position:fixed;top:0;left:0;right:0;z-index:60;height:var(--navh);display:f
 .mi-desc{{font-size:.9rem;color:var(--mut);margin-top:3px;max-width:54ch}}
 
 /* PIZZA */
-.pizza-intro{{font-family:'Fraunces',serif;font-style:italic;color:var(--mut);font-size:.96rem;margin:8px 0 26px;max-width:760px}}
+.pizza-intro{{font-family:'Fraunces',serif;font-style:italic;color:var(--mut);font-size:.96rem;margin:8px 0 26px;max-width:56ch}}
 .pizza-group{{margin-bottom:40px}}
 .pizza-head{{display:flex;align-items:baseline;justify-content:space-between;gap:16px;flex-wrap:wrap;border-bottom:2px solid var(--line);padding-bottom:10px}}
 .pizza-head h3{{color:var(--gold);font-size:clamp(1.4rem,3vw,2rem)}}
