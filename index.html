@@ -85,7 +85,7 @@ section{scroll-margin-top:var(--navh)}
 nav{position:fixed;top:0;left:0;right:0;z-index:60;height:var(--navh);display:flex;align-items:center;transition:background .3s,box-shadow .3s;background:linear-gradient(180deg,rgba(21,17,13,.9),transparent)}
 nav.solid{background:rgba(21,17,13,.96);backdrop-filter:blur(12px);box-shadow:0 1px 0 var(--line)}
 .nav-in{max-width:var(--max);margin:0 auto;width:100%;display:flex;align-items:center;justify-content:space-between;padding:0 26px}
-.nav-brand{display:flex;align-items:center;gap:12px;text-decoration:none}
+.nav-brand{display:flex;align-items:center;gap:12px;min-height:44px;text-decoration:none}
 .nav-brand b{font-family:'Bevan',serif;color:var(--cream);font-size:1.32rem;letter-spacing:.02em;text-transform:uppercase;line-height:1}
 .nav-brand b span{color:var(--gold)}
 .links{display:flex;gap:30px;align-items:center}
@@ -172,7 +172,7 @@ nav.solid{background:rgba(21,17,13,.96);backdrop-filter:blur(12px);box-shadow:0 
 .tile .photo img{width:100%;height:100%;object-fit:cover;display:block}
 .tile .in{position:relative;padding:22px 20px;display:flex;flex-direction:column;flex:1}
 .tile .in::before{content:"";position:absolute;top:0;left:20px;right:20px;height:2px;background:repeating-linear-gradient(90deg,var(--tan) 0 11px,transparent 11px 20px)}
-.tile .tag{font-size:.72rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:9px}
+.tile .tag{font-size:.75rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:9px}
 .tile h3{font-family:'Bevan',serif;text-transform:uppercase;color:var(--cream);font-size:1.12rem;line-height:1.06;letter-spacing:.005em}
 .tile p{font-size:.85rem;color:var(--mut);margin:7px 0 11px}
 .tile .price{color:var(--gold);font-weight:800;font-size:1.05rem;margin-top:auto;padding-top:10px}
@@ -204,7 +204,7 @@ nav.solid{background:rgba(21,17,13,.96);backdrop-filter:blur(12px);box-shadow:0 
 .ev .ic{width:56px;height:56px;border-radius:14px;background:rgba(224,169,56,.12);display:flex;align-items:center;justify-content:center;margin-bottom:20px}
 .ev .ic svg{stroke:var(--gold)}
 .ev h3{font-family:'Bevan',serif;text-transform:uppercase;color:var(--cream);font-size:1.25rem;line-height:1.08;margin-bottom:8px}
-.ev .when{display:block;font-size:.74rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin-bottom:12px}
+.ev .when{display:block;font-size:.75rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin-bottom:12px}
 .ev p{font-size:.96rem}
 
 /* ============ REVIEWS CAROUSEL ============ */
@@ -217,12 +217,12 @@ nav.solid{background:rgba(21,17,13,.96);backdrop-filter:blur(12px);box-shadow:0 
 .car-slide blockquote{font-family:'Fraunces',serif;font-style:italic;font-weight:600;color:var(--cream);font-size:clamp(1.4rem,3.2vw,2.2rem);line-height:1.36}
 .car-slide cite{display:block;margin-top:22px;font-style:normal;font-weight:700;font-size:.8rem;letter-spacing:.16em;text-transform:uppercase;color:var(--gold)}
 .car-nav{display:flex;align-items:center;justify-content:center;gap:18px;margin-top:30px}
-.car-btn{width:48px;height:48px;border-radius:999px;border:1.5px solid var(--line);background:rgba(224,169,56,.06);color:var(--gold);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background .2s,border-color .2s,transform .15s}
+.car-btn{flex:0 0 48px;width:48px;height:48px;border-radius:999px;border:1.5px solid var(--line);background:rgba(224,169,56,.06);color:var(--gold);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background .2s,border-color .2s,transform .15s}
 .car-btn:hover{background:var(--gold);color:var(--char);border-color:var(--gold)}
 .car-btn:active{transform:scale(.92)}
-.car-dots{display:flex;align-items:center}
+.car-dots{display:flex;align-items:center;min-width:0}
 /* 44px hit area around a 9px visual dot */
-.car-dots button{position:relative;width:44px;height:44px;border:none;background:none;cursor:pointer;padding:0}
+.car-dots button{position:relative;width:44px;min-width:0;height:44px;border:none;background:none;cursor:pointer;padding:0}
 .car-dots button::before{content:"";position:absolute;top:50%;left:50%;width:9px;height:9px;border-radius:999px;background:rgba(224,169,56,.3);transform:translate(-50%,-50%);transition:background .2s,transform .2s}
 .car-dots button[aria-current="true"]::before{background:var(--gold);transform:translate(-50%,-50%) scale(1.35)}
 
@@ -231,7 +231,7 @@ nav.solid{background:rgba(21,17,13,.96);backdrop-filter:blur(12px);box-shadow:0 
 .visit h2{font-size:clamp(2rem,4.4vw,3rem);color:var(--cream);margin:12px 0 18px}
 .visit h2 .accent{color:var(--gold);text-transform:none}
 .visit .addr{color:var(--cream);font-weight:600;line-height:1.85;margin:0 0 26px}
-.visit .addr a{color:var(--gold)}
+.visit .addr a{color:var(--gold);display:inline-block;padding:11px 0;margin:-11px 0}
 .vbtns{display:flex;gap:12px;flex-wrap:wrap}
 .hours{width:100%;border-collapse:collapse;background:var(--char3);border:1px solid var(--line);border-radius:18px;overflow:hidden}
 .hours caption{font-family:'Bevan',serif;text-transform:uppercase;color:var(--gold);text-align:left;padding:20px 24px 6px;font-size:1.2rem;letter-spacing:.03em}
@@ -283,6 +283,7 @@ footer{background:#0C0907;border-top:1px solid var(--line);padding:64px 26px 28p
   .burger{display:flex}
 }
 @media (max-width:720px){
+  .car-nav{gap:6px}
   .nav-brand b{font-size:1.15rem}
   .tiles{grid-template-columns:1fr}
   .tile .photo{aspect-ratio:16/10}

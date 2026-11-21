@@ -55,17 +55,39 @@ const SECURITY = {
 // Never serve infrastructure / source files, or any dotfile (blocks .git, .env, etc.).
 // Belt and braces: anything whose extension isn't in TYPES is also refused below,
 // so .md / .py / extensionless strays can't leak even if this list goes stale.
-const BLOCKED = new Set(["server.js", "package.json", "package-lock.json", ".gitignore", "CLAUDE.md"]);
-// Top-level folders that hold tooling, not site content (menu generators live in ops/).
-const BLOCKED_DIRS = new Set(["ops"]);
+// Names are compared lower-cased, so /Server.js or /OPS/ can't slip past on a
+// case-insensitive filesystem (macOS dev machines; Railway's Linux is case-sensitive).
+const BLOCKED = new Set(["server.js", "package.json", "package-lock.json", ".gitignore", "claude.md"]);
+// Top-level folders that are never site content: ops/ holds the menu generators, client/
+// holds client material (gitignored, so it isn't deployed — blocked here as a second lock).
+const BLOCKED_DIRS = new Set(["ops", "client"]);
 
 function notFound(res) {
   res.writeHead(404, { "Content-Type": "text/html; charset=utf-8", ...SECURITY });
   res.end("<h1>404 — Not Found</h1>");
 }
 
+function methodNotAllowed(res) {
+  res.writeHead(405, { "Content-Type": "text/html; charset=utf-8", Allow: "GET, HEAD", ...SECURITY });
+  res.end("<h1>405 — Method Not Allowed</h1>");
+}
+
+// Last line of defence: nothing a visitor sends may take the process down.
+// Any unexpected throw becomes a 404 (or a dropped connection if the reply had begun).
+function guard(res, fn) {
+  try {
+    fn();
+  } catch {
+    if (res.headersSent) res.destroy();
+    else notFound(res);
+  }
+}
+
 http
-  .createServer((req, res) => {
+  .createServer((req, res) => guard(res, () => {
+    // A static site only ever needs to be read.
+    if (req.method !== "GET" && req.method !== "HEAD") return methodNotAllowed(res);
+
     // strip query string, prevent directory traversal
     let urlPath;
     try {
@@ -73,6 +95,8 @@ http
     } catch {
       return notFound(res); // malformed %-escape: a thrown URIError here would kill the process
     }
+    // A NUL byte (%00) makes every fs call throw synchronously — refuse it up front.
+    if (urlPath.includes("\0")) return notFound(res);
     // Root path: serve the holding page when COMING_SOON is on, else the real site.
     // (index.html and every other page stay directly reachable for previewing.)
     if (urlPath === "/") urlPath = COMING_SOON ? "/coming-soon.html" : "/index.html";
@@ -80,17 +104,20 @@ http
 
     // Block dotfiles (.git, .env, .gitignore …) and named infra files.
     const segments = safePath.split(/[/\\]/).filter(Boolean);
+    const lower = segments.map((s) => s.toLowerCase());
     if (
-      segments.some((s) => s.startsWith(".")) ||
-      BLOCKED_DIRS.has(segments[0]) ||
-      BLOCKED.has(path.basename(safePath))
+      lower.some((s) => s.startsWith(".")) ||
+      BLOCKED_DIRS.has(lower[0]) ||
+      BLOCKED.has(lower[lower.length - 1])
     ) {
       return notFound(res);
     }
 
     let filePath = path.join(ROOT, safePath);
+    // Whatever the path tricks, the resolved file must sit inside this folder.
+    if (!filePath.startsWith(ROOT + path.sep)) return notFound(res);
 
-    fs.stat(filePath, (err, stat) => {
+    fs.stat(filePath, (err, stat) => guard(res, () => {
       // pretty URLs: /menu -> /menu.html
       if (err || stat.isDirectory()) {
         const withHtml = filePath.replace(/\/$/, "") + ".html";
@@ -129,7 +156,9 @@ http
       // Content-Length is required by strict crawlers (Apple/iMessage link previews)
       // to render social cards; a chunked/no-length response degrades to a plain card.
       res.writeHead(200, { ...headers, "Content-Length": String(stat.size) });
-      fs.createReadStream(filePath).pipe(res);
-    });
-  })
+      if (req.method === "HEAD") return res.end();
+      // A file that vanishes mid-read must not become an unhandled stream error.
+      fs.createReadStream(filePath).on("error", () => res.destroy()).pipe(res);
+    }));
+  }))
   .listen(PORT, () => console.log(`Winchester Grill site live on :${PORT}`));

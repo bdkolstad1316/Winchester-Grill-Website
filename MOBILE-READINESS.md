@@ -1,85 +1,47 @@
 # Mobile Readiness Report: winchestergrill.com
 
-**Overall: B** — Fast, readable, no layout bugs; tap targets and caching fixed, a few small labels remain.
+**Overall: B** — Fast, readable, thumb-friendly; only page weight on the home page keeps it from an A.
 
-Audited 2026-10-11 against https://winchestergrill.com (home) and https://winchestergrill.com/menu.html; items 1–5, 7 and 8 below were fixed the same day and re-measured in the browser. Static analysis plus a headless-browser pass at 375×812 (iPhone-size) to measure rendered tap targets, text sizes, and overflow. Not a real-device test.
+Audited 2026-11-21 against https://winchestergrill.com (home) and https://winchestergrill.com/menu.html. Static analysis plus a browser pass at 375×812 and 320×640 to measure rendered tap targets, text sizes and overflow. Not a real-device test. Grades reflect the fixes made during this audit, which go live with the next deploy.
 
 ## Grades
 
 | Category | Grade | Summary |
 |---|---|---|
-| Viewport & Layout | A | Correct viewport, no horizontal scroll at 375px |
-| Tap Targets | B | All measured targets now ≥44px; device check recommended |
-| Typography | B | 16px Lora body; a few labels dip under 12px |
+| Viewport & Layout | A | Correct viewport; no horizontal scroll at 375px or 320px |
+| Tap Targets | A | Every button and call link measures 43×44px or larger |
+| Typography | A | 16px Lora body; all labels now 12px or larger |
 | Forms | N/A | No forms by design — every contact path is a phone link |
-| Performance | B | First paint ~555KB (one hero photo); photos cached a day |
-| Navigation & Interaction | A | Sticky Call bar on both pages; content readable without JS |
+| Performance | B | Home ~420KB before load, ~640KB all-in; menu ~460KB |
+| Navigation & Interaction | A | Sticky Call bar on both pages; readable without JavaScript |
 
 ## Punch List
 
-Ordered by impact — fix top-down. Items 1–5 and 7 are done (measured at 375px: dots 44×44, footer links 44px tall, chips 44px, menu sticky bar showing with 50px buttons, hero slides 2–3 requested only after the load event, assets cached 24h with ETag revalidation). Only item 6 (small labels) remains open.
+Ordered by impact — fix top-down.
 
-### 1. ✅ FIXED — Navigation — Menu page has no sticky "Call to Order" bar
-**Current:** `index.html` has the `.mobile-order` bar (Call + Menu, 50px buttons, safe-area padding) pinned to the bottom on phones. `menu.html` does not. On the page people read longest, the only call buttons are inside the hamburger menu or at the very bottom (`.menu-cta`), roughly 1,400px of scrolling away.
-**Fix:** In `ops/build_menu_page.py`, add the same block before `<script>` and the matching CSS (`.mobile-order{…}` plus `@media (max-width:720px){.mobile-order{display:flex} body{padding-bottom:74px}}`), with the second button pointing to `index.html` instead of `menu.html`. Regenerate `menu.html`. Call tracking already tags it as `mobile-bar` — no extra wiring.
-**Why it matters:** The site's one job is to make the phone ring; on the menu page the phone number is hidden for the entire read.
+### 1. Performance — Two below-the-fold photos load immediately on the home page
+**Current:** `index.html` sets `background-image` inline on `.feature` (`cooked-pepperoni.webp`, 86KB) and `.story-img` (`story-interior.webp`, 136KB). Both sit well below the first screen but download before the page finishes loading — 222KB of the 420KB a phone fetches up front.
+**Fix:** Give them the same treatment as hero slides 2–3: move the URL to `data-bg` and let the existing `load` handler in the inline script attach it (`document.querySelectorAll('[data-bg]')` instead of `.slide[data-bg]`). Optionally serve a 750px-wide `story-interior` for phones.
+**Why it matters:** Cuts what a phone downloads before the page is usable roughly in half, which is felt on campground cellular.
 
-### 2. ✅ FIXED — Tap Targets — Review carousel dots are 9×9px
-**Current:** `index.html` `.car-dots button{width:9px;height:9px}` — five `role="tab"` buttons at 9px with 10px gaps. Measured 9×9 in the browser. Apple and WCAG both want 44px.
-**Fix:** Keep the visual dot but grow the hit area:
-```css
-.car-dots button{width:44px;height:44px;background:none;position:relative}
-.car-dots button::before{content:"";position:absolute;inset:50% auto auto 50%;width:9px;height:9px;transform:translate(-50%,-50%);border-radius:999px;background:rgba(224,169,56,.3);transition:background .2s,transform .2s}
-.car-dots button[aria-current="true"]::before{background:var(--gold);transform:translate(-50%,-50%) scale(1.35)}
-.car-dots{gap:0}
-```
-**Why it matters:** A thumb can't land on a 9px dot; people hit the wrong review or nothing.
+### 2. Typography — The "Most Loved" stamp renders at 9.3px
+**Current:** `.mi-stamp` in `ops/build_menu_page.py` (the inked stamp beside Banana Cream Pie on the menu).
+**Fix:** Raise its `font-size` to `.75rem` inside the `@media (max-width:820px)` block.
+**Why it matters:** It is decoration rather than information, so this is cosmetic — but it is the one piece of text on the site under 12px.
 
-### 3. ✅ FIXED — Tap Targets — Footer links are 19px tall with 8px gaps
-**Current:** `.foot ul{gap:8px}` and `.foot a` are plain inline links; measured 19px tall on both pages (Menu, Pizza, Events & Catering, Facebook, phone number, "← Back to home").
-**Fix:** `index.html` and the footer in `ops/build_menu_page.py`:
-```css
-.foot a{display:inline-block;padding:10px 0;margin:-10px 0}
-```
-(or `.foot ul{gap:16px}` plus `padding:6px 0` on the links). Target ≥44px row height.
-**Why it matters:** The footer phone number is one of the tracked call paths; stacked 19px links mis-tap.
+## Fixed during this audit
 
-### 4. ✅ FIXED — Tap Targets — Menu section chips are 40px tall
-**Current:** `.subnav a{padding:8px 16px;font-size:.82rem}` in `ops/build_menu_page.py` renders 40px-tall pills in the sticky bar (measured).
-**Fix:** `padding:10px 16px` → 44px. The bar is already horizontally scrollable, so width is fine.
-**Why it matters:** The chips are the primary way to jump around a long menu; 4px short of the guideline is a cheap win.
-
-### 5. ✅ FIXED — Performance — All three hero slides download before first paint
-**Current:** `index.html` sets `background-image` on all three `.slide` divs (hero-burger 77KB, hero-pizza 102KB, hero-wings 81KB = 260KB), so the browser fetches all three immediately even though slides 2–3 don't appear for 8 and 16 seconds. With the feature band (86KB) and story photo (136KB) also eager, the home page is ~815KB of first-party bytes — the audit script's 381KB figure counts only `<img>` tags.
-**Fix:** Leave slide 1 inline; set slides 2–3 from the script after `load`:
-```js
-addEventListener('load',()=>{document.querySelectorAll('.slide[data-bg]').forEach(s=>{s.style.backgroundImage='url('+s.dataset.bg+')'})});
-```
-with `<div class="slide" data-bg="assets/hero-pizza.webp"></div>`. Optionally serve a 750px-wide crop of `story-interior.webp` for phones via a `@media (max-width:720px)` background rule.
-**Why it matters:** 81% of visitors are on phones, often on cellular near the lake; ~180KB less before the hero shows.
-
-### 6. Typography — Labels render below 12px
-**Current (measured at 375px):** `.tile .tag` and `.feat-label` at `.72rem` = 11.5px; `.ev .when` and the menu `.kicker` at `.74rem` = 11.8px; `.mi-stamp` ("Most Loved") at 9.3px.
-**Fix:** `.72rem`/`.74rem` → `.75rem` (12px) in `index.html` and `ops/build_menu_page.py`; `.mi-stamp` font-size up to at least `.7rem` at the mobile breakpoint.
-**Why it matters:** These are tracked-uppercase labels, so legibility is already tight; 12px is the floor.
-
-### 7. ✅ FIXED — Performance — Images still on the pre-launch 5-minute cache
-**Current:** `server.js` sends `Cache-Control: public, max-age=300` on every asset, with a comment to raise it before launch.
-**Fix:** For `/assets/`, `max-age=31536000, immutable` and bump a `?v=` query (the og-image already uses `?v=1`) or the filename when a photo changes.
-**Why it matters:** Repeat visitors re-download ~700KB of photos every five minutes instead of using cache.
-
-### 8. ✅ FIXED — Navigation — Content is hidden until JavaScript runs
-**Current:** `.fade-up{opacity:0}` is applied unconditionally in `index.html`; every section below the hero only appears once the inline script's IntersectionObserver fires. The hamburger menu is also an `onclick` toggle with no non-JS fallback.
-**Fix:** Add `document.documentElement.classList.add('js')` as the first line of the script and scope the rule to `.js .fade-up{opacity:0;…}`. The menu is acceptable as-is because the sticky bar and in-page links cover every destination.
-**Why it matters:** One syntax error in the single inline block (or a blocked script) leaves phones showing a hero and a blank dark page.
+- Review-carousel arrows were being squeezed to 34px wide on phones; now a fixed 48×48 (dots stay 43×44 at 375px, 32×44 on a 320px screen).
+- The phone number in the Visit section and the logo link in the nav were 18–20px tall; both are now 44px or taller.
+- Small uppercase labels (`.tile .tag`, `.ev .when`, the menu `.kicker` and `.feat-label`) raised from 11.5–11.8px to 12px.
 
 ## What's solid
 
-- No horizontal overflow at 375px on either page; the viewport tag is correct and doesn't block zoom. The audit script's "9 oversize fixed widths" are `max-width` tokens, not real fixed widths.
-- The call paths that matter are big: 56px full-width CTAs, 48px hamburger and carousel arrows, 50px sticky bar buttons with safe-area padding on the home page.
-- Every `<img>` is WebP with explicit `width`/`height` and `loading="lazy"`; zero render-blocking scripts; fonts use `display=swap`. The menu page comes in around 415KB.
-- 16px Lora body with 1.65 line-height, readable on a phone without zooming.
+- Call paths are impossible to miss: 56px full-width buttons in the hero, a sticky Call bar on both pages, and a tappable number in the nav, billboard, Visit section and footer.
+- No horizontal scrolling at any phone width tested; zoom is not blocked.
+- Every photo is WebP with explicit dimensions and lazy loading; no render-blocking scripts; only one hero photo loads before the page is ready.
+- If JavaScript fails, the whole page is still readable and every call link still works.
 
 ## Verification
 
-After applying fixes, re-run: `python3 mobile-readiness/scripts/audit.py https://winchestergrill.com` or retest at [pagespeed.web.dev](https://pagespeed.web.dev). A real-device check of the carousel dots and menu chips is still recommended before forwarding.
+After applying fixes, re-run: `python3 mobile-readiness/scripts/audit.py https://winchestergrill.com` or retest at [pagespeed.web.dev](https://pagespeed.web.dev). A thumb test on a real phone is still worth thirty seconds.
