@@ -157,12 +157,18 @@ nav.solid{background:rgba(21,17,13,.96);backdrop-filter:blur(12px);box-shadow:0 
 @keyframes bob{0%,100%{transform:translate(-50%,0)}50%{transform:translate(-50%,8px)}}
 
 /* ============ TICKER BAND ============ */
-.ticker{background:var(--gold);color:var(--char);overflow:hidden;white-space:nowrap;border-top:3px solid var(--char);border-bottom:3px solid var(--char)}
+.ticker{position:relative;background:var(--gold);color:var(--char);overflow:hidden;white-space:nowrap;border-top:3px solid var(--char);border-bottom:3px solid var(--char);cursor:pointer}
 .ticker .run{display:inline-block;padding:14px 0;animation:scrollx 28s linear infinite}
 .ticker span{font-family:'Bevan',serif;text-transform:uppercase;font-size:1.05rem;letter-spacing:.04em;margin:0 28px}
 .ticker .dot{color:var(--ember)}
 @keyframes scrollx{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
-@media (prefers-reduced-motion:reduce){.ticker .run{animation:none;padding-left:26px}}
+/* Anything that moves for more than a few seconds needs a way to stop it: hovering
+   pauses, a click or tap toggles, and keyboard users get a button that appears on focus. */
+.ticker.paused .run{animation-play-state:paused}
+@media (hover:hover){.ticker:hover .run{animation-play-state:paused}}
+.ticker-pause{position:absolute;left:14px;top:50%;transform:translateY(-50%);z-index:1;opacity:0;pointer-events:none;background:var(--char);color:var(--cream);border:0;border-radius:999px;padding:11px 18px;font:700 .82rem/1 'Lora',serif;letter-spacing:.03em;cursor:pointer}
+.ticker-pause:focus-visible{opacity:1;pointer-events:auto;outline-color:var(--char)}
+@media (prefers-reduced-motion:reduce){.ticker{cursor:auto}.ticker .run{animation:none;padding-left:26px}.ticker-pause{display:none}}
 
 /* ============ CALL-TO-ORDER BILLBOARD ============ */
 .callbar{background:var(--char2);border-top:3px solid var(--gold);border-bottom:3px solid var(--gold);text-align:center;padding:60px 24px}
@@ -373,8 +379,9 @@ footer{background:var(--deep);border-top:1px solid var(--line);padding:64px 26px
 </header>
 
 <!-- TICKER -->
-<div class="ticker" aria-hidden="true">
-  <div class="run">
+<div class="ticker">
+  <button class="ticker-pause" type="button" aria-pressed="false">Pause scrolling banner</button>
+  <div class="run" aria-hidden="true">
     <span>Take &amp; Bake Pizza To Go <span class="dot">●</span></span><span>Full Bar <span class="dot">●</span></span><span>Families Welcome <span class="dot">●</span></span><span>Pool · Darts · Big-Screen Games <span class="dot">●</span></span><span>4.7★ · 212 Reviews <span class="dot">●</span></span>
     <span>Take &amp; Bake Pizza To Go <span class="dot">●</span></span><span>Full Bar <span class="dot">●</span></span><span>Families Welcome <span class="dot">●</span></span><span>Pool · Darts · Big-Screen Games <span class="dot">●</span></span><span>4.7★ · 212 Reviews <span class="dot">●</span></span>
   </div>
@@ -612,6 +619,17 @@ document.querySelectorAll('.fade-up').forEach(el=>io.observe(el));
 const closeNav=()=>{document.getElementById('nav-links').classList.remove('open');document.querySelector('.burger').setAttribute('aria-expanded','false')};
 document.querySelectorAll('.links a').forEach(a=>a.addEventListener('click',closeNav));
 addEventListener('keydown',e=>{if(e.key==='Escape')closeNav()});
+
+/* Ticker: a click or tap anywhere on the band (or the focus-revealed button) toggles it. */
+(function(){
+  const t=document.querySelector('.ticker');if(!t)return;
+  const b=t.querySelector('.ticker-pause');
+  t.addEventListener('click',()=>{
+    const p=t.classList.toggle('paused');
+    b.setAttribute('aria-pressed',p);
+    b.textContent=p?'Resume scrolling banner':'Pause scrolling banner';
+  });
+})();
 
 /* Tag today's row in the hours table (rows run Monday..Sunday; getDay() is Sunday=0). */
 (function(){const rows=document.querySelectorAll('.hours tr');const r=rows[(new Date().getDay()+6)%7];if(r)r.classList.add('today')})();
