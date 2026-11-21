@@ -206,7 +206,7 @@ HTML = f'''<!DOCTYPE html>
 <style>
 :root{{--char:#15110D;--char2:#1F1812;--char3:#2A2118;--gold:#E0A938;--gold-d:#B9852A;--ember:#B84426;--cream:#F8F1E4;--mut:#C8BBA4;--mut-2:#A39679;--deep:#0C0907;--on-gold:#4A3718;--line:rgba(224,169,56,.26);--max:1180px;--navh:78px;--subh:59px}}
 *{{margin:0;padding:0;box-sizing:border-box}}
-html{{scroll-behavior:smooth}}
+@media (prefers-reduced-motion:no-preference){{html{{scroll-behavior:smooth}}}}
 body{{font-family:'Lora',serif;font-size:16px;text-size-adjust:100%;-webkit-text-size-adjust:100%;background:var(--char);color:var(--mut);line-height:1.65;-webkit-tap-highlight-color:rgba(224,169,56,.2);overflow-x:hidden}}
 a{{color:inherit}}
 .display{{font-family:'Bevan',serif;font-weight:400;text-transform:uppercase;letter-spacing:.01em;line-height:.95}}
@@ -446,7 +446,7 @@ addEventListener('keydown',e=>{{if(e.key==='Escape')closeNav()}});
       if(!el)return;
       e.preventDefault();
       var y=el.getBoundingClientRect().top+window.pageYOffset-offset();
-      window.scrollTo({{top:y,behavior:'smooth'}});
+      window.scrollTo({{top:y,behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'}});
       history.replaceState(null,'',a.getAttribute('href'));
     }});
   }});

@@ -81,7 +81,7 @@
   --navh:78px;
 }
 *{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
 body{font-family:'Lora',serif;font-size:16px;text-size-adjust:100%;-webkit-text-size-adjust:100%;background:var(--char);color:var(--mut);line-height:1.65;-webkit-tap-highlight-color:rgba(224,169,56,.2);overflow-x:hidden}
 img{max-width:100%;display:block}
 section{scroll-margin-top:var(--navh)}
@@ -217,7 +217,6 @@ nav.solid{background:rgba(21,17,13,.96);backdrop-filter:blur(12px);box-shadow:0 
 .ev .ic{width:56px;height:56px;border-radius:14px;background:rgba(224,169,56,.12);display:flex;align-items:center;justify-content:center;margin-bottom:20px}
 .ev .ic svg{stroke:var(--gold)}
 .ev h3{font-family:'Bevan',serif;text-transform:uppercase;color:var(--cream);font-size:1.25rem;line-height:1.08;margin-bottom:8px}
-.ev .when{display:block;font-size:.75rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin-bottom:12px}
 .ev p{font-size:.96rem}
 
 /* ============ REVIEWS CAROUSEL ============ */
@@ -248,12 +247,12 @@ nav.solid{background:rgba(21,17,13,.96);backdrop-filter:blur(12px);box-shadow:0 
 .vbtns{display:flex;gap:12px;flex-wrap:wrap}
 .hours{width:100%;border-collapse:collapse;background:var(--char3);border:1px solid var(--line);border-radius:18px;overflow:hidden}
 .hours caption{font-family:'Bevan',serif;text-transform:uppercase;color:var(--gold);text-align:left;padding:20px 24px 6px;font-size:1.2rem;letter-spacing:.03em}
-.hours td{padding:13px 24px;border-top:1px solid rgba(224,169,56,.14);font-size:.98rem}
-.hours td:first-child{color:var(--cream);font-weight:600}
-.hours td:last-child{text-align:right}
-.hours .today td{background:rgba(224,169,56,.1)}
-.hours .today td:first-child::after{content:"Today";float:none;margin-left:8px;font-size:.64rem;letter-spacing:.14em;text-transform:uppercase;background:var(--gold);color:var(--char);padding:2px 8px;border-radius:999px;vertical-align:middle}
-.hours .closed td:last-child{color:var(--mut-2)}
+.hours th,.hours td{padding:13px 24px;border-top:1px solid rgba(224,169,56,.14);font-size:.98rem}
+.hours th{color:var(--cream);font-weight:600;text-align:left}
+.hours td{text-align:right}
+.hours .today th,.hours .today td{background:rgba(224,169,56,.1)}
+.hours .today th::after{content:"Today";float:none;margin-left:8px;font-size:.64rem;letter-spacing:.14em;text-transform:uppercase;background:var(--gold);color:var(--char);padding:2px 8px;border-radius:999px;vertical-align:middle}
+.hours .closed td{color:var(--mut-2)}
 
 /* ============ FOOTER ============ */
 footer{background:var(--deep);border-top:1px solid var(--line);padding:64px 26px 28px}
@@ -457,15 +456,13 @@ footer{background:var(--deep);border-top:1px solid var(--line);padding:64px 26px
     <div class="evgrid">
       <div class="ev fade-up">
         <div class="ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/><circle cx="9" cy="7" r="4"/></svg></div>
-        <span class="when">Book Anytime</span>
         <h3>Private Events</h3>
-        <p>Main room, outdoor venue, catering, and the full bar — birthdays to reunions to holiday parties.</p>
+        <p>Book anytime. Main room, outdoor venue, catering, and the full bar — birthdays to reunions to holiday parties.</p>
       </div>
       <div class="ev fade-up">
         <div class="ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M14 16V4a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12M14 9h4l3 3v4M5 16h9M1 16h.01"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></div>
-        <span class="when">Out-of-Towners</span>
         <h3>RV Parking + Power</h3>
-        <p>Room out back for the rigs, hookups included. Roll in off the highway and stay a while.</p>
+        <p>For out-of-towners: room out back for the rigs, hookups included. Roll in off the highway and stay a while.</p>
       </div>
     </div>
   </div>
@@ -531,13 +528,13 @@ footer{background:var(--deep);border-top:1px solid var(--line);padding:64px 26px
     <div class="fade-up">
       <table class="hours">
         <caption>Hours</caption>
-        <tr><td>Monday</td><td>3 PM – 9 PM</td></tr>
-        <tr class="closed"><td>Tuesday</td><td>Closed</td></tr>
-        <tr class="closed"><td>Wednesday</td><td>Closed</td></tr>
-        <tr><td>Thursday</td><td>11 AM – 9 PM</td></tr>
-        <tr><td>Friday</td><td>11 AM – 9 PM</td></tr>
-        <tr><td>Saturday</td><td>11 AM – 9 PM</td></tr>
-        <tr><td>Sunday</td><td>11 AM – 9 PM</td></tr>
+        <tr><th scope="row">Monday</th><td>3 PM – 9 PM</td></tr>
+        <tr class="closed"><th scope="row">Tuesday</th><td>Closed</td></tr>
+        <tr class="closed"><th scope="row">Wednesday</th><td>Closed</td></tr>
+        <tr><th scope="row">Thursday</th><td>11 AM – 9 PM</td></tr>
+        <tr><th scope="row">Friday</th><td>11 AM – 9 PM</td></tr>
+        <tr><th scope="row">Saturday</th><td>11 AM – 9 PM</td></tr>
+        <tr><th scope="row">Sunday</th><td>11 AM – 9 PM</td></tr>
       </table>
     </div>
   </div>
@@ -615,13 +612,13 @@ addEventListener('keydown',e=>{if(e.key==='Escape')closeNav()});
   const track=document.getElementById('carTrack');
   if(!track)return;
   const slides=[...track.children], dots=document.getElementById('carDots');
-  let i=0, timer=null;
+  let i=0, timer=null, stopped=false;
   const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
   slides.forEach((_,n)=>{
     const b=document.createElement('button');
     b.setAttribute('role','tab');
     b.setAttribute('aria-label','Review '+(n+1));
-    b.addEventListener('click',()=>{go(n);restart()});
+    b.addEventListener('click',()=>{go(n);stop()});
     dots.appendChild(b);
   });
   function go(n){
@@ -630,17 +627,20 @@ addEventListener('keydown',e=>{if(e.key==='Escape')closeNav()});
     [...dots.children].forEach((d,k)=>d.setAttribute('aria-current',k===i?'true':'false'));
   }
   function next(){go(i+1)}
-  function restart(){if(reduce)return;clearInterval(timer);timer=setInterval(next,6000)}
-  document.getElementById('carNext').addEventListener('click',()=>{next();restart()});
-  document.getElementById('carPrev').addEventListener('click',()=>{go(i-1);restart()});
+  function restart(){if(reduce||stopped)return;clearInterval(timer);timer=setInterval(next,6000)}
+  /* Once a visitor touches, swipes or uses the arrows or dots, they are reading at their
+     own pace: stop rotating for the rest of the visit. Hover and focus only pause. */
+  function stop(){stopped=true;clearInterval(timer)}
+  document.getElementById('carNext').addEventListener('click',()=>{next();stop()});
+  document.getElementById('carPrev').addEventListener('click',()=>{go(i-1);stop()});
   const car=track.closest('.carousel');
   car.addEventListener('mouseenter',()=>clearInterval(timer));
   car.addEventListener('mouseleave',restart);
   car.addEventListener('focusin',()=>clearInterval(timer));
   car.addEventListener('focusout',restart);
   let x0=null;
-  car.addEventListener('touchstart',e=>x0=e.touches[0].clientX,{passive:true});
-  car.addEventListener('touchend',e=>{if(x0===null)return;const dx=e.changedTouches[0].clientX-x0;if(Math.abs(dx)>40){dx<0?next():go(i-1);restart()}x0=null},{passive:true});
+  car.addEventListener('touchstart',e=>{x0=e.touches[0].clientX;stop()},{passive:true});
+  car.addEventListener('touchend',e=>{if(x0===null)return;const dx=e.changedTouches[0].clientX-x0;if(Math.abs(dx)>40){dx<0?next():go(i-1)}x0=null},{passive:true});
   go(0);restart();
 })();
 
