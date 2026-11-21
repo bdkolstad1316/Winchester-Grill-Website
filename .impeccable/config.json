@@ -13,6 +13,66 @@
         ],
         "createdAt": "2026-11-21T18:36:00.707Z",
         "reason": "Claude: false positive from the source-file scan. The Events icons sit beside their headings via CSS grid; the rendered scan of the page raises no icon-tile-stack finding (checked 2026-11-21)."
+      },
+      {
+        "rule": "overused-font",
+        "value": "fraunces",
+        "createdAt": "2026-11-21T18:45:23.434Z",
+        "reason": "Sanctioned brand choice: the project CLAUDE.md names Fraunces italic as the Winchester Grill accent face (Bevan display, Lora body, Fraunces italic accent). It sets one phrase inside Bevan headings, not the headline face."
+      },
+      {
+        "rule": "italic-serif-display",
+        "value": "*",
+        "files": [
+          "index.html"
+        ],
+        "createdAt": "2026-11-21T18:45:30.069Z",
+        "reason": "Sanctioned brand choice: the project CLAUDE.md names Fraunces italic as the Winchester Grill accent face. It sets one phrase inside Bevan headings, not the headline face."
+      },
+      {
+        "rule": "italic-serif-display",
+        "value": "*",
+        "files": [
+          "menu.html"
+        ],
+        "createdAt": "2026-11-21T18:45:30.084Z",
+        "reason": "Sanctioned brand choice: the project CLAUDE.md names Fraunces italic as the Winchester Grill accent face. It sets one phrase inside Bevan headings, not the headline face."
+      },
+      {
+        "rule": "italic-serif-display",
+        "value": "*",
+        "files": [
+          "coming-soon.html"
+        ],
+        "createdAt": "2026-11-21T18:45:30.097Z",
+        "reason": "Sanctioned brand choice: the project CLAUDE.md names Fraunces italic as the Winchester Grill accent face. It sets one phrase inside Bevan headings, not the headline face."
+      },
+      {
+        "rule": "marquee",
+        "value": "*",
+        "files": [
+          "index.html"
+        ],
+        "createdAt": "2026-11-21T18:46:35.441Z",
+        "reason": "Brian confirmed 2026-11-21: keep the scrolling ticker. It is decorative, aria-hidden, stops under reduced motion, and its facts appear elsewhere on the page."
+      },
+      {
+        "rule": "cramped-padding",
+        "value": "*",
+        "files": [
+          "index.html"
+        ],
+        "createdAt": "2026-11-21T18:46:35.454Z",
+        "reason": "Brian confirmed 2026-11-21: keep the scrolling ticker. A full-bleed marquee is meant to run to the edges of its band."
+      },
+      {
+        "rule": "repeating-stripes-gradient",
+        "value": "*",
+        "files": [
+          "index.html"
+        ],
+        "createdAt": "2026-11-21T18:46:35.468Z",
+        "reason": "Brian confirmed 2026-11-21: keep the dashed stitch rule on the menu tiles; it echoes the leather-patch cap."
       }
     ]
   }

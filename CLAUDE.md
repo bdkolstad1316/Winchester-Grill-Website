@@ -75,6 +75,10 @@ public site.
   there); quiet text on dark uses `--mut-2`. Check contrast (4.5:1) before adding a colour.
 - **Accessibility wiring:** each page has a skip link and a `<main id="main">`; the hamburger
   carries `aria-expanded`/`aria-controls="nav-links"`. Keep those ids if the nav is reworked.
+- **Design-hook exceptions live in `.impeccable/config.json`.** Brian has confirmed three things
+  the impeccable detector dislikes as intentional: the Fraunces italic accent, the scrolling
+  gold ticker, and the dashed stitch line on the home-page tiles. Don't "fix" them, and don't
+  reintroduce small tracked-caps labels above headings; those were folded into the copy.
 - **Favicon set:** `favicon.ico` (root; 16/32/48), `assets/favicon-32.png`, `assets/apple-touch-icon.png`,
   `assets/icon-192.png` / `icon-512.png`, `site.webmanifest`. All generated from a Bevan "W" in
   gold on charcoal; regenerate the whole set together if the mark ever changes.
