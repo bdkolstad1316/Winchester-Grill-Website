@@ -88,8 +88,10 @@ public site.
   listener on every `tel:` link. Adding a call button anywhere needs no extra wiring.
 
 ## Rules for Claude
-- Pull before editing. Brian commits through GitHub Desktop and may have changed things.
-- Don't push to `main` without asking. A push is a deploy to a live client site.
+- Pull before editing. Brian may have committed through GitHub Desktop.
+- Don't push to `main` without asking. A push is a deploy to a live client site. Once Brian
+  says push, do it from the shell (`git push origin main` — the `gh` CLI is logged in, so
+  he doesn't need GitHub Desktop), then verify the live deploy.
 - Keep dependencies at zero unless there's a real reason; that's why this thing is fast.
 - Redesign work goes on a branch, not a `v2/` folder.
 - Brand: Bevan (display), Lora (body), Fraunces italic (accent); gold `#E0A938`,
