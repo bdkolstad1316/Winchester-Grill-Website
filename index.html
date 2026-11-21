@@ -21,6 +21,9 @@
 <meta property="og:image:alt" content="Winchester Grill — family bar & grill in Winchester, Idaho">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://winchestergrill.com/assets/og-image.jpg?v=1">
+<!-- The first hero photo is a CSS background, which browsers discover late; preloading it
+     starts the download with the HTML so the first screen paints sooner. -->
+<link rel="preload" as="image" href="assets/hero-burger.webp" type="image/webp" fetchpriority="high">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bevan&family=Fraunces:ital,opsz,wght@1,9..144,500;1,9..144,600&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
@@ -299,6 +302,7 @@ footer{background:#0C0907;border-top:1px solid var(--line);padding:64px 26px 28p
   .sec{padding:68px 0}
 }
 </style>
+<noscript><style>.feature{background-image:url('assets/cooked-pepperoni.webp')}.story-img{background-image:url('assets/story-interior.webp')}</style></noscript>
 </head>
 <body>
 
@@ -402,7 +406,7 @@ footer{background:#0C0907;border-top:1px solid var(--line);padding:64px 26px 28p
 </section>
 
 <!-- TAKE & BAKE FEATURE -->
-<section class="feature" id="takeandbake" style="background-image:url('assets/cooked-pepperoni.webp')">
+<section class="feature" id="takeandbake" data-bg="assets/cooked-pepperoni.webp">
   <div class="wrap">
     <div class="feature-card fade-up">
       <span class="kicker">Two ways to pizza</span>
@@ -419,7 +423,7 @@ footer{background:#0C0907;border-top:1px solid var(--line);padding:64px 26px 28p
 <!-- STORY -->
 <section class="sec sec-cream" id="story">
   <div class="wrap story">
-    <div class="story-img fade-up" style="background-image:url('assets/story-interior.webp')"></div>
+    <div class="story-img fade-up" data-bg="assets/story-interior.webp"></div>
     <div class="fade-up">
       <span class="kicker" style="color:var(--gold-d)">Since 2019 · Town est. 1900</span>
       <h2 class="display">Named for a stack of rifles. <span class="accent">Run on burgers.</span></h2>
@@ -568,10 +572,19 @@ addEventListener('scroll',()=>nav.classList.toggle('solid',scrollY>40),{passive:
 
 /* Hero slides 2-3: fetch their photos only once the page has loaded, and not at all
    when the user prefers reduced motion (the crossfade is off and only slide 1 shows). */
+const setBg=el=>{el.style.backgroundImage='url('+el.dataset.bg+')'};
 addEventListener('load',()=>{
   if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;
-  document.querySelectorAll('.slide[data-bg]').forEach(s=>{s.style.backgroundImage='url('+s.dataset.bg+')'});
+  document.querySelectorAll('.slide[data-bg]').forEach(setBg);
 });
+/* Below-the-fold background photos (take-and-bake band, story photo): fetched only as
+   the visitor scrolls toward them, about a screen and a half ahead. */
+(function(){
+  const els=document.querySelectorAll('[data-bg]:not(.slide)');
+  if(!('IntersectionObserver' in window)){els.forEach(setBg);return}
+  const bio=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){setBg(e.target);bio.unobserve(e.target)}}),{rootMargin:'150% 0px'});
+  els.forEach(el=>bio.observe(el));
+})();
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('vis');io.unobserve(e.target)}}),{threshold:.12});
 document.querySelectorAll('.fade-up').forEach(el=>io.observe(el));
 document.querySelectorAll('.links a').forEach(a=>a.addEventListener('click',()=>document.querySelector('.links').classList.remove('open')));
