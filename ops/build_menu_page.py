@@ -97,7 +97,7 @@ def item_row(nm, desc, price):
     stamp = (f'<span class="mi-stamp">{e(STAMPS[nm])}</span>'
              if nm in STAMPS else '')
     return (f'<div class="mi">'
-            f'<div class="mi-top"><span class="mi-name">{e(nm)}</span>{stamp}'
+            f'<div class="mi-top{" has-stamp" if stamp else ""}"><span class="mi-name">{e(nm)}</span>{stamp}'
             f'<span class="mi-dots"></span><span class="mi-price">{price_html}</span></div>{d}</div>')
 
 def feature_html(anchor):
@@ -108,7 +108,7 @@ def feature_html(anchor):
     aspect = f[4] if len(f) > 4 else None  # optional per-feature aspect (default 7:3 in CSS)
     if not os.path.exists(os.path.join(ASSETS_DIR, fn)):
         return ''  # graceful skip until the real photo is dropped in
-    style = f' style="aspect-ratio:{aspect}"' if aspect else ''
+    style = f' style="--ar:{aspect}"' if aspect else ''
     # Intrinsic width/height stop the page shifting while the banner loads.
     # CLAUDE.md rule: images ship with explicit width/height. Fail the build rather
     # than silently emit a dimensionless <img> and reintroduce layout shift.
@@ -254,8 +254,12 @@ nav{{position:fixed;top:0;left:0;right:0;z-index:60;height:var(--navh);display:f
 .sec-bar h2{{color:var(--gold);font-size:clamp(1.6rem,3.4vw,2.3rem)}}
 .sec-note{{font-family:'Fraunces',serif;font-style:italic;color:var(--mut);font-size:.96rem;margin:10px 0 22px;max-width:760px}}
 .menu-feature{{position:relative;border-radius:16px;overflow:hidden;margin:4px 0 32px;border:1px solid var(--line);background:var(--deep)}}
-.menu-feature img{{width:100%;aspect-ratio:7/3;object-fit:cover;display:block}}
-.menu-feature figcaption{{position:absolute;left:0;right:0;bottom:0;padding:22px 26px;background:linear-gradient(transparent,rgba(10,7,5,.92))}}
+/* height:auto matters: without it the <img> height attribute is a fixed pixel height and
+   aspect-ratio never applies (banners rendered 686px tall on phones). */
+.menu-feature img{{width:100%;height:auto;aspect-ratio:var(--ar,7/3);object-fit:cover;display:block}}
+/* The caption starts its text where the gradient is already ~80% dark, so the gold label
+   clears 4.5:1 even over a white plate. */
+.menu-feature figcaption{{position:absolute;left:0;right:0;bottom:0;padding:76px 26px 22px;background:linear-gradient(transparent,rgba(10,7,5,.8) 40%,rgba(10,7,5,.95))}}
 .menu-feature .feat-label{{display:block;font-size:.75rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:5px}}
 .menu-feature .feat-name{{font-family:'Bevan',serif;text-transform:uppercase;color:var(--cream);font-size:clamp(1.5rem,4vw,2.3rem);line-height:1}}
 .menu-feature .feat-tag{{display:block;margin-top:6px;font-size:.98rem;color:var(--mut)}}
@@ -317,13 +321,17 @@ footer{{background:var(--deep);border-top:1px solid var(--line);padding:54px 26p
 .legal .heart{{width:.95em;height:.95em;vertical-align:-.14em;margin:0 .12em;fill:var(--ember)}}
 
 @media (max-width:820px){{
+  /* Phones: a 16:9 photo with the caption on the card beneath it, not over it. */
+  .menu-feature img{{aspect-ratio:16/9}}
+  .menu-feature figcaption{{position:static;padding:16px 18px 18px;background:none}}
   .mi-grid{{grid-template-columns:1fr;gap:0}}
   .nav-brand b{{font-size:1.15rem}}
   /* On a phone the stamp drops to its own line under the dish name, so a readable
      12px stamp doesn't squeeze the name onto two lines. The zero-height ::after is
-     the line break; rows without a stamp are unaffected (row-gap is 0). */
-  .mi-top{{flex-wrap:wrap;gap:0 8px}}
-  .mi-top::after{{content:"";order:2;flex-basis:100%;height:0}}
+     the line break. Only rows that carry a stamp wrap: letting every row wrap sent
+     the price of long-named dishes onto a second line. */
+  .mi-top.has-stamp{{flex-wrap:wrap;gap:0 8px}}
+  .mi-top.has-stamp::after{{content:"";order:2;flex-basis:100%;height:0}}
   .mi-stamp{{order:3;margin:9px 0 3px 3px}}
 }}
 @media (max-width:920px){{

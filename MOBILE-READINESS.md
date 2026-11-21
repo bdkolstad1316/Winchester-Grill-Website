@@ -21,6 +21,7 @@ Nothing open. Everything this audit found was fixed the same day:
 
 - **Performance — below-the-fold photos.** The take-and-bake band and the story photo (222KB together) used to download with the page. They now load only as a visitor scrolls toward them, and the first hero photo is preloaded so the opening screen paints sooner. A phone that never scrolls fetches about 307KB; scrolling the whole home page brings it to about 765KB. The menu page is about 460KB.
 - **Tap targets.** Review-carousel arrows were squeezed to 34px wide on phones; now a fixed 48×48. The phone number in the Visit section and the logo link in the nav were 18–20px tall; both are now 44px or taller.
+- **Menu photo banners.** Found later the same day by a rendered-page audit: the four photo banners on the menu were rendering 686–900px tall on every screen, because their `height` attribute was acting as a fixed height. They now show as a 16:9 photo with the caption beneath on phones, and as wide strips on desktop. The price of long-named dishes also stays on the first line again.
 - **Typography.** Small uppercase labels raised from 11.5–11.8px to 12px. The "Most Loved" stamp on the menu went from 9px to 12px and sits on its own line under the dish name on phones, so the name and price stay on one row.
 
 ## What's solid

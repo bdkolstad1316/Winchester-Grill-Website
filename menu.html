@@ -1111,8 +1111,12 @@ nav{position:fixed;top:0;left:0;right:0;z-index:60;height:var(--navh);display:fl
 .sec-bar h2{color:var(--gold);font-size:clamp(1.6rem,3.4vw,2.3rem)}
 .sec-note{font-family:'Fraunces',serif;font-style:italic;color:var(--mut);font-size:.96rem;margin:10px 0 22px;max-width:760px}
 .menu-feature{position:relative;border-radius:16px;overflow:hidden;margin:4px 0 32px;border:1px solid var(--line);background:var(--deep)}
-.menu-feature img{width:100%;aspect-ratio:7/3;object-fit:cover;display:block}
-.menu-feature figcaption{position:absolute;left:0;right:0;bottom:0;padding:22px 26px;background:linear-gradient(transparent,rgba(10,7,5,.92))}
+/* height:auto matters: without it the <img> height attribute is a fixed pixel height and
+   aspect-ratio never applies (banners rendered 686px tall on phones). */
+.menu-feature img{width:100%;height:auto;aspect-ratio:var(--ar,7/3);object-fit:cover;display:block}
+/* The caption starts its text where the gradient is already ~80% dark, so the gold label
+   clears 4.5:1 even over a white plate. */
+.menu-feature figcaption{position:absolute;left:0;right:0;bottom:0;padding:76px 26px 22px;background:linear-gradient(transparent,rgba(10,7,5,.8) 40%,rgba(10,7,5,.95))}
 .menu-feature .feat-label{display:block;font-size:.75rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:5px}
 .menu-feature .feat-name{font-family:'Bevan',serif;text-transform:uppercase;color:var(--cream);font-size:clamp(1.5rem,4vw,2.3rem);line-height:1}
 .menu-feature .feat-tag{display:block;margin-top:6px;font-size:.98rem;color:var(--mut)}
@@ -1174,13 +1178,17 @@ footer{background:var(--deep);border-top:1px solid var(--line);padding:54px 26px
 .legal .heart{width:.95em;height:.95em;vertical-align:-.14em;margin:0 .12em;fill:var(--ember)}
 
 @media (max-width:820px){
+  /* Phones: a 16:9 photo with the caption on the card beneath it, not over it. */
+  .menu-feature img{aspect-ratio:16/9}
+  .menu-feature figcaption{position:static;padding:16px 18px 18px;background:none}
   .mi-grid{grid-template-columns:1fr;gap:0}
   .nav-brand b{font-size:1.15rem}
   /* On a phone the stamp drops to its own line under the dish name, so a readable
      12px stamp doesn't squeeze the name onto two lines. The zero-height ::after is
-     the line break; rows without a stamp are unaffected (row-gap is 0). */
-  .mi-top{flex-wrap:wrap;gap:0 8px}
-  .mi-top::after{content:"";order:2;flex-basis:100%;height:0}
+     the line break. Only rows that carry a stamp wrap: letting every row wrap sent
+     the price of long-named dishes onto a second line. */
+  .mi-top.has-stamp{flex-wrap:wrap;gap:0 8px}
+  .mi-top.has-stamp::after{content:"";order:2;flex-basis:100%;height:0}
   .mi-stamp{order:3;margin:9px 0 3px 3px}
 }
 @media (max-width:920px){
@@ -1322,7 +1330,7 @@ footer{background:var(--deep);border-top:1px solid var(--line);padding:54px 26px
 <section class="menu-sec" id="entrees">
   <div class="sec-bar"><h2 class="display">Entrees</h2></div>
   
-  <figure class="menu-feature"><img src="assets/featured-bite-size-steak.webp" alt="Bite Size Steak — Fresh mashed, garlic toast, soup or salad" loading="lazy" decoding="async" width="1600" height="900" style="aspect-ratio:16 / 9"><figcaption><span class="feat-label">Cut to Order</span><span class="feat-name">Bite Size Steak</span><span class="feat-tag">Fresh mashed, garlic toast, soup or salad</span></figcaption></figure>
+  <figure class="menu-feature"><img src="assets/featured-bite-size-steak.webp" alt="Bite Size Steak — Fresh mashed, garlic toast, soup or salad" loading="lazy" decoding="async" width="1600" height="900" style="--ar:16 / 9"><figcaption><span class="feat-label">Cut to Order</span><span class="feat-name">Bite Size Steak</span><span class="feat-tag">Fresh mashed, garlic toast, soup or salad</span></figcaption></figure>
   <div class="mi-grid">
 <div class="mi"><div class="mi-top"><span class="mi-name">Pulled Pork Mac and Cheese</span><span class="mi-dots"></span><span class="mi-price">$13.99</span></div></div>
 <div class="mi"><div class="mi-top"><span class="mi-name">Chicken Bacon Ranch Mac &amp; Cheese</span><span class="mi-dots"></span><span class="mi-price">$12.99</span></div></div>
@@ -1345,7 +1353,7 @@ footer{background:var(--deep);border-top:1px solid var(--line);padding:54px 26px
   <div class="mi-grid">
 <div class="mi"><div class="mi-top"><span class="mi-name">Brownie Delight</span><span class="mi-dots"></span><span class="mi-price">$5.99</span></div><p class="mi-desc">With ice cream and chocolate drizzle</p></div>
 <div class="mi"><div class="mi-top"><span class="mi-name">Raspberry Cheesecake</span><span class="mi-dots"></span><span class="mi-price">$6.99</span></div></div>
-<div class="mi"><div class="mi-top"><span class="mi-name">Banana Cream Pie</span><span class="mi-stamp">Most Loved</span><span class="mi-dots"></span><span class="mi-price">$6.99</span></div></div>
+<div class="mi"><div class="mi-top has-stamp"><span class="mi-name">Banana Cream Pie</span><span class="mi-stamp">Most Loved</span><span class="mi-dots"></span><span class="mi-price">$6.99</span></div></div>
 <div class="mi"><div class="mi-top"><span class="mi-name">Bowl of Ice Cream</span><span class="mi-dots"></span><span class="mi-price">$3.99</span></div><p class="mi-desc">Vanilla or Huckleberry</p></div>
   </div>
 </section>

@@ -66,6 +66,9 @@ public site.
   call tracking together, silently — the page still shows, un-animated. Run
   `node --check` on extracted inline scripts before committing. Don't verify with grep;
   grep will happily confirm broken code is "present."
+- **An `<img>` with `width`/`height` attributes needs `height:auto` (or an explicit CSS height).**
+  Without it the `height` attribute is a fixed pixel height and `aspect-ratio` is ignored.
+  That bug made the menu banners 686–900px tall on phones until Nov 2026.
 - **Images must stay WebP with explicit `width`/`height`.** Both pages hold an A mobile
   grade (372KB home / 450KB menu). Dropping in a full-size JPEG without dimensions costs
   the grade and reintroduces layout shift.
