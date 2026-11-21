@@ -30,6 +30,8 @@ and nothing to `npm ci`.
   `railway link -p <that id>` to manage it from the terminal)
 - Live: https://winchestergrill.com
 - DNS, SSL and the registrar are all Cloudflare, on Brian's account
+- `www.winchestergrill.com` 301-redirects to the bare domain, keeping path and query, via a
+  Cloudflare Redirect Rule on the zone (added 2026-11-21). The bare domain is canonical.
 - `winchesterkitchenandbar.com` (the old domain, also on Brian's Cloudflare) 301-redirects
   here. Don't let it lapse — it still sends real traffic and carries the old SEO equity.
 
