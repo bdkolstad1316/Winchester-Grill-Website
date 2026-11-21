@@ -66,9 +66,11 @@
   --char3:#2A2118;      /* card */
   --gold:#E0A938;       /* brighter, more modern gold */
   --gold-d:#B9852A;
+  --gold-ink:#8A5F14;   /* gold for text on cream: 5.0:1 (gold-d is only 2.9:1 there) */
   --ember:#C24A2C;      /* warm ember accent (modern pop) */
   --cream:#F8F1E4;
   --mut:#C8BBA4;
+  --mut-2:#A39679;      /* quieter than --mut, still 5.4:1 on the dark cards */
   --tan:#C9A86A;
   --line:rgba(224,169,56,.26);
   --max:1180px;
@@ -196,7 +198,7 @@ nav.solid{background:rgba(21,17,13,.96);backdrop-filter:blur(12px);box-shadow:0 
 .story{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
 .story-img{aspect-ratio:4/5;border-radius:18px;background:#0C0907 center/cover no-repeat;border:1px solid var(--line)}
 .story h2{font-size:clamp(2rem,4.4vw,3.2rem);color:#241D16;margin:12px 0 20px}
-.story h2 .accent{color:var(--gold-d);text-transform:none}
+.story h2 .accent{color:var(--gold-ink);text-transform:none}
 .story p{margin-bottom:15px;color:#4A3F33}
 .story p b{color:#241D16}
 .story .sig{font-family:'Fraunces',serif;font-style:italic;font-weight:600;color:var(--ember);font-size:1.2rem;margin-top:6px}
@@ -243,7 +245,7 @@ nav.solid{background:rgba(21,17,13,.96);backdrop-filter:blur(12px);box-shadow:0 
 .hours td:last-child{text-align:right}
 .hours .today td{background:rgba(224,169,56,.1)}
 .hours .today td:first-child::after{content:"Today";float:none;margin-left:8px;font-size:.64rem;letter-spacing:.14em;text-transform:uppercase;background:var(--gold);color:var(--char);padding:2px 8px;border-radius:999px;vertical-align:middle}
-.hours .closed td:last-child{color:#7E725D}
+.hours .closed td:last-child{color:var(--mut-2)}
 
 /* ============ FOOTER ============ */
 footer{background:#0C0907;border-top:1px solid var(--line);padding:64px 26px 28px}
@@ -425,7 +427,7 @@ footer{background:#0C0907;border-top:1px solid var(--line);padding:64px 26px 28p
   <div class="wrap story">
     <div class="story-img fade-up" data-bg="assets/story-interior.webp"></div>
     <div class="fade-up">
-      <span class="kicker" style="color:var(--gold-d)">Since 2019 · Town est. 1900</span>
+      <span class="kicker" style="color:var(--gold-ink)">Since 2019 · Town est. 1900</span>
       <h2 class="display">Named for a stack of rifles. <span class="accent">Run on burgers.</span></h2>
       <p>In 1900, the town fathers needed a name for the new school district. Someone eyed the <b>stack of Winchester rifles by the door</b> and that was that — sixty-seven years later, <i>Death Valley Days</i> rolled into town to film an episode about it.</p>
       <p>The old sawmill's mill pond grew up to become <b>Winchester Lake</b>, and the lake brings campers, anglers, and road-trippers right past our door. Since 2019 we've turned the old bar into a place for the whole family: scratch kitchen, big kids menu, pool, darts, the game on the TVs, and a full bar for the grown-ups.</p>
