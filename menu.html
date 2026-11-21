@@ -1085,10 +1085,10 @@ nav{position:fixed;top:0;left:0;right:0;z-index:60;height:var(--navh);display:fl
 .nav-in{max-width:var(--max);margin:0 auto;width:100%;display:flex;align-items:center;justify-content:space-between;padding:0 26px}
 .nav-brand{display:flex;align-items:center;gap:12px;min-height:44px;text-decoration:none}
 .nav-brand img{height:50px;width:auto}
-.nav-brand b{font-family:'Bevan',serif;color:var(--cream);font-size:1.32rem;letter-spacing:.02em;text-transform:uppercase}
+.nav-brand b{font-family:'Bevan',serif;color:var(--cream);font-size:1.32rem;letter-spacing:.02em;text-transform:uppercase;white-space:nowrap}
 .nav-brand b span{color:var(--gold)}
 .links{display:flex;gap:30px;align-items:center}
-.links a{color:var(--cream);text-decoration:none;font-weight:600;font-size:.86rem;letter-spacing:.08em;text-transform:uppercase;padding:8px 2px}
+.links a{color:var(--cream);text-decoration:none;font-weight:600;font-size:.86rem;letter-spacing:.08em;text-transform:uppercase;padding:8px 2px;white-space:nowrap}
 .links a:hover,.links a[aria-current]{color:var(--gold)}
 .links .order{display:inline-flex;align-items:center;gap:8px;background:var(--gold);color:var(--char);padding:11px 20px;border-radius:999px;font-weight:700;white-space:nowrap}
 .links .order svg{width:16px;height:16px;flex:0 0 auto}
@@ -1196,6 +1196,13 @@ footer{background:var(--deep);border-top:1px solid var(--line);padding:54px 26px
   .mi-top.has-stamp{flex-wrap:wrap;gap:0 8px}
   .mi-top.has-stamp::after{content:"";order:2;flex-basis:100%;height:0}
   .mi-stamp{order:3;margin:9px 0 3px 3px}
+}
+/* 921-1100px (tablet landscape, small laptops): the full nav stays, tightened so the
+   brand and links sit on one line. The Facebook icon drops out here; it is in the footer. */
+@media (min-width:921px) and (max-width:1100px){
+  .nav-brand b{font-size:1.15rem}
+  .links{gap:18px}
+  .links .fb{display:none}
 }
 @media (max-width:920px){
   .links{position:fixed;inset:var(--navh) 0 auto 0;flex-direction:column;gap:0;background:rgba(21,17,13,.98);padding:8px 0 22px;display:none;border-bottom:1px solid var(--line)}
