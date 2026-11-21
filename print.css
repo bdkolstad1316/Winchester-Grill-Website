@@ -1,19 +1,60 @@
-/* Winchester Grill menu, printed: black on white, no chrome, no photos.
-   Linked from menu.html with media="print". It lives in its own file because design
-   scanners that read the page's inline CSS treat print rules as screen colours. */
-/* The palette is flipped by re-setting the colour tokens for everything inside body. */
-body{--char:#fff;--char2:#fff;--char3:#fff;--deep:#fff;--cream:#000;--mut:#222;--mut-2:#444;--gold:#000;--on-gold:#000;--line:#999;padding:0;font-size:11pt}
-nav,.skip,.subnav,.mobile-order,.menu-feature,.menu-cta .btn,footer a[href="index.html"]{display:none!important}
+/* Winchester Grill menu, printed: the whole menu on two letter pages (one sheet, both sides),
+   black on white, two columns, no photos or site chrome.
+
+   Loaded by a print-only @import at the top of menu.html's <style>. Two things follow from that:
+   1. An @import sits FIRST in the cascade, so the page's own rules beat these at equal
+      specificity. Every selector here therefore starts with `html ` to win. Without it the
+      page's phone layout (one column, big type) takes over and the menu runs to ten pages.
+   2. These rules stay in this file, not inline: design scanners that read the page's inline
+      CSS treat print rules as screen colours and report false contrast failures.
+
+   Check any change with a real print: headless Chrome --print-to-pdf, then count the pages. */
+
+@page{size:letter;margin:.4in .5in}
+
+/* Palette: re-set the colour tokens for everything inside body. */
+html body{--char:#fff;--char2:#fff;--char3:#fff;--deep:#fff;--cream:#000;--mut:#222;--mut-2:#444;--gold:#000;--on-gold:#000;--line:#999;
+  padding:0;font-size:8.5pt;line-height:1.35}
 html{scroll-behavior:auto}
-.mhead{padding:0 0 14pt;background:none}
-.menu-body{padding:0}
-.wrap{max-width:none;padding:0}
-.menu-sec{margin-bottom:18pt}
-.mi-grid{grid-template-columns:1fr 1fr;gap:0 28pt}
-.mi,.pizza-head,.sec-bar{break-inside:avoid}
-.sec-bar{break-after:avoid}
-.mi-dots{border-bottom-color:#999}
-.mi-stamp{animation:none!important;opacity:1}
-.menu-cta{background:none;padding:14pt 0 0;border-top:1px solid #999}
-footer{background:none;padding:10pt 0 0}
-a{color:inherit;text-decoration:none}
+html a{color:inherit;text-decoration:none}
+
+/* Site chrome, photos and the on-screen call-to-action do not print. */
+html nav,html .skip,html .subnav,html .mobile-order,html .menu-feature,html .menu-cta,html footer{display:none!important}
+
+/* Masthead: name, title, one line of intro, and how to reach the place. */
+html .mhead{padding:0 0 6pt;margin:0 0 8pt;background:none;border-bottom:1.5pt solid #000;text-align:center}
+html .mhead::before{content:"Winchester Grill";display:block;font-family:'Bevan',serif;text-transform:uppercase;letter-spacing:.06em;font-size:10pt;margin-bottom:1pt}
+html .mhead h1{font-size:22pt;margin:0 0 2pt}
+html .mhead p{max-width:none;margin:0;font-size:8.5pt}
+html .mhead .price-note{display:none}   /* the footnote at the end says the same */
+html .mhead::after{content:"317 Nezperce Ave, Winchester, Idaho  ·  (208) 924-6420  ·  winchestergrill.com";display:block;margin-top:3pt;font-weight:700;font-size:8.5pt}
+
+/* Body: one flow in two columns, read top to bottom then across. */
+html .menu-body{padding:0}
+html .wrap{max-width:none;padding:0;columns:2;column-gap:.34in}
+html .menu-sec{margin:0 0 7pt}
+html .sec-bar{padding-bottom:1.5pt;margin-bottom:3pt;border-bottom:1pt solid #000;break-inside:avoid;break-after:avoid}
+/* Keeps a section heading with what follows: the invisible tail needs room in the same
+   column, so a heading that would land alone at the bottom moves to the next one. */
+html .sec-bar::after{content:"";display:block;height:54pt;margin-bottom:-54pt}
+html .sec-bar h2{font-size:12.5pt}
+html .sec-note,html .pizza-intro,html .topping-note{font-size:7.5pt;margin:2pt 0 3pt;max-width:none;break-inside:avoid;break-after:avoid}
+html .mi-grid{display:block;margin-top:0}
+html .mi{padding:1.7pt 0;border-bottom:0;break-inside:avoid}
+html .mi-top{gap:5pt}
+html .mi-name{font-size:9pt}
+html .mi-price{font-size:9pt}
+html .mi-dots{border-bottom:1pt dotted #999;transform:translateY(-2pt)}
+html .mi-desc{font-size:7.5pt;line-height:1.3;margin-top:0;max-width:none}
+/* Pizza and kids groups are short enough to keep whole, heading and all. */
+html .pizza-group{margin:4pt 0 5pt;break-inside:avoid}
+html .pizza-head{flex-wrap:nowrap;padding-bottom:1.5pt;margin-bottom:2pt;border-bottom:.75pt solid #999;break-inside:avoid;break-after:avoid}
+html .pizza-head h3{font-size:10pt}
+html .pizza-price{font-size:8.5pt}
+
+/* The stamp sits beside its dish again (the phone layout drops it to its own line). */
+html .mi-top.has-stamp{flex-wrap:nowrap;gap:5pt}
+html .mi-top.has-stamp::after{display:none}
+html .mi-stamp{order:0;margin:0 1pt;animation:none!important;opacity:1;font-size:6pt;padding:1pt 4pt .5pt;border-width:1pt}
+
+html .menu-disclaimer{max-width:none;margin:6pt 0 0;padding-top:4pt;border-top:.75pt solid #999;font-size:6.5pt;line-height:1.3;text-align:left;break-inside:avoid}
