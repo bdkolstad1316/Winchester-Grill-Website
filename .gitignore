@@ -13,3 +13,6 @@ client/
 # Impeccable design hook: per-machine cache and local overrides (config.json is shared)
 .impeccable/hook.cache.json
 .impeccable/config.local.json
+
+# Codex hook wiring written by impeccable: absolute paths for this machine only
+.codex/
