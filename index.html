@@ -67,8 +67,12 @@
   --gold:#E0A938;       /* brighter, more modern gold */
   --gold-d:#B9852A;
   --gold-ink:#8A5F14;   /* gold for text on cream: 5.0:1 (gold-d is only 2.9:1 there) */
-  --ember:#C24A2C;      /* warm ember accent (modern pop) */
+  --ember:#B84426;      /* warm ember accent; cream text on it is 4.8:1 */
+  --ember-d:#A63B1F;    /* ember hover: darker, so contrast goes up not down */
   --cream:#F8F1E4;
+  --deep:#0C0907;       /* deepest surface: footer, photo placeholders */
+  --ink:#241D16;        /* headings on cream */
+  --ink-2:#3A3128;      /* body text on cream */
   --mut:#C8BBA4;
   --mut-2:#A39679;      /* quieter than --mut, still 5.4:1 on the dark cards */
   --tan:#C9A86A;
@@ -85,6 +89,10 @@ section{scroll-margin-top:var(--navh)}
 .display{font-family:'Bevan',serif;font-weight:400;letter-spacing:.005em;text-transform:uppercase;line-height:.95}
 .accent{font-family:'Fraunces',serif;font-style:italic;font-weight:600}
 .kicker{font-size:.78rem;font-weight:700;letter-spacing:.3em;text-transform:uppercase;color:var(--gold)}
+
+.skip{position:absolute;left:16px;top:-64px;z-index:100;background:var(--gold);color:var(--char);padding:12px 20px;border-radius:999px;font-weight:700;letter-spacing:.03em;text-decoration:none;transition:top .15s}
+.skip:focus{top:14px}
+main:focus{outline:none}
 
 /* ============ NAV ============ */
 nav{position:fixed;top:0;left:0;right:0;z-index:60;height:var(--navh);display:flex;align-items:center;transition:background .3s,box-shadow .3s;background:linear-gradient(180deg,rgba(21,17,13,.9),transparent)}
@@ -112,7 +120,7 @@ nav.solid{background:rgba(21,17,13,.96);backdrop-filter:blur(12px);box-shadow:0 
 .btn-gold{background:var(--gold);color:var(--char)}
 .btn-gold:hover{background:var(--cream)}
 .btn-ember{background:var(--ember);color:var(--cream)}
-.btn-ember:hover{background:#D5572F}
+.btn-ember:hover{background:var(--ember-d)}
 .btn-glass{border:1.5px solid rgba(248,241,228,.55);color:var(--cream);background:rgba(21,17,13,.25);backdrop-filter:blur(4px)}
 .btn-glass:hover{border-color:var(--gold);color:var(--gold)}
 
@@ -120,7 +128,7 @@ nav.solid{background:rgba(21,17,13,.96);backdrop-filter:blur(12px);box-shadow:0 
 .hero{position:relative;min-height:100vh;min-height:100svh;display:flex;align-items:center;justify-content:center;text-align:center;overflow:hidden;isolation:isolate}
 @supports not (height:100svh){.hero{min-height:100vh}}
 .slides{position:absolute;inset:0;z-index:-2}
-.slide{position:absolute;inset:-6%;background:35% center/cover no-repeat #0C0907;opacity:0;animation:cyc 24s infinite ease-in-out}
+.slide{position:absolute;inset:-6%;background:35% center/cover no-repeat var(--deep);opacity:0;animation:cyc 24s infinite ease-in-out}
 .slide:nth-child(1){animation-name:cyc,kbA;animation-delay:0s}
 .slide:nth-child(2){animation-name:cyc,kbB;animation-delay:8s}
 .slide:nth-child(3){animation-name:cyc,kbA;animation-delay:16s}
@@ -161,19 +169,19 @@ nav.solid{background:rgba(21,17,13,.96);backdrop-filter:blur(12px);box-shadow:0 
 
 /* ============ SECTION SHELL ============ */
 .sec{padding:104px 0}
-.sec-cream{background:var(--cream);color:#3A3128}
+.sec-cream{background:var(--cream);color:var(--ink-2)}
 .sec-dark2{background:var(--char2)}
 .sec-head{max-width:680px;margin-bottom:54px}
 .sec-head.center{margin-left:auto;margin-right:auto;text-align:center}
 .sec-head h2{font-size:clamp(2.2rem,5vw,3.6rem);color:var(--cream);margin-top:12px}
-.sec-cream .sec-head h2{color:#241D16}
+.sec-cream .sec-head h2{color:var(--ink)}
 .sec-head h2 .accent{color:var(--gold);text-transform:none;display:block;margin-top:.12em}
 .sec-head p{margin-top:14px;font-size:1.05rem}
 
 /* ============ MENU TILES ============ */
 .tiles{display:grid;grid-template-columns:repeat(5,1fr);gap:18px}
 .tile{border-radius:18px;overflow:hidden;border:1px solid var(--line);background:var(--char3);display:flex;flex-direction:column}
-.tile .photo{aspect-ratio:1/1;background:#0C0907;overflow:hidden}
+.tile .photo{aspect-ratio:1/1;background:var(--deep);overflow:hidden}
 .tile .photo img{width:100%;height:100%;object-fit:cover;display:block}
 .tile .in{position:relative;padding:22px 20px;display:flex;flex-direction:column;flex:1}
 .tile .in::before{content:"";position:absolute;top:0;left:20px;right:20px;height:2px;background:repeating-linear-gradient(90deg,var(--tan) 0 11px,transparent 11px 20px)}
@@ -185,7 +193,7 @@ nav.solid{background:rgba(21,17,13,.96);backdrop-filter:blur(12px);box-shadow:0 
 .menu-foot p{font-size:.95rem;max-width:460px}
 
 /* ============ FEATURE BAND (take & bake) ============ */
-.feature{position:relative;overflow:hidden;background:#0C0907 center/cover no-repeat}
+.feature{position:relative;overflow:hidden;background:var(--deep) center/cover no-repeat}
 .feature::before{content:"";position:absolute;inset:0;background:linear-gradient(100deg,rgba(21,17,13,.95) 38%,rgba(21,17,13,.55) 100%)}
 .feature .wrap{position:relative;padding:96px 26px;max-width:var(--max)}
 .feature-card{max-width:560px}
@@ -196,11 +204,11 @@ nav.solid{background:rgba(21,17,13,.96);backdrop-filter:blur(12px);box-shadow:0 
 
 /* ============ STORY ============ */
 .story{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
-.story-img{aspect-ratio:4/5;border-radius:18px;background:#0C0907 center/cover no-repeat;border:1px solid var(--line)}
-.story h2{font-size:clamp(2rem,4.4vw,3.2rem);color:#241D16;margin:12px 0 20px}
+.story-img{aspect-ratio:4/5;border-radius:18px;background:var(--deep) center/cover no-repeat;border:1px solid var(--line)}
+.story h2{font-size:clamp(2rem,4.4vw,3.2rem);color:var(--ink);margin:12px 0 20px}
 .story h2 .accent{color:var(--gold-ink);text-transform:none}
-.story p{margin-bottom:15px;color:#4A3F33}
-.story p b{color:#241D16}
+.story p{margin-bottom:15px;color:var(--ink-2)}
+.story p b{color:var(--ink)}
 .story .sig{font-family:'Fraunces',serif;font-style:italic;font-weight:600;color:var(--ember);font-size:1.2rem;margin-top:6px}
 
 /* ============ EVENTS ============ */
@@ -248,7 +256,7 @@ nav.solid{background:rgba(21,17,13,.96);backdrop-filter:blur(12px);box-shadow:0 
 .hours .closed td:last-child{color:var(--mut-2)}
 
 /* ============ FOOTER ============ */
-footer{background:#0C0907;border-top:1px solid var(--line);padding:64px 26px 28px}
+footer{background:var(--deep);border-top:1px solid var(--line);padding:64px 26px 28px}
 .foot{max-width:var(--max);margin:0 auto;display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:40px}
 .foot-logotype{font-family:'Bevan',serif;text-transform:uppercase;color:var(--cream);font-size:1.6rem;letter-spacing:.02em;line-height:1;margin-bottom:16px}
 .foot-logotype span{color:var(--gold)}
@@ -257,8 +265,8 @@ footer{background:#0C0907;border-top:1px solid var(--line);padding:64px 26px 28p
 .foot a:hover{color:var(--gold)}
 .foot h4{font-family:'Bevan',serif;text-transform:uppercase;color:var(--cream);font-size:1rem;letter-spacing:.04em;margin-bottom:14px}
 .foot ul{list-style:none;display:flex;flex-direction:column;gap:8px}
-.legal{max-width:var(--max);margin:48px auto 0;padding-top:22px;border-top:1px solid rgba(224,169,56,.14);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:.82rem;color:#7E725D}
-.legal a{color:#7E725D}
+.legal{max-width:var(--max);margin:48px auto 0;padding-top:22px;border-top:1px solid rgba(224,169,56,.14);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:.82rem;color:var(--mut-2)}
+.legal a{color:var(--mut-2)}
 
 /* ============ STICKY MOBILE ORDER BAR ============ */
 .mobile-order{position:fixed;left:0;right:0;bottom:0;z-index:55;display:none;gap:10px;padding:12px 16px calc(12px + env(safe-area-inset-bottom));background:rgba(21,17,13,.96);backdrop-filter:blur(12px);border-top:1px solid var(--line)}
@@ -307,6 +315,7 @@ footer{background:#0C0907;border-top:1px solid var(--line);padding:64px 26px 28p
 <noscript><style>.feature{background-image:url('assets/cooked-pepperoni.webp')}.story-img{background-image:url('assets/story-interior.webp')}</style></noscript>
 </head>
 <body>
+<a class="skip" href="#main">Skip to content</a>
 
 <!-- NAV -->
 <nav id="nav">
@@ -314,10 +323,10 @@ footer{background:#0C0907;border-top:1px solid var(--line);padding:64px 26px 28p
     <a class="nav-brand" href="#top">
       <b>Winchester <span>Grill</span></b>
     </a>
-    <button class="burger" aria-label="Open menu" onclick="document.querySelector('.links').classList.toggle('open')">
+    <button class="burger" aria-label="Menu" aria-expanded="false" aria-controls="nav-links" onclick="this.setAttribute('aria-expanded',document.getElementById('nav-links').classList.toggle('open'))">
       <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
     </button>
-    <div class="links">
+    <div class="links" id="nav-links">
       <a href="menu.html">Menu</a>
       <a href="#takeandbake">Pizza</a>
       <a href="#story">Our Story</a>
@@ -329,6 +338,8 @@ footer{background:#0C0907;border-top:1px solid var(--line);padding:64px 26px 28p
     </div>
   </div>
 </nav>
+
+<main id="main" tabindex="-1">
 
 <!-- HERO -->
 <header class="hero" id="top">
@@ -532,6 +543,8 @@ footer{background:#0C0907;border-top:1px solid var(--line);padding:64px 26px 28p
   </div>
 </section>
 
+</main>
+
 <!-- FOOTER -->
 <footer>
   <div class="foot">
@@ -589,7 +602,10 @@ addEventListener('load',()=>{
 })();
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('vis');io.unobserve(e.target)}}),{threshold:.12});
 document.querySelectorAll('.fade-up').forEach(el=>io.observe(el));
-document.querySelectorAll('.links a').forEach(a=>a.addEventListener('click',()=>document.querySelector('.links').classList.remove('open')));
+/* Collapsed nav: close on a link tap or Escape, and keep the button's aria-expanded in step. */
+const closeNav=()=>{document.getElementById('nav-links').classList.remove('open');document.querySelector('.burger').setAttribute('aria-expanded','false')};
+document.querySelectorAll('.links a').forEach(a=>a.addEventListener('click',closeNav));
+addEventListener('keydown',e=>{if(e.key==='Escape')closeNav()});
 
 /* Tag today's row in the hours table (rows run Monday..Sunday; getDay() is Sunday=0). */
 (function(){const rows=document.querySelectorAll('.hours tr');const r=rows[(new Date().getDay()+6)%7];if(r)r.classList.add('today')})();

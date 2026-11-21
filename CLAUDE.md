@@ -69,6 +69,12 @@ public site.
 - **Images must stay WebP with explicit `width`/`height`.** Both pages hold an A mobile
   grade (372KB home / 450KB menu). Dropping in a full-size JPEG without dimensions costs
   the grade and reintroduces layout shift.
+- **Colours are tokens.** Every colour lives in the `:root` block at the top of each page
+  (`index.html`, the generator for `menu.html`, `coming-soon.html` — three copies, kept in
+  step by hand). Gold text on cream uses `--gold-ink`, not `--gold`/`--gold-d` (too faint
+  there); quiet text on dark uses `--mut-2`. Check contrast (4.5:1) before adding a colour.
+- **Accessibility wiring:** each page has a skip link and a `<main id="main">`; the hamburger
+  carries `aria-expanded`/`aria-controls="nav-links"`. Keep those ids if the nav is reworked.
 - **Favicon set:** `favicon.ico` (root; 16/32/48), `assets/favicon-32.png`, `assets/apple-touch-icon.png`,
   `assets/icon-192.png` / `icon-512.png`, `site.webmanifest`. All generated from a Bevan "W" in
   gold on charcoal; regenerate the whole set together if the mark ever changes.

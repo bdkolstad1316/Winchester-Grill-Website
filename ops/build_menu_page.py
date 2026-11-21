@@ -204,7 +204,7 @@ HTML = f'''<!DOCTYPE html>
 {ld_json}
 </script>
 <style>
-:root{{--char:#15110D;--char2:#1F1812;--char3:#2A2118;--gold:#E0A938;--gold-d:#B9852A;--ember:#C24A2C;--cream:#F8F1E4;--mut:#C8BBA4;--line:rgba(224,169,56,.26);--max:1180px;--navh:78px;--subh:59px}}
+:root{{--char:#15110D;--char2:#1F1812;--char3:#2A2118;--gold:#E0A938;--gold-d:#B9852A;--ember:#B84426;--cream:#F8F1E4;--mut:#C8BBA4;--mut-2:#A39679;--deep:#0C0907;--on-gold:#4A3718;--line:rgba(224,169,56,.26);--max:1180px;--navh:78px;--subh:59px}}
 *{{margin:0;padding:0;box-sizing:border-box}}
 html{{scroll-behavior:smooth}}
 body{{font-family:'Lora',serif;font-size:16px;text-size-adjust:100%;-webkit-text-size-adjust:100%;background:var(--char);color:var(--mut);line-height:1.65;-webkit-tap-highlight-color:rgba(224,169,56,.2);overflow-x:hidden}}
@@ -216,6 +216,9 @@ a{{color:inherit}}
 section{{scroll-margin-top:calc(var(--navh) + var(--subh) + 26px)}}
 
 /* NAV */
+.skip{{position:absolute;left:16px;top:-64px;z-index:100;background:var(--gold);color:var(--char);padding:12px 20px;border-radius:999px;font-weight:700;letter-spacing:.03em;text-decoration:none;transition:top .15s}}
+.skip:focus{{top:14px}}
+main:focus{{outline:none}}
 nav{{position:fixed;top:0;left:0;right:0;z-index:60;height:var(--navh);display:flex;align-items:center;background:rgba(21,17,13,.96);backdrop-filter:blur(12px);box-shadow:0 1px 0 var(--line)}}
 .nav-in{{max-width:var(--max);margin:0 auto;width:100%;display:flex;align-items:center;justify-content:space-between;padding:0 26px}}
 .nav-brand{{display:flex;align-items:center;gap:12px;min-height:44px;text-decoration:none}}
@@ -251,7 +254,7 @@ nav{{position:fixed;top:0;left:0;right:0;z-index:60;height:var(--navh);display:f
 .sec-bar{{border-bottom:2px solid var(--line);padding-bottom:10px;margin-bottom:8px}}
 .sec-bar h2{{color:var(--gold);font-size:clamp(1.6rem,3.4vw,2.3rem)}}
 .sec-note{{font-family:'Fraunces',serif;font-style:italic;color:var(--mut);font-size:.96rem;margin:10px 0 22px;max-width:760px}}
-.menu-feature{{position:relative;border-radius:16px;overflow:hidden;margin:4px 0 32px;border:1px solid var(--line);background:#0C0907}}
+.menu-feature{{position:relative;border-radius:16px;overflow:hidden;margin:4px 0 32px;border:1px solid var(--line);background:var(--deep)}}
 .menu-feature img{{width:100%;aspect-ratio:7/3;object-fit:cover;display:block}}
 .menu-feature figcaption{{position:absolute;left:0;right:0;bottom:0;padding:22px 26px;background:linear-gradient(transparent,rgba(10,7,5,.92))}}
 .menu-feature .feat-label{{display:block;font-size:.75rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:5px}}
@@ -290,26 +293,26 @@ nav{{position:fixed;top:0;left:0;right:0;z-index:60;height:var(--navh);display:f
 .pizza-head h3{{color:var(--gold);font-size:clamp(1.4rem,3vw,2rem)}}
 .pizza-price{{font-weight:800;color:var(--cream);font-size:1rem;letter-spacing:.02em}}
 .topping-note{{font-family:'Fraunces',serif;font-style:italic;color:var(--mut);margin-top:6px}}
-.menu-disclaimer{{max-width:760px;margin:54px auto 0;padding-top:22px;border-top:1px solid var(--line);text-align:center;font-size:.82rem;line-height:1.6;color:#9A8C70}}
+.menu-disclaimer{{max-width:760px;margin:54px auto 0;padding-top:22px;border-top:1px solid var(--line);text-align:center;font-size:.82rem;line-height:1.6;color:var(--mut-2)}}
 
 /* CTA strip */
 .menu-cta{{background:var(--gold);color:var(--char);text-align:center;padding:46px 26px}}
 .menu-cta h2{{font-size:clamp(1.6rem,3.6vw,2.4rem);margin-bottom:8px}}
-.menu-cta p{{color:#5a4420;font-weight:600;margin-bottom:22px}}
+.menu-cta p{{color:var(--on-gold);font-weight:600;margin-bottom:22px}}
 .btn{{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:54px;padding:15px 32px;border-radius:999px;font-weight:700;font-size:1rem;letter-spacing:.04em;text-transform:uppercase;text-decoration:none;transition:transform .15s,background .2s}}
 .btn:active{{transform:scale(.97)}}
 .btn-dark{{background:var(--char);color:var(--cream)}}
 .btn-dark:hover{{background:#000}}
 
 /* FOOTER */
-footer{{background:#0C0907;border-top:1px solid var(--line);padding:54px 26px 28px}}
+footer{{background:var(--deep);border-top:1px solid var(--line);padding:54px 26px 28px}}
 .foot{{max-width:var(--max);margin:0 auto;display:flex;justify-content:space-between;gap:30px;flex-wrap:wrap;align-items:center}}
 .foot-logotype{{font-family:'Bevan',serif;text-transform:uppercase;color:var(--cream);font-size:1.5rem;letter-spacing:.02em;line-height:1}}
 .foot-logotype span{{color:var(--gold)}}
 .foot p,.foot a{{font-size:.9rem;color:var(--mut);text-decoration:none}}
 .foot p a{{display:inline-block;padding:10px 0;margin:-10px 0}} /* 44px tap height without changing the layout */
 .foot a:hover{{color:var(--gold)}}
-.legal{{max-width:var(--max);margin:36px auto 0;padding-top:20px;border-top:1px solid rgba(224,169,56,.14);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:.8rem;color:#7E725D}}
+.legal{{max-width:var(--max);margin:36px auto 0;padding-top:20px;border-top:1px solid rgba(224,169,56,.14);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:.8rem;color:var(--mut-2)}}
 
 @media (max-width:820px){{
   .mi-grid{{grid-template-columns:1fr;gap:0}}
@@ -345,16 +348,17 @@ footer{{background:#0C0907;border-top:1px solid var(--line);padding:54px 26px 28
 </style>
 </head>
 <body>
+<a class="skip" href="#main">Skip to content</a>
 
 <nav id="nav">
   <div class="nav-in">
     <a class="nav-brand" href="index.html">
       <b>Winchester <span>Grill</span></b>
     </a>
-    <button class="burger" aria-label="Open menu" onclick="document.querySelector('.links').classList.toggle('open')">
+    <button class="burger" aria-label="Menu" aria-expanded="false" aria-controls="nav-links" onclick="this.setAttribute('aria-expanded',document.getElementById('nav-links').classList.toggle('open'))">
       <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
     </button>
-    <div class="links">
+    <div class="links" id="nav-links">
       <a href="menu.html" aria-current="page">Menu</a>
       <a href="index.html#takeandbake">Pizza</a>
       <a href="index.html#story">Our Story</a>
@@ -365,6 +369,7 @@ footer{{background:#0C0907;border-top:1px solid var(--line);padding:54px 26px 28
   </div>
 </nav>
 
+<main id="main" tabindex="-1">
 <header class="mhead">
   <span class="kicker">Winchester, Idaho · Family Bar &amp; Grill</span>
   <h1 class="display">The <span class="accent">Menu</span></h1>
@@ -403,6 +408,8 @@ footer{{background:#0C0907;border-top:1px solid var(--line);padding:54px 26px 28
   <a class="btn btn-dark" href="tel:+12089246420">Call (208) 924-6420</a>
 </div>
 
+</main>
+
 <footer>
   <div class="foot">
     <div class="foot-logotype">Winchester <span>Grill</span></div>
@@ -422,7 +429,10 @@ footer{{background:#0C0907;border-top:1px solid var(--line);padding:54px 26px 28
 </div>
 
 <script>
-document.querySelectorAll('.links a').forEach(a=>a.addEventListener('click',()=>document.querySelector('.links').classList.remove('open')));
+/* Collapsed nav: close on a link tap or Escape, and keep the button's aria-expanded in step. */
+const closeNav=()=>{{document.getElementById('nav-links').classList.remove('open');document.querySelector('.burger').setAttribute('aria-expanded','false')}};
+document.querySelectorAll('.links a').forEach(a=>a.addEventListener('click',closeNav));
+addEventListener('keydown',e=>{{if(e.key==='Escape')closeNav()}});
 
 /* Jump to menu sections with an offset that measures the real sticky-header height,
    so headings never hide under the nav + pill bar regardless of screen or font. */
